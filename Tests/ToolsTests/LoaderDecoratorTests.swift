@@ -31,24 +31,28 @@ final class LoaderDecoratorTests: XCTestCase {
     
     func test_load_shouldCallDecorateWithDecorateeFailure() {
         
+        let payload = anyPayload()
         let result: SUT.LoadResult = .failure(anyFailure())
         let (sut, decoratee, decorateSpy) = makeSUT()
         
-        sut.load(anyPayload()) { _ in }
+        sut.load(payload) { _ in }
         decoratee.complete(with: result)
         
-        XCTAssertNoDiff(decorateSpy.payloads, [result])
+        XCTAssertNoDiff(decorateSpy.payloads.map(\.0), [payload])
+        XCTAssertNoDiff(decorateSpy.payloads.map(\.1), [result])
     }
     
     func test_load_shouldCallDecorateWithDecorateeSuccess() {
         
+        let payload = anyPayload()
         let result: SUT.LoadResult = .success(anySuccess())
         let (sut, decoratee, decorateSpy) = makeSUT()
         
-        sut.load(anyPayload()) { _ in }
+        sut.load(payload) { _ in }
         decoratee.complete(with: result)
         
-        XCTAssertNoDiff(decorateSpy.payloads, [result])
+        XCTAssertNoDiff(decorateSpy.payloads.map(\.0), [payload])
+        XCTAssertNoDiff(decorateSpy.payloads.map(\.1), [result])
     }
     
     func test_load_shouldDeliverDecorateeFailure() {
@@ -61,8 +65,6 @@ final class LoaderDecoratorTests: XCTestCase {
             decoratee.complete(with: result)
             decorateSpy.complete(with: .success(()))
         }
-        
-        XCTAssertNoDiff(decorateSpy.payloads, [result])
     }
     
     func test_load_shouldDeliverDecorateeSuccess() {
@@ -75,8 +77,6 @@ final class LoaderDecoratorTests: XCTestCase {
             decoratee.complete(with: result)
             decorateSpy.complete(with: .success(()))
         }
-        
-        XCTAssertNoDiff(decorateSpy.payloads, [result])
     }
     
     func test_load_shouldNotCallDecorateOnInstanceDeallocation() {
@@ -111,7 +111,7 @@ final class LoaderDecoratorTests: XCTestCase {
     
     private typealias SUT = LoaderDecorator<Payload, Success, Failure>
     private typealias Decoratee = Spy<Payload, Success, Failure>
-    private typealias DecorateSpy = Spy<Result<Success, Failure>, Void, Never>
+    private typealias DecorateSpy = Spy<(Payload, Result<Success, Failure>), Void, Never>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -125,9 +125,9 @@ final class LoaderDecoratorTests: XCTestCase {
         let decorateSpy = DecorateSpy()
         let sut = SUT(
             decoratee: decoratee,
-            decorate: { payload, completion in
+            decorate: { payload, result, completion in
                 
-                decorateSpy.process(payload) { _ in completion() }
+                decorateSpy.process((payload, result)) { _ in completion() }
             }
         )
         

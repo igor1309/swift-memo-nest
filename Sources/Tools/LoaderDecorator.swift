@@ -30,7 +30,7 @@ public final class LoaderDecorator<Payload, Success, Failure: Error> {
     public typealias Decoratee = Loader<Payload, Success, Failure>
     
     /// A typealias for a closure that processes the result and invokes a completion handler.
-    public typealias Decorate = (Result<Success, Failure>, @escaping () -> Void) -> Void
+    public typealias Decorate = (Payload, Result<Success, Failure>, @escaping () -> Void) -> Void
 }
 
 extension LoaderDecorator: Loader {
@@ -47,7 +47,7 @@ extension LoaderDecorator: Loader {
             
             guard let self else { return }
             
-            decorate(result) { completion(result) }
+            decorate(payload, result) { completion(result) }
         }
     }
 }
