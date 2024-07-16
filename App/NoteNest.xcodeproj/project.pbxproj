@@ -11,6 +11,8 @@
 		2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D82C4642C700CE3C96 /* ContentView.swift */; };
 		2A33A3DB2C4642C900CE3C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */; };
 		2A33A3DE2C4642C900CE3C96 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A33A3DD2C4642C900CE3C96 /* Preview Assets.xcassets */; };
+		2A33A3E62C46449000CE3C96 /* ListFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3E52C46449000CE3C96 /* ListFlowView.swift */; };
+		2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A33A3DD2C4642C900CE3C96 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2A33A3E42C4642F300CE3C96 /* swift-note-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-note-nest"; path = ..; sourceTree = "<group>"; };
+		2A33A3E52C46449000CE3C96 /* ListFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowView.swift; sourceTree = "<group>"; };
+		2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 			children = (
 				2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */,
 				2A33A3D82C4642C700CE3C96 /* ContentView.swift */,
+				2A33A3E72C4644AF00CE3C96 /* ListFlow */,
 				2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */,
 				2A33A3DC2C4642C900CE3C96 /* Preview Content */,
 			);
@@ -67,6 +72,15 @@
 				2A33A3DD2C4642C900CE3C96 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2A33A3E72C4644AF00CE3C96 /* ListFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2A33A3E52C46449000CE3C96 /* ListFlowView.swift */,
+				2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */,
+			);
+			path = ListFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +155,8 @@
 			files = (
 				2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */,
 				2A33A3D72C4642C700CE3C96 /* NoteNestApp.swift in Sources */,
+				2A33A3E62C46449000CE3C96 /* ListFlowView.swift in Sources */,
+				2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
