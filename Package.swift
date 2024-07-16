@@ -6,11 +6,12 @@ import PackageDescription
 let package = Package(
     name: "swift-note-nest",
     platforms: [
-        .iOS(.v14),
-        .macOS(.v11)
+        .iOS(.v17),
+        .macOS(.v13)
     ],
     products: [
         .entryListFeature,
+        .tools,
         .uiPrimitives,
     ],
     dependencies: [
@@ -19,6 +20,8 @@ let package = Package(
     targets: [
         .entryListFeature,
         .entryListFeatureTests,
+        .tools,
+        .toolsTests,
         .uiPrimitives,
     ]
 )
@@ -29,6 +32,13 @@ private extension Product {
         name: .entryListFeature,
         targets: [
             .entryListFeature,
+        ]
+    )
+    
+    static let tools = library(
+        name: .tools,
+        targets: [
+            .tools,
         ]
     )
     
@@ -56,12 +66,28 @@ private extension Target {
         ]
     )
     
+    static let tools = target(
+        name: .tools,
+        dependencies: [
+            .uiPrimitives,
+            .imRx
+        ]
+    )
+    static let toolsTests = testTarget(
+        name: .toolsTests,
+        dependencies: [
+            .tools
+        ]
+    )
+    
     static let uiPrimitives = target(name: .uiPrimitives)
 }
 
 private extension Target.Dependency {
     
     static let entryListFeature: Self = byName(name: .entryListFeature)
+    
+    static let tools: Self = byName(name: .tools)
     
     static let uiPrimitives: Self = byName(name: .uiPrimitives)
 }
@@ -70,6 +96,9 @@ private extension String {
     
     static let entryListFeature = "EntryListFeature"
     static let entryListFeatureTests = "EntryListFeatureTests"
+    
+    static let tools = "Tools"
+    static let toolsTests = "ToolsTests"
     
     static let uiPrimitives = "UIPrimitives"
 }

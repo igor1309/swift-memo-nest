@@ -60,6 +60,8 @@
 		2A33A3E52C46449000CE3C96 /* ListFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowView.swift; sourceTree = "<group>"; };
 		2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowModel.swift; sourceTree = "<group>"; };
 		2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryListFeature.xctestplan; path = TestPlans/EntryListFeature.xctestplan; sourceTree = "<group>"; };
+		2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tools.xctestplan; path = TestPlans/Tools.xctestplan; sourceTree = "<group>"; };
+		2ABB5CD62C46BAAB00D6822C /* NoteNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = NoteNest.xctestplan; path = TestPlans/NoteNest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +161,9 @@
 		2A36E5AF2C468E670015BA96 /* TestPlans */ = {
 			isa = PBXGroup;
 			children = (
+				2ABB5CD62C46BAAB00D6822C /* NoteNest.xctestplan */,
 				2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */,
+				2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */,
 			);
 			name = TestPlans;
 			sourceTree = "<group>";
