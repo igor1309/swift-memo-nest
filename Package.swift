@@ -5,19 +5,55 @@ import PackageDescription
 
 let package = Package(
     name: "swift-note-nest",
+    platforms: [
+        .iOS(.v14),
+        .macOS(.v11)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "swift-note-nest",
-            targets: ["swift-note-nest"]),
+        .noteNest,
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "swift-note-nest"),
-        .testTarget(
-            name: "swift-note-nestTests",
-            dependencies: ["swift-note-nest"]),
+        .noteNest,
+        .noteNestTests,
+        .uiPrimitives,
     ]
 )
+
+private extension Product {
+    
+    static let noteNest = library(
+        name: .noteNest, 
+        targets: [
+            .noteNest,
+            .uiPrimitives
+        ]
+    )
+}
+
+private extension Target {
+    
+    static let noteNest = target(name: .noteNest)
+    static let noteNestTests = testTarget(
+        name: .noteNestTests,
+        dependencies: [
+            .noteNest
+        ]
+    )
+    
+    static let uiPrimitives = target(name: .uiPrimitives)
+}
+
+private extension Target.Dependency {
+    
+    static let noteNest: Self = byName(name: .noteNest)
+    
+    static let uiPrimitives: Self = byName(name: .uiPrimitives)
+}
+
+private extension String {
+    
+    static let noteNest = "NoteNest"
+    static let noteNestTests = "NoteNestTests"
+    
+    static let uiPrimitives = "UIPrimitives"
+}
