@@ -15,6 +15,7 @@ let package = Package(
         .uiPrimitives,
     ],
     dependencies: [
+        .customDump,
         .imRx
     ],
     targets: [
@@ -76,6 +77,7 @@ private extension Target {
     static let toolsTests = testTarget(
         name: .toolsTests,
         dependencies: [
+            .customDump,
             .tools
         ]
     )
@@ -127,4 +129,85 @@ private extension String {
     
     static let imRx = "IMRx"
     static let im_Rx = "swift-imrx"
+}
+
+// MARK: - Point-Free
+
+private extension Package.Dependency {
+    
+    static let casePaths = Package.Dependency.package(
+        url: .pointFreeGitHub + .case_paths,
+        from: .init(1, 4, 2)
+    )
+    static let combineSchedulers = Package.Dependency.package(
+        url: .pointFreeGitHub + .combine_schedulers,
+        from: .init(1, 0, 0)
+    )
+    static let customDump = Package.Dependency.package(
+        url: .pointFreeGitHub + .swift_custom_dump,
+        from: .init(1, 3, 0)
+    )
+    static let identifiedCollections = Package.Dependency.package(
+        url: .pointFreeGitHub + .swift_identified_collections,
+        from: .init(1, 1, 0)
+    )
+    static let snapshotTesting = Package.Dependency.package(
+        url: .pointFreeGitHub + .swift_snapshot_testing,
+        from: .init(1, 16, 2)
+    )
+    static let swiftUINavigation = Package.Dependency.package(
+        url: .pointFreeGitHub + .swiftUI_navigation,
+        from: .init(1, 5, 0)
+    )
+}
+
+private extension Target.Dependency {
+    
+    static let casePaths = product(
+        name: .casePaths,
+        package: .case_paths
+    )
+    static let combineSchedulers = product(
+        name: .combineSchedulers,
+        package: .combine_schedulers
+    )
+    static let customDump = product(
+        name: .customDump,
+        package: .swift_custom_dump
+    )
+    static let identifiedCollections = product(
+        name: .identifiedCollections,
+        package: .swift_identified_collections
+    )
+    static let snapshotTesting = product(
+        name: .snapshotTesting,
+        package: .swift_snapshot_testing
+    )
+    static let swiftUINavigation = product(
+        name: .swiftUINavigation,
+        package: .swiftUI_navigation
+    )
+}
+
+private extension String {
+    
+    static let pointFreeGitHub = "https://github.com/pointfreeco/"
+    
+    static let casePaths = "CasePaths"
+    static let case_paths = "swift-case-paths"
+    
+    static let combineSchedulers = "CombineSchedulers"
+    static let combine_schedulers = "combine-schedulers"
+    
+    static let customDump = "CustomDump"
+    static let swift_custom_dump = "swift-custom-dump"
+    
+    static let identifiedCollections = "IdentifiedCollections"
+    static let swift_identified_collections = "swift-identified-collections"
+    
+    static let snapshotTesting = "SnapshotTesting"
+    static let swift_snapshot_testing = "swift-snapshot-testing"
+    
+    static let swiftUINavigation = "SwiftUINavigation"
+    static let swiftUI_navigation = "swiftui-navigation"
 }
