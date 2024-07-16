@@ -126,7 +126,7 @@ private extension ListFlowView {
 
 #Preview {
     
-    NavigationView {
+    NavigationStack {
         
         ListFlowView(model: .preview(), factory: .preview())
     }

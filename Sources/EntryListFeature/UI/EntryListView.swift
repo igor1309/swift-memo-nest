@@ -109,7 +109,7 @@ private func entryListView(
     initialState: EntryListState<PreviewEntry> = .init()
 ) -> some View {
     
-    NavigationView {
+    NavigationStack {
         
         EntryListView(
             state: initialState,
