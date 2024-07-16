@@ -65,6 +65,8 @@ private extension EntryListView {
             
             ForEach(entries, content: entryView)
         }
+        .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
         .listStyle(.plain)
     }
 }
