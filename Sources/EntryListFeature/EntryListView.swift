@@ -40,23 +40,14 @@ public struct EntryListView<EntryView: View>: View {
                 }
                 
             case let .success(entries):
-                listView(entries: entries)
+                if entries.isEmpty {
+                    Text("No entries")
+                } else {
+                    listView(entries: entries)
+                }
             }
         }
         .onFirstAppear { model.event(.load) }
-    }
-}
-
-#Preview {
-    
-    NavigationView {
-        
-        EntryListView(model: .preview()) { entry in
-            
-            Button(entry.text) { print(entry) }
-                .font(.subheadline)
-        }
-        .navigationTitle("Entries")
     }
 }
 
@@ -112,6 +103,43 @@ private extension EntryListView {
                     model.event(.loadMore(after: entry.id))
                 }
             }
+    }
+}
+
+// MARK: - Previews
+
+private func entryListView(
+    initialState: EntryListState = .init()
+) -> some View {
+    
+    NavigationView {
+        
+        EntryListView(
+            model: .preview(initialState: initialState)
+        ) { entry in
+            
+            Button(entry.text) { print(entry) }
+                .font(.subheadline)
+        }
+        .navigationTitle("Entries")
+    }
+}
+
+struct EntryListView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        
+        Group {
+            
+            entryListView()
+            entryListView(initialState: .init(result: .failure(.init())))
+            entryListView(initialState: .init(result: .success([])))
+            entryListView(initialState: .init(result: .success(.preview())))
+            entryListView(initialState: .init(
+                result: .success(.preview()),
+                status: .inflight
+            ))
+        }
     }
 }
 #endif
