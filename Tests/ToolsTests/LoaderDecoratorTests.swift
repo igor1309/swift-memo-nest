@@ -1,6 +1,6 @@
 //
 //  LoaderDecoratorTests.swift
-//  
+//
 //
 //  Created by Igor Malyarov on 16.07.2024.
 //
@@ -18,7 +18,95 @@ final class LoaderDecoratorTests: XCTestCase {
         XCTAssertEqual(decorateSpy.callCount, 0)
         XCTAssertNotNil(sut)
     }
-
+    
+    func test_load_shouldCallDecorateeWithPayload() {
+        
+        let payload = anyPayload()
+        let (sut, decoratee, _) = makeSUT()
+        
+        sut.load(payload) { _ in }
+        
+        XCTAssertNoDiff(decoratee.payloads, [payload])
+    }
+    
+    func test_load_shouldCallDecorateWithDecorateeFailure() {
+        
+        let result: SUT.LoadResult = .failure(anyFailure())
+        let (sut, decoratee, decorateSpy) = makeSUT()
+        
+        sut.load(anyPayload()) { _ in }
+        decoratee.complete(with: result)
+        
+        XCTAssertNoDiff(decorateSpy.payloads, [result])
+    }
+    
+    func test_load_shouldCallDecorateWithDecorateeSuccess() {
+        
+        let result: SUT.LoadResult = .success(anySuccess())
+        let (sut, decoratee, decorateSpy) = makeSUT()
+        
+        sut.load(anyPayload()) { _ in }
+        decoratee.complete(with: result)
+        
+        XCTAssertNoDiff(decorateSpy.payloads, [result])
+    }
+    
+    func test_load_shouldDeliverDecorateeFailure() {
+        
+        let result: SUT.LoadResult = .failure(anyFailure())
+        let (sut, decoratee, decorateSpy) = makeSUT()
+        
+        assert(sut, with: anyPayload(), toDeliver: result) {
+            
+            decoratee.complete(with: result)
+            decorateSpy.complete(with: .success(()))
+        }
+        
+        XCTAssertNoDiff(decorateSpy.payloads, [result])
+    }
+    
+    func test_load_shouldDeliverDecorateeSuccess() {
+        
+        let result: SUT.LoadResult = .success(anySuccess())
+        let (sut, decoratee, decorateSpy) = makeSUT()
+        
+        assert(sut, with: anyPayload(), toDeliver: result) {
+            
+            decoratee.complete(with: result)
+            decorateSpy.complete(with: .success(()))
+        }
+        
+        XCTAssertNoDiff(decorateSpy.payloads, [result])
+    }
+    
+    func test_load_shouldNotCallDecorateOnInstanceDeallocation() {
+        
+        var sut: SUT?
+        let decoratee: Decoratee
+        let decorateSpy: DecorateSpy
+        (sut, decoratee, decorateSpy) = makeSUT()
+        
+        sut?.load(anyPayload()) { _ in }
+        sut = nil
+        decoratee.complete(with: .failure(anyFailure()))
+        
+        XCTAssertEqual(decorateSpy.callCount, 0)
+    }
+    
+    func test_load_shouldNotDeliverDecorateeResultOnInstanceDeallocation() {
+        
+        var sut: SUT?
+        let decoratee: Decoratee
+        (sut, decoratee, _) = makeSUT()
+        var result: SUT.LoadResult?
+        
+        sut?.load(anyPayload()) { result = $0 }
+        sut = nil
+        decoratee.complete(with: .failure(anyFailure()))
+        
+        XCTAssertNil(result)
+    }
+    
     // MARK: - Helpers
     
     private typealias SUT = LoaderDecorator<Payload, Success, Failure>
@@ -59,19 +147,52 @@ final class LoaderDecoratorTests: XCTestCase {
         
         let value: String
     }
-
+    
     private struct Failure: Error, Equatable {
         
         let value: String
     }
-}
-
-extension Spy: Loader {
     
-    func load(
-        _ payload: Payload,
-        _ completion: @escaping (Result<Success, Failure>) -> Void
+    private func anyPayload(
+        _ value: String = UUID().uuidString
+    ) -> Payload {
+        
+        return .init(value: value)
+    }
+    
+    private func anySuccess(
+        _ value: String = UUID().uuidString
+    ) -> Success {
+        
+        return .init(value: value)
+    }
+    
+    private func anyFailure(
+        _ value: String = UUID().uuidString
+    ) -> Failure {
+        
+        return .init(value: value)
+    }
+    
+    private func assert(
+        _ sut: SUT,
+        with payload: Payload,
+        toDeliver expectedResult: Result<Success, Failure>,
+        on action: @escaping () -> Void,
+        timeout: TimeInterval = 0.05,
+        file: StaticString = #file,
+        line: UInt = #line
     ) {
-        process(payload, completion: completion)
+        let exp = expectation(description: "wait for completion")
+        
+        sut.load(payload) {
+            
+            XCTAssertNoDiff($0, expectedResult, file: file, line: line)
+            exp.fulfill()
+        }
+        
+        action()
+        
+        wait(for: [exp], timeout: timeout)
     }
 }

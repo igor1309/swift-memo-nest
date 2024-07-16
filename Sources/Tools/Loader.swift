@@ -13,8 +13,10 @@ public protocol Loader<Payload, Success, Failure> {
     
     func load(
         _: Payload,
-        _: @escaping (Result<Success, Failure>) -> Void
+        _: @escaping (LoadResult) -> Void
     )
+    
+    typealias LoadResult = Result<Success, Failure>
 }
 
 public extension Loader where Payload == Void {
