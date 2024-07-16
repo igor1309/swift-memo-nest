@@ -7,8 +7,8 @@
 
 struct EntryListState: Equatable {
     
-    var result: EntryListResult
-    var status: Status?
+    var result: EntryListResult? = nil
+    var status: Status? = nil
 }
 
 typealias EntryListResult = Result<[Entry], EntryListEvent.LoadFailure>

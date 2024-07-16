@@ -25,6 +25,9 @@ struct EntryListView<EntryView: View>: View {
         
         Group {
             switch model.state.result {
+            case .none:
+                ProgressView()
+                
             case .failure:
                 loadFailureView()
                 

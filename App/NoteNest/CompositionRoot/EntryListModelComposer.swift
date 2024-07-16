@@ -31,7 +31,7 @@ extension EntryListModelComposer {
         )
         
         return .init(
-            initialState: .init(result: .success([])),
+            initialState: .init(),
             reduce: reducer.reduce(_:_:),
             handleEffect: effectHandler.handleEffect(_:_:),
             scheduler: scheduler
