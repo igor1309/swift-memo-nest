@@ -16,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A324D892C46483B008E7EB6 /* NoteNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = NoteNest.xctestplan; path = TestPlans/NoteNest.xctestplan; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* NoteNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
 		2A33A3D82C4642C700CE3C96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +41,7 @@
 		2A33A3CA2C4642C700CE3C96 = {
 			isa = PBXGroup;
 			children = (
+				2A324D892C46483B008E7EB6 /* NoteNest.xctestplan */,
 				2A33A3E42C4642F300CE3C96 /* swift-note-nest */,
 				2A33A3D52C4642C700CE3C96 /* NoteNest */,
 				2A33A3D42C4642C700CE3C96 /* Products */,

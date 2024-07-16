@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "0F0AB403-94D9-48EC-AA04-21F3137DDA48",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "NoteNestTests",
+        "name" : "NoteNestTests"
+      }
+    }
+  ],
+  "version" : 1
+}
