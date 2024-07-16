@@ -26,10 +26,16 @@ struct EntryListView<EntryView: View>: View {
         Group {
             switch model.state.result {
             case .none:
-                ProgressView()
+                progressView()
                 
             case .failure:
-                loadFailureView()
+                switch model.state.status {
+                case .none:
+                    loadFailureView()
+                    
+                case .inflight:
+                    progressView()
+                }
                 
             case let .success(entries):
                 listView(entries: entries)
@@ -54,10 +60,21 @@ struct EntryListView<EntryView: View>: View {
 
 private extension EntryListView {
     
+    func progressView() -> some View {
+        
+        ProgressView().id(UUID())
+    }
+    
     func loadFailureView() -> some View {
         
-        Text("Error loading entries.")
-            .foregroundStyle(.red)
+        VStack(spacing: 32) {
+            
+            Text("Error loading entries.")
+                .foregroundStyle(.red)
+            
+            Button("Reload", action: { model.event(.load) })
+                .buttonStyle(.borderedProminent)
+        }
     }
     
     func listView(
@@ -73,7 +90,7 @@ private extension EntryListView {
             
             if model.state.status == .inflight {
                 
-                ProgressView().id(UUID())
+                progressView()
             }
         }
         .scrollDismissesKeyboard(.immediately)

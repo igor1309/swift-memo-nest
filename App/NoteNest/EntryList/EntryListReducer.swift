@@ -62,12 +62,8 @@ private extension EntryListReducer {
             
         case let .success(entries):
             switch state.result {
-            case .none:
+            case .none, .failure:
                 state.result = .success(entries)
-                
-            case .failure:
-                // ???
-                break
                 
             case var .success(existingEntries):
                 existingEntries += entries
