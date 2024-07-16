@@ -43,11 +43,11 @@ private extension EntryListReducer {
         with result: Event.LoadResult
     ) {
         switch result {
-        case let .failure:
-            #warning("FIXME")
+        case let .failure(failure):
+            state = .failure(failure)
             
         case let .success(entries):
-            state = entries
+            state = .success(entries)
         }
     }
 }

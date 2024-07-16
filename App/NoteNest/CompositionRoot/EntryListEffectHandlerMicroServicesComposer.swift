@@ -25,6 +25,7 @@ private extension EntryListEffectHandlerMicroServicesComposer {
         _ completion: @escaping MicroServices.LoadCompletion
     ) {
         completion(.success(.stub(20)))
+        // completion(.failure(.init()))
     }
 }
 

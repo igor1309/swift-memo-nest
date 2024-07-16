@@ -5,4 +5,4 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-typealias EntryListState = [Entry]
+typealias EntryListState = Result<[Entry], EntryListEvent.LoadFailure>

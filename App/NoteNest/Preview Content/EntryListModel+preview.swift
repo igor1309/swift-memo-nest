@@ -10,7 +10,7 @@ import Foundation
 extension EntryListModel {
     
     static func preview(
-        initialState: [Entry] = .preview()
+        initialState: EntryListState = .success(.preview())
     ) -> Self {
         
         return .init(

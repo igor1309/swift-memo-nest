@@ -23,11 +23,15 @@ struct EntryListView<EntryView: View>: View {
     
     var body: some View {
         
-        List {
-            
-            ForEach(model.state, content: entryView)
+        Group {
+            switch model.state {
+            case .failure:
+                loadFailureView()
+                
+            case let .success(entries):
+                listView(entries: entries)
+            }
         }
-        .listStyle(.plain)
         .onFirstAppear { model.event(.load) }
     }
 }
@@ -37,10 +41,30 @@ struct EntryListView<EntryView: View>: View {
     NavigationView {
         
         EntryListView(model: .preview()) { entry in
-        
+            
             Button(entry.text) { print(entry) }
                 .font(.subheadline)
         }
-            .navigationTitle("Entries")
+        .navigationTitle("Entries")
+    }
+}
+
+private extension EntryListView {
+    
+    func loadFailureView() -> some View {
+     
+        Text("Error loading entries.")
+            .foregroundStyle(.red)
+    }
+    
+    func listView(
+        entries: [Entry]
+    ) -> some View {
+        
+        List {
+            
+            ForEach(entries, content: entryView)
+        }
+        .listStyle(.plain)
     }
 }
