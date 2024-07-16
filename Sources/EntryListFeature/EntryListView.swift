@@ -5,15 +5,17 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
+#if canImport(SwiftUI)
 import SwiftUI
+import UIPrimitives
 
-struct EntryListView<EntryView: View>: View {
+public struct EntryListView<EntryView: View>: View {
     
     @StateObject private var model: EntryListModel
     
     private let entryView: (Entry) -> EntryView
     
-    init(
+    public init(
         model: EntryListModel,
         entryView: @escaping (Entry) -> EntryView
     ) {
@@ -21,7 +23,7 @@ struct EntryListView<EntryView: View>: View {
         self.entryView = entryView
     }
     
-    var body: some View {
+    public var body: some View {
         
         Group {
             switch model.state.result {
@@ -70,7 +72,7 @@ private extension EntryListView {
         VStack(spacing: 32) {
             
             Text("Error loading entries.")
-                .foregroundStyle(.red)
+                .foregroundColor(.red)
             
             Button("Reload", action: { model.event(.load) })
                 .buttonStyle(.borderedProminent)
@@ -112,3 +114,4 @@ private extension EntryListView {
             }
     }
 }
+#endif

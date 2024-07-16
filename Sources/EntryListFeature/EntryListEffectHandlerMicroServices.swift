@@ -7,13 +7,21 @@
 
 import Foundation
 
-struct EntryListEffectHandlerMicroServices {
+public struct EntryListEffectHandlerMicroServices {
     
-    let load: Load
-    let loadMoreAfter: LoadMoreAfter
+    public let load: Load
+    public let loadMoreAfter: LoadMoreAfter
+    
+    public init(
+        load: @escaping Load, 
+        loadMoreAfter: @escaping LoadMoreAfter
+    ) {
+        self.load = load
+        self.loadMoreAfter = loadMoreAfter
+    }
 }
 
-extension EntryListEffectHandlerMicroServices {
+public extension EntryListEffectHandlerMicroServices {
     
     typealias LoadResult = Event.LoadResult
     typealias LoadCompletion = (LoadResult) -> Void

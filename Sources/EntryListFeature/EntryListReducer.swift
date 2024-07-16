@@ -5,9 +5,12 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-final class EntryListReducer {}
+public final class EntryListReducer {
+    
+    public init() {}
+}
 
-extension EntryListReducer {
+public extension EntryListReducer {
     
     func reduce(
         _ state: State,
@@ -34,7 +37,7 @@ extension EntryListReducer {
     }
 }
 
-extension EntryListReducer {
+public extension EntryListReducer {
     
     typealias State = EntryListState
     typealias Event = EntryListEvent

@@ -7,19 +7,19 @@
 
 import Foundation
 
-final class EntryListEffectHandler {
+public final class EntryListEffectHandler {
     
     private let microServices: MicroServices
     
-    init(microServices: MicroServices) {
+    public init(microServices: MicroServices) {
         
         self.microServices = microServices
     }
     
-    typealias MicroServices = EntryListEffectHandlerMicroServices
+    public typealias MicroServices = EntryListEffectHandlerMicroServices
 }
 
-extension EntryListEffectHandler {
+public extension EntryListEffectHandler {
     
     func handleEffect(
         _ effect: Effect,
@@ -35,7 +35,7 @@ extension EntryListEffectHandler {
     }
 }
 
-extension EntryListEffectHandler {
+public extension EntryListEffectHandler {
     
     typealias Dispatch = (Event) -> Void
     

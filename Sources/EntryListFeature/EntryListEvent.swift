@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-enum EntryListEvent: Equatable {
+public enum EntryListEvent: Equatable {
     
     case load
     case loaded(LoadResult)
@@ -14,6 +14,10 @@ enum EntryListEvent: Equatable {
 
 extension EntryListEvent {
     
-    struct LoadFailure: Error, Equatable {}
-    typealias LoadResult = Result<[Entry], LoadFailure>
+    public struct LoadFailure: Error, Equatable {
+        
+        public init() {}
+    }
+    
+    public typealias LoadResult = Result<[Entry], LoadFailure>
 }

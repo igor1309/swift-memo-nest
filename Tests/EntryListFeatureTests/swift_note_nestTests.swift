@@ -1,5 +1,4 @@
 import XCTest
-@testable import swift_note_nest
 
 final class swift_note_nestTests: XCTestCase {
     func testExample() throws {

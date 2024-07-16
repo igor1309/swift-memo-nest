@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EntryListFeature
 import UIPrimitives
 
 struct ListFlowView: View {
