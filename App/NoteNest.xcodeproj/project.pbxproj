@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A0CC5352C46A58400B34E91 /* EntryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A0CC5342C46A58400B34E91 /* EntryListFeature */; };
+		2A0CC5372C46B90A00B34E91 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CC5362C46B90A00B34E91 /* Entry.swift */; };
 		2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D8D2C464975008E7EB6 /* UIPrimitives */; };
 		2A324D902C464ABF008E7EB6 /* ListFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */; };
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0CC5362C46B90A00B34E91 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEvent.swift; sourceTree = "<group>"; };
 		2A324D962C464BCE008E7EB6 /* ListFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEffect.swift; sourceTree = "<group>"; };
 		2A324D982C464BDD008E7EB6 /* ListFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowState.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		2A324DC22C466B04008E7EB6 /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
+				2A0CC5362C46B90A00B34E91 /* Entry.swift */,
 				2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */,
 				2A324DC02C46687A008E7EB6 /* EntryListModelComposer.swift */,
 				2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */,
@@ -245,6 +248,7 @@
 				2A324D9B2C464C44008E7EB6 /* ListFlowModel+preview.swift in Sources */,
 				2A324DC12C46687A008E7EB6 /* EntryListModelComposer.swift in Sources */,
 				2A324DC62C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */,
+				2A0CC5372C46B90A00B34E91 /* Entry.swift in Sources */,
 				2A324DAE2C465CFE008E7EB6 /* ListFlowFactory+preview.swift in Sources */,
 				2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */,
 				2A324D902C464ABF008E7EB6 /* ListFlowEvent.swift in Sources */,

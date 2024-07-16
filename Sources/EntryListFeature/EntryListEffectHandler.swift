@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class EntryListEffectHandler {
+public final class EntryListEffectHandler<Entry: Identifiable> {
     
     private let microServices: MicroServices
     
@@ -16,7 +16,7 @@ public final class EntryListEffectHandler {
         self.microServices = microServices
     }
     
-    public typealias MicroServices = EntryListEffectHandlerMicroServices
+    public typealias MicroServices = EntryListEffectHandlerMicroServices<Entry>
 }
 
 public extension EntryListEffectHandler {
@@ -39,8 +39,8 @@ public extension EntryListEffectHandler {
     
     typealias Dispatch = (Event) -> Void
     
-    typealias Event = EntryListEvent
-    typealias Effect = EntryListEffect
+    typealias Event = EntryListEvent<Entry>
+    typealias Effect = EntryListEffect<Entry>
 }
 
 private extension EntryListEffectHandler {

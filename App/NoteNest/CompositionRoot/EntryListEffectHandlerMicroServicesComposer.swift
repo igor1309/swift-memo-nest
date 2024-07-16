@@ -20,7 +20,7 @@ extension EntryListEffectHandlerMicroServicesComposer {
         )
     }
     
-    typealias MicroServices = EntryListEffectHandlerMicroServices
+    typealias MicroServices = EntryListEffectHandlerMicroServices<Entry>
 }
 
 private extension EntryListEffectHandlerMicroServicesComposer {

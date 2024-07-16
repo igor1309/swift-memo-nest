@@ -8,4 +8,4 @@
 import Foundation
 import IMRx
 
-public typealias EntryListModel = RxViewModel<EntryListState, EntryListEvent, EntryListEffect>
+public typealias EntryListModel<Entry: Identifiable> = RxViewModel<EntryListState<Entry>, EntryListEvent<Entry>, EntryListEffect<Entry>>

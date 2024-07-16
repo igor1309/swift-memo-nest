@@ -8,7 +8,7 @@
 import EntryListFeature
 import Foundation
 
-extension Array where Element == Entry {
+extension Array where Element == PreviewEntry {
     
     static func preview(count: Int = 10) -> Self {
         

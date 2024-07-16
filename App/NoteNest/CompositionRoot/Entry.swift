@@ -7,13 +7,13 @@
 
 import Foundation
 
-public struct Entry: Equatable, Identifiable {
+struct Entry: Equatable, Identifiable {
     
-    public let id: UUID
-    public let text: String
+    let id: UUID
+    let text: String
     
-    public init(
-        id: UUID, 
+    init(
+        id: UUID,
         text: String
     ) {
         self.id = id

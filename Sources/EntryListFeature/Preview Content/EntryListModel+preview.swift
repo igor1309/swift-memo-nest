@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension EntryListModel {
+extension EntryListModel where State == EntryListState<PreviewEntry> {
     
     static func preview(
-        initialState: EntryListState = .init()
+        initialState: EntryListState<PreviewEntry> = .init()
     ) -> Self {
         
         return .init(

@@ -22,12 +22,12 @@ final class EntryListModelComposer {
 
 extension EntryListModelComposer {
     
-    func compose() -> EntryListModel {
+    func compose() -> EntryListModel<Entry> {
         
-        let reducer = EntryListReducer()
+        let reducer = EntryListReducer<Entry>()
         
         let composer = EntryListEffectHandlerMicroServicesComposer()
-        let effectHandler = EntryListEffectHandler(
+        let effectHandler = EntryListEffectHandler<Entry>(
             microServices: composer.compose()
         )
         

@@ -9,14 +9,14 @@
 import SwiftUI
 import UIPrimitives
 
-public struct EntryStateWrapperListView<EntryView: View>: View {
+public struct EntryStateWrapperListView<Entry: Identifiable, EntryView: View>: View {
     
-    @StateObject private var model: EntryListModel
+    @StateObject private var model: Model
     
     private let entryView: (Entry) -> EntryView
     
     public init(
-        model: EntryListModel,
+        model: Model,
         entryView: @escaping (Entry) -> EntryView
     ) {
         self._model = .init(wrappedValue: model)
@@ -31,5 +31,7 @@ public struct EntryStateWrapperListView<EntryView: View>: View {
             entryView: entryView
         )
     }
+    
+    public typealias Model = EntryListModel<Entry>
 }
 #endif

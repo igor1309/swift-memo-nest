@@ -8,10 +8,10 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
-struct EntryListView<EntryView: View>: View {
+struct EntryListView<Entry: Identifiable, EntryView: View>: View {
     
-    let state: EntryListState
-    let event: (EntryListEvent) -> Void
+    let state: State
+    let event: (Event) -> Void
     let entryView: (Entry) -> EntryView
     
     var body: some View {
@@ -40,6 +40,12 @@ struct EntryListView<EntryView: View>: View {
         }
         .onFirstAppear { event(.load) }
     }
+}
+
+extension EntryListView {
+    
+    typealias State = EntryListState<Entry>
+    typealias Event = EntryListEvent<Entry>
 }
 
 private extension EntryListView {
@@ -100,7 +106,7 @@ private extension EntryListView {
 // MARK: - Previews
 
 private func entryListView(
-    initialState: EntryListState = .init()
+    initialState: EntryListState<PreviewEntry> = .init()
 ) -> some View {
     
     NavigationView {

@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-public final class EntryListReducer {
+public final class EntryListReducer<Entry: Identifiable> {
     
     public init() {}
 }
@@ -39,9 +39,9 @@ public extension EntryListReducer {
 
 public extension EntryListReducer {
     
-    typealias State = EntryListState
-    typealias Event = EntryListEvent
-    typealias Effect = EntryListEffect
+    typealias State = EntryListState<Entry>
+    typealias Event = EntryListEvent<Entry>
+    typealias Effect = EntryListEffect<Entry>
 }
 
 private extension EntryListReducer {

@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-public enum EntryListEvent: Equatable {
+public enum EntryListEvent<Entry: Identifiable> {
     
     case load
     case loaded(LoadResult)
@@ -21,3 +21,5 @@ extension EntryListEvent {
     
     public typealias LoadResult = Result<[Entry], LoadFailure>
 }
+
+extension EntryListEvent: Equatable where Entry: Equatable {}

@@ -22,7 +22,7 @@ final class ContentViewComposer {
         self.scheduler = scheduler
     }
     
-    typealias MakeEntryListModel = () -> EntryListModel
+    typealias MakeEntryListModel = () -> EntryListModel<Entry>
 }
 
 extension ContentViewComposer {

@@ -10,12 +10,14 @@ import SwiftUI
 
 final class ListFlowFactory {
     
-    private let model: EntryListModel
+    private let model: Model
     
-    init(model: EntryListModel) {
+    init(model: Model) {
         
         self.model = model
     }
+    
+    typealias Model = EntryListModel<Entry>
 }
 
 extension ListFlowFactory {
