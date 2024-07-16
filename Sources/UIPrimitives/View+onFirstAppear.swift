@@ -5,6 +5,7 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
+#if canImport(SwiftUI)
 import SwiftUI
 
 public extension View {
@@ -37,3 +38,4 @@ struct OnFirstAppearModifier: ViewModifier {
             }
     }
 }
+#endif

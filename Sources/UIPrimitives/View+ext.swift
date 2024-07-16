@@ -5,6 +5,7 @@
 //  Created by Igor Malyarov on 10.05.2024.
 //
 
+#if canImport(UIKit)
 import SwiftUI
 
 /// Extending SwiftUI API
@@ -89,3 +90,4 @@ public extension View {
         )
     }
 }
+#endif
