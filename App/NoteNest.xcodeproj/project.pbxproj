@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D8D2C464975008E7EB6 /* UIPrimitives */; };
 		2A33A3D72C4642C700CE3C96 /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */; };
 		2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D82C4642C700CE3C96 /* ContentView.swift */; };
 		2A33A3DB2C4642C900CE3C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */; };
@@ -32,12 +33,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A324D8A2C464913008E7EB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2A33A3CA2C4642C700CE3C96 = {
 			isa = PBXGroup;
 			children = (
@@ -45,6 +54,7 @@
 				2A33A3E42C4642F300CE3C96 /* swift-note-nest */,
 				2A33A3D52C4642C700CE3C96 /* NoteNest */,
 				2A33A3D42C4642C700CE3C96 /* Products */,
+				2A324D8A2C464913008E7EB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +111,9 @@
 			dependencies = (
 			);
 			name = NoteNest;
+			packageProductDependencies = (
+				2A324D8D2C464975008E7EB6 /* UIPrimitives */,
+			);
 			productName = NoteNest;
 			productReference = 2A33A3D32C4642C700CE3C96 /* NoteNest.app */;
 			productType = "com.apple.product-type.application";
@@ -364,6 +377,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2A324D8D2C464975008E7EB6 /* UIPrimitives */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIPrimitives;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2A33A3CB2C4642C700CE3C96 /* Project object */;
 }

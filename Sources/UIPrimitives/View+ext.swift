@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Extending SwiftUI API
-extension View {
+public extension View {
     
     func alert<Item: Identifiable>(
         item: Item?,

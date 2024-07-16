@@ -11,6 +11,7 @@ let package = Package(
     ],
     products: [
         .noteNest,
+        .uiPrimitives,
     ],
     targets: [
         .noteNest,
@@ -25,6 +26,12 @@ private extension Product {
         name: .noteNest, 
         targets: [
             .noteNest,
+        ]
+    )
+    
+    static let uiPrimitives = library(
+        name: .uiPrimitives,
+        targets: [
             .uiPrimitives
         ]
     )
