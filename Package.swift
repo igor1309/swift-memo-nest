@@ -13,6 +13,9 @@ let package = Package(
         .entryListFeature,
         .uiPrimitives,
     ],
+    dependencies: [
+        .imRx
+    ],
     targets: [
         .entryListFeature,
         .entryListFeatureTests,
@@ -39,7 +42,13 @@ private extension Product {
 
 private extension Target {
     
-    static let entryListFeature = target(name: .entryListFeature)
+    static let entryListFeature = target(
+        name: .entryListFeature,
+        dependencies: [
+            .uiPrimitives,
+            .imRx
+        ]
+    )
     static let entryListFeatureTests = testTarget(
         name: .entryListFeatureTests,
         dependencies: [
@@ -63,4 +72,30 @@ private extension String {
     static let entryListFeatureTests = "EntryListFeatureTests"
     
     static let uiPrimitives = "UIPrimitives"
+}
+
+// MARK: - external dependencies
+
+private extension Package.Dependency {
+    
+    static let imRx = Package.Dependency.package(
+        url: .igor1309GitHub + .im_Rx,
+        branch: "main"
+    )
+}
+
+private extension Target.Dependency {
+    
+    static let imRx = product(
+        name: .imRx,
+        package: .im_Rx
+    )
+}
+
+private extension String {
+    
+    static let igor1309GitHub = "https://github.com/igor1309/"
+    
+    static let imRx = "IMRx"
+    static let im_Rx = "swift-imrx"
 }
