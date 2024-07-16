@@ -6,35 +6,6 @@
 //
 
 import Foundation
+import IMRx
 
-final class ListFlowModel: ObservableObject {
-    
-    @Published private(set) var route: Route
-    
-    init(route: Route = .init()) {
-     
-        self.route = route
-    }
-}
-
-extension ListFlowModel {
-    
-    struct Route: Equatable {
-        
-        var destination: Destination? = nil
-        var modal: Modal? = nil
-    }
-}
-
-extension ListFlowModel.Route {
-    
-    enum Destination: Equatable {
-        
-        case detail
-    }
-    
-    enum Modal: Equatable {
-        
-        case editor
-    }
-}
+typealias ListFlowModel =  RxViewModel<ListFlowState, ListFlowEvent, ListFlowEffect>
