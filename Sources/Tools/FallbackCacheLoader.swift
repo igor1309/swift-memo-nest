@@ -1,5 +1,5 @@
 //
-//  CacheLoaderTests.swift
+//  FallbackCacheLoader.swift
 //
 //
 //  Created by Igor Malyarov on 16.07.2024.
@@ -7,11 +7,11 @@
 
 /// A loader that tries to load data from an in-memory store first, and if it fails, falls back to a persistent store.
 /// On a successful load from the persistent store, it updates the in-memory store.
-public final class CacheLoader<Payload, Success, Failure: Error> {
+public final class FallbackCacheLoader<Payload, Success, Failure: Error> {
     
-    private let strategyLoader: StrategyLoader<Payload, Success, Failure>
+    private let loader: any Loader<Payload, Success, Failure>
     
-    /// Initialises a new instance of `CacheLoader`.
+    /// Initialises a new instance of `FallbackCacheLoader`.
     /// - Parameters:
     ///   - inMemoryLoader: The loader for the in-memory store.
     ///   - persistentLoader: The loader for the persistent store.
@@ -33,42 +33,19 @@ public final class CacheLoader<Payload, Success, Failure: Error> {
             }
         )
         
-        self.strategyLoader = .init(
+        self.loader = StrategyLoader(
             primary: inMemoryLoader,
             secondary: decoratedPersistentLoader
         )
     }
 }
 
-extension CacheLoader: Loader {
+extension FallbackCacheLoader: Loader {
     
     public func load(
         _ payload: Payload,
         _ completion: @escaping (LoadResult) -> Void
     ) {
-        strategyLoader.load(payload, completion)
+        loader.load(payload, completion)
     }
 }
-
-
-import Tools
-import XCTest
-
-//final class CacheLoaderTests: XCTestCase {
-//
-//    // MARK: - Helpers
-//
-//    private typealias SUT = CacheLoader
-//
-//    private func makeSUT(
-//        file: StaticString = #file,
-//        line: UInt = #line
-//    ) -> SUT {
-//
-//        let sut = SUT()
-//
-//        trackForMemoryLeaks(sut, file: file, line: line)
-//
-//        return sut
-//    }
-//}
