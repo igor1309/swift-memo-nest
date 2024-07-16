@@ -9,12 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     
+    private let composer: ContentViewComposer
+    
+    init() {
+        
+        let composer = EntryListModelComposer()
+        self.composer = .init(makeEntryListModel: composer.compose)
+    }
+    
     var body: some View {
         
         NavigationView {
             
-            ListFlowView(model: .preview(), factory: .preview())
-                .navigationTitle("Entries")
+            ListFlowView(
+                model: composer.composeViewModel(),
+                factory: composer.composeFactory()
+            )
+            .navigationTitle("Entries")
         }
     }
 }
