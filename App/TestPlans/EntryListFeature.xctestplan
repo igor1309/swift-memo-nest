@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "0F0AB403-94D9-48EC-AA04-21F3137DDA48",
+      "id" : "A6B2CCD1-37B0-4D6A-B0C2-D5A2F6D992E8",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -15,8 +15,8 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "NoteNestTests",
-        "name" : "NoteNestTests"
+        "identifier" : "EntryListFeatureTests",
+        "name" : "EntryListFeatureTests"
       }
     }
   ],

@@ -43,7 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A324D892C46483B008E7EB6 /* NoteNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = NoteNest.xctestplan; path = TestPlans/NoteNest.xctestplan; sourceTree = "<group>"; };
 		2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEvent.swift; sourceTree = "<group>"; };
 		2A324D962C464BCE008E7EB6 /* ListFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEffect.swift; sourceTree = "<group>"; };
 		2A324D982C464BDD008E7EB6 /* ListFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowState.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		2A33A3E42C4642F300CE3C96 /* swift-note-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-note-nest"; path = ..; sourceTree = "<group>"; };
 		2A33A3E52C46449000CE3C96 /* ListFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowView.swift; sourceTree = "<group>"; };
 		2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowModel.swift; sourceTree = "<group>"; };
+		2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryListFeature.xctestplan; path = TestPlans/EntryListFeature.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 		2A33A3CA2C4642C700CE3C96 = {
 			isa = PBXGroup;
 			children = (
-				2A324D892C46483B008E7EB6 /* NoteNest.xctestplan */,
+				2A36E5AF2C468E670015BA96 /* TestPlans */,
 				2A33A3E42C4642F300CE3C96 /* swift-note-nest */,
 				2A33A3D52C4642C700CE3C96 /* NoteNest */,
 				2A33A3D42C4642C700CE3C96 /* Products */,
@@ -184,6 +184,14 @@
 				2A324DAB2C465CDB008E7EB6 /* ListFlowFactory.swift */,
 			);
 			path = ListFlow;
+			sourceTree = "<group>";
+		};
+		2A36E5AF2C468E670015BA96 /* TestPlans */ = {
+			isa = PBXGroup;
+			children = (
+				2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */,
+			);
+			name = TestPlans;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

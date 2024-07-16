@@ -10,22 +10,22 @@ let package = Package(
         .macOS(.v11)
     ],
     products: [
-        .noteNest,
+        .entryListFeature,
         .uiPrimitives,
     ],
     targets: [
-        .noteNest,
-        .noteNestTests,
+        .entryListFeature,
+        .entryListFeatureTests,
         .uiPrimitives,
     ]
 )
 
 private extension Product {
     
-    static let noteNest = library(
-        name: .noteNest, 
+    static let entryListFeature = library(
+        name: .entryListFeature,
         targets: [
-            .noteNest,
+            .entryListFeature,
         ]
     )
     
@@ -39,11 +39,11 @@ private extension Product {
 
 private extension Target {
     
-    static let noteNest = target(name: .noteNest)
-    static let noteNestTests = testTarget(
-        name: .noteNestTests,
+    static let entryListFeature = target(name: .entryListFeature)
+    static let entryListFeatureTests = testTarget(
+        name: .entryListFeatureTests,
         dependencies: [
-            .noteNest
+            .entryListFeature
         ]
     )
     
@@ -52,15 +52,15 @@ private extension Target {
 
 private extension Target.Dependency {
     
-    static let noteNest: Self = byName(name: .noteNest)
+    static let entryListFeature: Self = byName(name: .entryListFeature)
     
     static let uiPrimitives: Self = byName(name: .uiPrimitives)
 }
 
 private extension String {
     
-    static let noteNest = "NoteNest"
-    static let noteNestTests = "NoteNestTests"
+    static let entryListFeature = "EntryListFeature"
+    static let entryListFeatureTests = "EntryListFeatureTests"
     
     static let uiPrimitives = "UIPrimitives"
 }
