@@ -10,24 +10,13 @@ import Foundation
 extension EntryListModel {
     
     static func preview(
-        initialState: [Entry] = .preview
+        initialState: [Entry] = .preview()
     ) -> Self {
         
         return .init(
             initialState: initialState,
             reduce: { state, _ in (state, nil) },
             handleEffect: { _,_ in }
-        )
-    }
-}
-
-extension Array where Element == Entry {
-    
-    static let preview: Self = (0..<10).map { _ in
-    
-        return .init(
-            id: UUID(),
-            text: UUID().uuidString
         )
     }
 }

@@ -28,6 +28,7 @@ struct EntryListView<EntryView: View>: View {
             ForEach(model.state, content: entryView)
         }
         .listStyle(.plain)
+        .onFirstAppear { model.event(.load) }
     }
 }
 

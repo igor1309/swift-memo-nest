@@ -24,7 +24,11 @@ extension EntryListModelComposer {
     func compose() -> EntryListModel {
         
         let reducer = EntryListReducer()
-        let effectHandler = EntryListEffectHandler()
+        
+        let composer = EntryListEffectHandlerMicroServicesComposer()
+        let effectHandler = EntryListEffectHandler(
+            microServices: composer.compose()
+        )
         
         return .init(
             initialState: [],

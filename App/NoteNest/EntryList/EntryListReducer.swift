@@ -18,7 +18,11 @@ extension EntryListReducer {
         var effect: Effect?
         
         switch event {
+        case .load:
+            effect = .load
             
+        case let .loaded(result):
+            reduce(&state, with: result)
         }
         
         return (state, effect)
@@ -30,4 +34,20 @@ extension EntryListReducer {
     typealias State = EntryListState
     typealias Event = EntryListEvent
     typealias Effect = EntryListEffect
+}
+
+private extension EntryListReducer {
+ 
+    func reduce(
+        _ state: inout State,
+        with result: Event.LoadResult
+    ) {
+        switch result {
+        case let .failure:
+            #warning("FIXME")
+            
+        case let .success(entries):
+            state = entries
+        }
+    }
 }
