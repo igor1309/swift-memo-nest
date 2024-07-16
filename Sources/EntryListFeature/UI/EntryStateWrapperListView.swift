@@ -1,5 +1,5 @@
 //
-//  EntryListView.swift
+//  EntryStateWrapperListView.swift
 //  NoteNest
 //
 //  Created by Igor Malyarov on 16.07.2024.
@@ -9,7 +9,7 @@
 import SwiftUI
 import UIPrimitives
 
-public struct EntryListView<EntryView: View>: View {
+public struct EntryStateWrapperListView<EntryView: View>: View {
     
     @StateObject private var model: EntryListModel
     
@@ -51,7 +51,7 @@ public struct EntryListView<EntryView: View>: View {
     }
 }
 
-private extension EntryListView {
+private extension EntryStateWrapperListView {
     
     func progressView() -> some View {
         
@@ -114,7 +114,7 @@ private func entryListView(
     
     NavigationView {
         
-        EntryListView(
+        EntryStateWrapperListView(
             model: .preview(initialState: initialState)
         ) { entry in
             

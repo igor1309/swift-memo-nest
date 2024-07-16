@@ -24,6 +24,6 @@ extension ListFlowFactory {
         entryView: @escaping (Entry) -> some View
     ) -> some View {
         
-        EntryListView(model: model, entryView: entryView)
+        EntryStateWrapperListView(model: model, entryView: entryView)
     }
 }
