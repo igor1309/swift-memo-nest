@@ -12,15 +12,19 @@ struct ListFlowView: View {
     
     @StateObject private var model: ListFlowModel
     
-    init(model: ListFlowModel) {
-        
+    private let factory: ListFlowFactory
+    
+    init(
+        model: ListFlowModel,
+        factory: ListFlowFactory
+    ) {
         self._model = .init(wrappedValue: model)
+        self.factory = factory
     }
     
     var body: some View {
         
-#warning("`preview` is used - replace with factory and composer")
-        EntryListView(model: .preview()) { entry in
+        factory.makeEntryListView { entry in
             
             entryRow(entry, event: { model.event(.select(entry)) })
         }
@@ -123,6 +127,6 @@ private extension ListFlowView {
     
     NavigationView {
         
-        ListFlowView(model: .preview())
+        ListFlowView(model: .preview(), factory: .preview())
     }
 }

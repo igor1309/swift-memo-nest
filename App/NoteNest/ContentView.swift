@@ -13,7 +13,7 @@ struct ContentView: View {
         
         NavigationView {
             
-            ListFlowView(model: .preview())
+            ListFlowView(model: .preview(), factory: .preview())
                 .navigationTitle("Entries")
         }
     }
