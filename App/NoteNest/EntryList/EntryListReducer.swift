@@ -19,12 +19,19 @@ extension EntryListReducer {
         
         switch event {
         case .load:
+            print("load")
+            state.status = .inflight
             effect = .load
             
         case let .loaded(result):
+            print("loaded")
             reduce(&state, with: result)
+            
+        case .loadMore:
+            print("load more")
         }
         
+        print(state.result.map { $0.count })
         return (state, effect)
     }
 }
@@ -42,12 +49,14 @@ private extension EntryListReducer {
         _ state: inout State,
         with result: Event.LoadResult
     ) {
+        state.status = nil
+
         switch result {
         case let .failure(failure):
-            state = .failure(failure)
+            state.result = .failure(failure)
             
         case let .success(entries):
-            state = .success(entries)
+            state.result = .success(entries)
         }
     }
 }

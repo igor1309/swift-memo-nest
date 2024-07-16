@@ -9,6 +9,7 @@ enum EntryListEvent: Equatable {
     
     case load
     case loaded(LoadResult)
+    case loadMore
 }
 
 extension EntryListEvent {

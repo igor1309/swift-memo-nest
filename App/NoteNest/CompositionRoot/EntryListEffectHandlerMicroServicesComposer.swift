@@ -24,8 +24,11 @@ private extension EntryListEffectHandlerMicroServicesComposer {
     func load(
         _ completion: @escaping MicroServices.LoadCompletion
     ) {
-        completion(.success(.stub(20)))
-        // completion(.failure(.init()))
+        DispatchQueue.main.delay(for: .seconds(2)) {
+
+            completion(.success(.stub(20)))
+            // completion(.failure(.init()))
+        }
     }
 }
 

@@ -24,7 +24,7 @@ struct EntryListView<EntryView: View>: View {
     var body: some View {
         
         Group {
-            switch model.state {
+            switch model.state.result {
             case .failure:
                 loadFailureView()
                 
@@ -52,7 +52,7 @@ struct EntryListView<EntryView: View>: View {
 private extension EntryListView {
     
     func loadFailureView() -> some View {
-     
+        
         Text("Error loading entries.")
             .foregroundStyle(.red)
     }
@@ -63,10 +63,27 @@ private extension EntryListView {
         
         List {
             
-            ForEach(entries, content: entryView)
+            ForEach(entries) {
+                
+                entryView(entry: $0, lastID: entries.last?.id)
+            }
         }
         .scrollDismissesKeyboard(.immediately)
         .scrollContentBackground(.hidden)
         .listStyle(.plain)
+    }
+    
+    private func entryView(
+        entry: Entry,
+        lastID id: Entry.ID?
+    ) -> some View {
+        
+        entryView(entry)
+            .onFirstAppear {
+                
+                if entry.id == id {
+                    model.event(.loadMore)
+                }
+            }
     }
 }

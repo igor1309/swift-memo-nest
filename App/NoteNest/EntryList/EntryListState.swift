@@ -5,4 +5,18 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-typealias EntryListState = Result<[Entry], EntryListEvent.LoadFailure>
+struct EntryListState: Equatable {
+    
+    var result: EntryListResult
+    var status: Status?
+}
+
+typealias EntryListResult = Result<[Entry], EntryListEvent.LoadFailure>
+
+extension EntryListState {
+    
+    enum Status: Equatable {
+        
+        case inflight
+    }
+}

@@ -25,7 +25,6 @@
 		2A324DB22C465E27008E7EB6 /* ContentViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */; };
 		2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324DB42C465EFF008E7EB6 /* CombineSchedulers */; };
 		2A324DB72C465FD4008E7EB6 /* EntryListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DB62C465FD4008E7EB6 /* EntryListReducer.swift */; };
-		2A324DB92C465FE9008E7EB6 /* EntryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DB82C465FE9008E7EB6 /* EntryListState.swift */; };
 		2A324DBB2C466003008E7EB6 /* EntryListEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DBA2C466003008E7EB6 /* EntryListEvent.swift */; };
 		2A324DBD2C466011008E7EB6 /* EntryListEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DBC2C466011008E7EB6 /* EntryListEffect.swift */; };
 		2A324DBF2C46604F008E7EB6 /* EntryListEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DBE2C46604F008E7EB6 /* EntryListEffectHandler.swift */; };
@@ -33,6 +32,8 @@
 		2A324DC42C466FFF008E7EB6 /* EntryListEffectHandlerMicroServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC32C466FFF008E7EB6 /* EntryListEffectHandlerMicroServices.swift */; };
 		2A324DC62C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */; };
 		2A324DC82C467381008E7EB6 /* [Entry]+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC72C467381008E7EB6 /* [Entry]+preview.swift */; };
+		2A324DCA2C467D25008E7EB6 /* EntryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC92C467D25008E7EB6 /* EntryListState.swift */; };
+		2A324DCC2C4682C7008E7EB6 /* DispatchQueue+delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */; };
 		2A33A3D72C4642C700CE3C96 /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */; };
 		2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D82C4642C700CE3C96 /* ContentView.swift */; };
 		2A33A3DB2C4642C900CE3C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */; };
@@ -57,7 +58,6 @@
 		2A324DAD2C465CFE008E7EB6 /* ListFlowFactory+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListFlowFactory+preview.swift"; sourceTree = "<group>"; };
 		2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewComposer.swift; sourceTree = "<group>"; };
 		2A324DB62C465FD4008E7EB6 /* EntryListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListReducer.swift; sourceTree = "<group>"; };
-		2A324DB82C465FE9008E7EB6 /* EntryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListState.swift; sourceTree = "<group>"; };
 		2A324DBA2C466003008E7EB6 /* EntryListEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEvent.swift; sourceTree = "<group>"; };
 		2A324DBC2C466011008E7EB6 /* EntryListEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffect.swift; sourceTree = "<group>"; };
 		2A324DBE2C46604F008E7EB6 /* EntryListEffectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandler.swift; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		2A324DC32C466FFF008E7EB6 /* EntryListEffectHandlerMicroServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServices.swift; sourceTree = "<group>"; };
 		2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2A324DC72C467381008E7EB6 /* [Entry]+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Entry]+preview.swift"; sourceTree = "<group>"; };
+		2A324DC92C467D25008E7EB6 /* EntryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListState.swift; sourceTree = "<group>"; };
+		2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+delay.swift"; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* NoteNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
 		2A33A3D82C4642C700CE3C96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2A324DA72C464F44008E7EB6 /* Entry.swift */,
-				2A324DB82C465FE9008E7EB6 /* EntryListState.swift */,
+				2A324DC92C467D25008E7EB6 /* EntryListState.swift */,
 				2A324DBA2C466003008E7EB6 /* EntryListEvent.swift */,
 				2A324DBC2C466011008E7EB6 /* EntryListEffect.swift */,
 				2A324DB62C465FD4008E7EB6 /* EntryListReducer.swift */,
@@ -119,6 +121,7 @@
 				2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */,
 				2A324DC02C46687A008E7EB6 /* EntryListModelComposer.swift */,
 				2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */,
+				2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -285,8 +288,9 @@
 				2A324DB72C465FD4008E7EB6 /* EntryListReducer.swift in Sources */,
 				2A324DB22C465E27008E7EB6 /* ContentViewComposer.swift in Sources */,
 				2A324DC42C466FFF008E7EB6 /* EntryListEffectHandlerMicroServices.swift in Sources */,
-				2A324DB92C465FE9008E7EB6 /* EntryListState.swift in Sources */,
 				2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */,
+				2A324DCC2C4682C7008E7EB6 /* DispatchQueue+delay.swift in Sources */,
+				2A324DCA2C467D25008E7EB6 /* EntryListState.swift in Sources */,
 				2A324DA62C464F14008E7EB6 /* EntryListModel.swift in Sources */,
 				2A324D9F2C464CC4008E7EB6 /* ListFlowEffectHandler.swift in Sources */,
 			);

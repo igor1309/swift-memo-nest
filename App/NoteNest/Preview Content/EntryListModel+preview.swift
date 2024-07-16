@@ -10,11 +10,11 @@ import Foundation
 extension EntryListModel {
     
     static func preview(
-        initialState: EntryListState = .success(.preview())
+        initialState: EntryListResult = .success(.preview())
     ) -> Self {
         
         return .init(
-            initialState: initialState,
+            initialState: .init(result: initialState),
             reduce: { state, _ in (state, nil) },
             handleEffect: { _,_ in }
         )
