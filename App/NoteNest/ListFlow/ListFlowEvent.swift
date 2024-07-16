@@ -7,13 +7,15 @@
 
 enum ListFlowEvent: Equatable {
     
+    case addEntry
     case dismiss(Dismiss)
+    case select(Entry)
 }
 
 extension ListFlowEvent {
     
     enum Dismiss: Equatable {
  
-        case destination
+        case destination, modal
     }
 }

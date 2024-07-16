@@ -18,12 +18,32 @@ struct ListFlowView: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .navigationDestination(
-                destination: model.state.destination,
-                dismissDestination: { model.event(.dismiss(.destination)) },
-                content: destinationContent
-            )
+        
+#warning("`preview` is used - replace with factory and composer")
+        EntryListView(model: .preview()) { entry in
+            
+            entryRow(entry, event: { model.event(.select(entry)) })
+        }
+        .navigationDestination(
+            destination: model.state.destination,
+            dismissDestination: { model.event(.dismiss(.destination)) },
+            content: destinationContent
+        )
+        .sheet(
+            modal: model.state.modal,
+            dismissModal: { model.event(.dismiss(.modal)) },
+            content: modalContent
+        )
+        .toolbar {
+            
+            ToolbarItem {
+                
+                Button("Add Entry", systemImage: "plus") {
+                    
+                    model.event(.addEntry)
+                }
+            }
+        }
     }
 }
 
@@ -42,19 +62,67 @@ extension ListFlowState.Destination: Identifiable {
     }
 }
 
+extension ListFlowState.Modal: Identifiable {
+    
+    var id: ID {
+        
+        switch self {
+        case .editor: return .editor
+        }
+    }
+    
+    enum ID: Hashable {
+        
+        case editor
+    }
+}
+
 private extension ListFlowView {
+    
+    private func entryRow(
+        _ entry: Entry,
+        event: @escaping () -> Void
+    ) -> some View {
+        
+        Button(entry.text, action: event)
+            .font(.subheadline)
+    }
     
     func destinationContent(
         destination: ListFlowState.Destination
     ) -> some View {
         
         switch destination {
-        case .detail:
-            Text("TBD: Detail View")
+        case let .detail(entry):
+            Text("TBD: Detail View for \(entry)")
+                .toolbar {
+                    
+                    ToolbarItem {
+                        
+                        Button("Edit Entry", systemImage: "square.and.pencil") {
+                            
+                            print("TBD: edit entry", entry)
+                        }
+                    }
+                }
+        }
+    }
+    
+    func modalContent(
+        modal: ListFlowState.Modal
+    ) -> some View {
+        
+        switch modal {
+        case .editor:
+            Text("TBD: Editor")
         }
     }
 }
 
 #Preview {
-    ListFlowView(model: .preview())
+    
+    NavigationView {
+        
+        ListFlowView(model: .preview())
+    }
 }

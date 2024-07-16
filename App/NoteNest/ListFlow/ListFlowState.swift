@@ -15,7 +15,7 @@ extension ListFlowState {
     
     enum Destination: Equatable {
         
-        case detail
+        case detail(Entry)
     }
     
     enum Modal: Equatable {

@@ -16,6 +16,10 @@
 		2A324D9B2C464C44008E7EB6 /* ListFlowModel+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D9A2C464C44008E7EB6 /* ListFlowModel+preview.swift */; };
 		2A324D9D2C464CAB008E7EB6 /* ListFlowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D9C2C464CAB008E7EB6 /* ListFlowReducer.swift */; };
 		2A324D9F2C464CC4008E7EB6 /* ListFlowEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D9E2C464CC4008E7EB6 /* ListFlowEffectHandler.swift */; };
+		2A324DA32C464EF1008E7EB6 /* EntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DA22C464EF1008E7EB6 /* EntryListView.swift */; };
+		2A324DA62C464F14008E7EB6 /* EntryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DA52C464F14008E7EB6 /* EntryListModel.swift */; };
+		2A324DA82C464F44008E7EB6 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DA72C464F44008E7EB6 /* Entry.swift */; };
+		2A324DAA2C464F75008E7EB6 /* EntryListModel+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DA92C464F75008E7EB6 /* EntryListModel+preview.swift */; };
 		2A33A3D72C4642C700CE3C96 /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */; };
 		2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33A3D82C4642C700CE3C96 /* ContentView.swift */; };
 		2A33A3DB2C4642C900CE3C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */; };
@@ -32,6 +36,10 @@
 		2A324D9A2C464C44008E7EB6 /* ListFlowModel+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListFlowModel+preview.swift"; sourceTree = "<group>"; };
 		2A324D9C2C464CAB008E7EB6 /* ListFlowReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowReducer.swift; sourceTree = "<group>"; };
 		2A324D9E2C464CC4008E7EB6 /* ListFlowEffectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEffectHandler.swift; sourceTree = "<group>"; };
+		2A324DA22C464EF1008E7EB6 /* EntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListView.swift; sourceTree = "<group>"; };
+		2A324DA52C464F14008E7EB6 /* EntryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListModel.swift; sourceTree = "<group>"; };
+		2A324DA72C464F44008E7EB6 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		2A324DA92C464F75008E7EB6 /* EntryListModel+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryListModel+preview.swift"; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* NoteNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
 		2A33A3D82C4642C700CE3C96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +71,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2A324DA42C464F0B008E7EB6 /* EntryList */ = {
+			isa = PBXGroup;
+			children = (
+				2A324DA72C464F44008E7EB6 /* Entry.swift */,
+				2A324DA52C464F14008E7EB6 /* EntryListModel.swift */,
+				2A324DA22C464EF1008E7EB6 /* EntryListView.swift */,
+			);
+			path = EntryList;
+			sourceTree = "<group>";
+		};
 		2A33A3CA2C4642C700CE3C96 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +105,7 @@
 			children = (
 				2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */,
 				2A33A3D82C4642C700CE3C96 /* ContentView.swift */,
+				2A324DA42C464F0B008E7EB6 /* EntryList */,
 				2A33A3E72C4644AF00CE3C96 /* ListFlow */,
 				2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */,
 				2A33A3DC2C4642C900CE3C96 /* Preview Content */,
@@ -99,6 +118,7 @@
 			children = (
 				2A33A3DD2C4642C900CE3C96 /* Preview Assets.xcassets */,
 				2A324D9A2C464C44008E7EB6 /* ListFlowModel+preview.swift */,
+				2A324DA92C464F75008E7EB6 /* EntryListModel+preview.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -197,13 +217,17 @@
 			files = (
 				2A324D9B2C464C44008E7EB6 /* ListFlowModel+preview.swift in Sources */,
 				2A33A3D92C4642C700CE3C96 /* ContentView.swift in Sources */,
+				2A324DA82C464F44008E7EB6 /* Entry.swift in Sources */,
 				2A324D902C464ABF008E7EB6 /* ListFlowEvent.swift in Sources */,
 				2A324D9D2C464CAB008E7EB6 /* ListFlowReducer.swift in Sources */,
 				2A324D972C464BCE008E7EB6 /* ListFlowEffect.swift in Sources */,
 				2A33A3D72C4642C700CE3C96 /* NoteNestApp.swift in Sources */,
+				2A324DAA2C464F75008E7EB6 /* EntryListModel+preview.swift in Sources */,
 				2A324D992C464BDD008E7EB6 /* ListFlowState.swift in Sources */,
 				2A33A3E62C46449000CE3C96 /* ListFlowView.swift in Sources */,
+				2A324DA32C464EF1008E7EB6 /* EntryListView.swift in Sources */,
 				2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */,
+				2A324DA62C464F14008E7EB6 /* EntryListModel.swift in Sources */,
 				2A324D9F2C464CC4008E7EB6 /* ListFlowEffectHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,8 +18,15 @@ extension ListFlowReducer {
         let effect: Effect? = nil
         
         switch event {
+        case .addEntry:
+            guard state.destination == nil else { fatalError("impossible state") }
+            state.modal = .editor
+            
         case let .dismiss(dismiss):
             reduce(&state, dismiss)
+            
+        case let .select(entry):
+            state.destination = .detail(entry)
         }
         
         return (state, effect)
@@ -42,6 +49,9 @@ private extension ListFlowReducer {
         switch dismiss {
         case .destination:
             state.destination = nil
+        
+        case .modal:
+            state.modal = nil
         }
     }
 }

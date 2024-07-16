@@ -10,8 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-
-        ListFlowView(model: .preview())
+        
+        NavigationView {
+            
+            ListFlowView(model: .preview())
+                .navigationTitle("Entries")
+        }
     }
 }
 
