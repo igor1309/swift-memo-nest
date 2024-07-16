@@ -28,6 +28,9 @@ extension EntryListEffectHandler {
         switch effect {
         case .load:
             load(dispatch)
+            
+        case let .loadMore(after: id):
+            loadMore(after: id, dispatch)
         }
     }
 }
@@ -46,5 +49,12 @@ private extension EntryListEffectHandler {
         _ dispatch: @escaping Dispatch
     ) {
         microServices.load { dispatch(.loaded($0)) }
+    }
+    
+    func loadMore(
+        after id: Entry.ID,
+        _ dispatch: @escaping Dispatch
+    ) {
+        microServices.loadMoreAfter(id) { dispatch(.loaded($0)) }
     }
 }

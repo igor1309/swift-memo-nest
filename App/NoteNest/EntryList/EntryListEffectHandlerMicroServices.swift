@@ -10,6 +10,7 @@ import Foundation
 struct EntryListEffectHandlerMicroServices {
     
     let load: Load
+    let loadMoreAfter: LoadMoreAfter
 }
 
 extension EntryListEffectHandlerMicroServices {
@@ -17,6 +18,8 @@ extension EntryListEffectHandlerMicroServices {
     typealias LoadResult = Event.LoadResult
     typealias LoadCompletion = (LoadResult) -> Void
     typealias Load = (@escaping LoadCompletion) -> Void
+    
+    typealias LoadMoreAfter = (Entry.ID, @escaping LoadCompletion) -> Void
     
     typealias Event = EntryListEvent
 }

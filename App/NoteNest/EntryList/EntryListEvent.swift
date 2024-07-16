@@ -9,7 +9,7 @@ enum EntryListEvent: Equatable {
     
     case load
     case loaded(LoadResult)
-    case loadMore
+    case loadMore(after: Entry.ID)
 }
 
 extension EntryListEvent {

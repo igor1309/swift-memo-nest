@@ -70,6 +70,11 @@ private extension EntryListView {
                 
                 entryView(entry: $0, lastID: entries.last?.id)
             }
+            
+            if model.state.status == .inflight {
+                
+                ProgressView().id(UUID())
+            }
         }
         .scrollDismissesKeyboard(.immediately)
         .scrollContentBackground(.hidden)
@@ -85,7 +90,7 @@ private extension EntryListView {
             .onFirstAppear {
                 
                 if entry.id == id {
-                    model.event(.loadMore)
+                    model.event(.loadMore(after: entry.id))
                 }
             }
     }

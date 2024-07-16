@@ -13,7 +13,10 @@ extension EntryListEffectHandlerMicroServicesComposer {
     
     func compose() -> MicroServices {
         
-        return .init(load: load)
+        return .init(
+            load: load,
+            loadMoreAfter: loadMoreAfter
+        )
     }
     
     typealias MicroServices = EntryListEffectHandlerMicroServices
@@ -24,10 +27,26 @@ private extension EntryListEffectHandlerMicroServicesComposer {
     func load(
         _ completion: @escaping MicroServices.LoadCompletion
     ) {
+        random(completion)
+    }
+    
+    func loadMoreAfter(
+        id: Entry.ID,
+        _ completion: @escaping MicroServices.LoadCompletion
+    ) {
+        random(completion)
+    }
+    
+    private func random(
+        _ completion: @escaping MicroServices.LoadCompletion
+    ) {
         DispatchQueue.main.delay(for: .seconds(2)) {
-
-            completion(.success(.stub(20)))
-            // completion(.failure(.init()))
+            
+            if Bool.random() {
+                completion(.success(.stub(Int.random(in: 1...20))))
+            } else {
+                completion(.failure(.init()))
+            }
         }
     }
 }

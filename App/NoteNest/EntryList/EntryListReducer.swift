@@ -25,8 +25,9 @@ extension EntryListReducer {
         case let .loaded(result):
             reduce(&state, with: result)
             
-        case .loadMore:
-            print("load more")
+        case let .loadMore(after: id):
+            state.status = .inflight
+            effect = .loadMore(after: id)
         }
         
         return (state, effect)
@@ -41,19 +42,37 @@ extension EntryListReducer {
 }
 
 private extension EntryListReducer {
- 
+    
     func reduce(
         _ state: inout State,
         with result: Event.LoadResult
     ) {
         state.status = nil
-
+        
         switch result {
         case let .failure(failure):
-            state.result = .failure(failure)
+            switch state.result {
+            case .none:
+                state.result = .failure(failure)
+                
+            case .failure, .success:
+                // ???
+                break
+            }
             
         case let .success(entries):
-            state.result = .success(entries)
+            switch state.result {
+            case .none:
+                state.result = .success(entries)
+                
+            case .failure:
+                // ???
+                break
+                
+            case var .success(existingEntries):
+                existingEntries += entries
+                state.result = .success(existingEntries)
+            }
         }
     }
 }

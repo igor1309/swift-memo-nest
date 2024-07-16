@@ -8,4 +8,5 @@
 enum EntryListEffect: Equatable {
     
     case load
+    case loadMore(after: Entry.ID)
 }
