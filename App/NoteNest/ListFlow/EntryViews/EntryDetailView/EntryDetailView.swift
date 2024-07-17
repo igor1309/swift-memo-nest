@@ -76,7 +76,7 @@ private extension EntryDetailView {
         _ tags: [String]
     ) -> some View {
         
-        Text(tags.map { "#\($0)" }.joined(separator: ", "))
+        entry.tagsString.map(Text.init)
     }
 }
 

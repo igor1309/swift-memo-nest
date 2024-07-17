@@ -13,6 +13,8 @@
 		2A25DB732C47BA7500653E07 /* EntryEditorWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB722C47BA7500653E07 /* EntryEditorWrapperView.swift */; };
 		2A25DB762C47C17300653E07 /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB752C47C17300653E07 /* EntryDetailView.swift */; };
 		2A25DB782C47C2D000653E07 /* Entry+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB772C47C2D000653E07 /* Entry+preview.swift */; };
+		2A25DB7A2C47F3B700653E07 /* EntryRowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB792C47F3B700653E07 /* EntryRowLabel.swift */; };
+		2A25DB7D2C47F4C300653E07 /* Entry+tagsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB7C2C47F4C300653E07 /* Entry+tagsString.swift */; };
 		2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D8D2C464975008E7EB6 /* UIPrimitives */; };
 		2A324D902C464ABF008E7EB6 /* ListFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */; };
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
@@ -45,6 +47,8 @@
 		2A25DB722C47BA7500653E07 /* EntryEditorWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryEditorWrapperView.swift; sourceTree = "<group>"; };
 		2A25DB752C47C17300653E07 /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailView.swift; sourceTree = "<group>"; };
 		2A25DB772C47C2D000653E07 /* Entry+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+preview.swift"; sourceTree = "<group>"; };
+		2A25DB792C47F3B700653E07 /* EntryRowLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRowLabel.swift; sourceTree = "<group>"; };
+		2A25DB7C2C47F4C300653E07 /* Entry+tagsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+tagsString.swift"; sourceTree = "<group>"; };
 		2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEvent.swift; sourceTree = "<group>"; };
 		2A324D962C464BCE008E7EB6 /* ListFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEffect.swift; sourceTree = "<group>"; };
 		2A324D982C464BDD008E7EB6 /* ListFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowState.swift; sourceTree = "<group>"; };
@@ -121,6 +125,17 @@
 			path = EntryDetailView;
 			sourceTree = "<group>";
 		};
+		2A25DB7B2C47F4B700653E07 /* EntryViews */ = {
+			isa = PBXGroup;
+			children = (
+				2A25DB792C47F3B700653E07 /* EntryRowLabel.swift */,
+				2A25DB7C2C47F4C300653E07 /* Entry+tagsString.swift */,
+				2A25DB742C47C16500653E07 /* EntryDetailView */,
+				2A25DB712C47BA6600653E07 /* EntryEditor */,
+			);
+			path = EntryViews;
+			sourceTree = "<group>";
+		};
 		2A324D8A2C464913008E7EB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +210,7 @@
 				2A324D9E2C464CC4008E7EB6 /* ListFlowEffectHandler.swift */,
 				2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */,
 				2A33A3E52C46449000CE3C96 /* ListFlowView.swift */,
-				2A25DB742C47C16500653E07 /* EntryDetailView */,
-				2A25DB712C47BA6600653E07 /* EntryEditor */,
+				2A25DB7B2C47F4B700653E07 /* EntryViews */,
 				2A324DAB2C465CDB008E7EB6 /* ListFlowFactory.swift */,
 			);
 			path = ListFlow;
@@ -311,9 +325,11 @@
 				2A324DAA2C464F75008E7EB6 /* EntryListModel+preview.swift in Sources */,
 				2A324DC82C467381008E7EB6 /* [Entry]+preview.swift in Sources */,
 				2A324D992C464BDD008E7EB6 /* ListFlowState.swift in Sources */,
+				2A25DB7A2C47F3B700653E07 /* EntryRowLabel.swift in Sources */,
 				2A324DAC2C465CDB008E7EB6 /* ListFlowFactory.swift in Sources */,
 				2A33A3E62C46449000CE3C96 /* ListFlowView.swift in Sources */,
 				2A324DB22C465E27008E7EB6 /* ListFlowViewComposer.swift in Sources */,
+				2A25DB7D2C47F4C300653E07 /* Entry+tagsString.swift in Sources */,
 				2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */,
 				2A324DCC2C4682C7008E7EB6 /* DispatchQueue+delay.swift in Sources */,
 				2A324D9F2C464CC4008E7EB6 /* ListFlowEffectHandler.swift in Sources */,

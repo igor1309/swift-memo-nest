@@ -90,8 +90,10 @@ private extension ListFlowView {
         event: @escaping () -> Void
     ) -> some View {
         
-        Button(entry.text, action: event)
-            .font(.subheadline)
+        Button(action: event) {
+            
+            EntryRowLabel(entry: entry)
+        }
     }
     
     func destinationContent(
@@ -127,7 +129,6 @@ private extension ListFlowView {
         
         switch modal {
         case .editor:
-#warning("pass non empty for editing")
             EntryEditorWrapperView(
                 onCancel: { model.event(.dismiss(.modal)) },
                 onSave: { model.event(.save($0)) }
