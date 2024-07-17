@@ -45,14 +45,18 @@ public struct EntryEditor: View {
                 .padding(.horizontal)
             }
             
-            VStack(alignment: .leading, spacing: 0) {
-                
-                Text("Note")
-                    .foregroundStyle(.tertiary)
-                    .font(.subheadline.weight(.medium))
-                    .padding(.horizontal)
+            ZStack(alignment: .topLeading) {
+             
+                if entry.note.isEmpty {
+                    
+                    Text("Note")
+                        .foregroundStyle(.tertiary)
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                }
                 
                 TextEditor(text: $entry.note)
+                    .scrollContentBackground(.hidden)
                     .padding(.horizontal, 12)
             }
             
