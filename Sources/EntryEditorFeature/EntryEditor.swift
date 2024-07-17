@@ -9,6 +9,9 @@ import SwiftUI
 
 public struct EntryEditor: View {
     
+    @FocusState private var isFocused
+    @State private var newTag: String?
+    
     @Binding private var entry: Entry
     
     public init(entry: Binding<Entry>) {
@@ -22,7 +25,7 @@ public struct EntryEditor: View {
             
             linkView(title: $entry.title, url: $entry.url)
             textEditor(text: $entry.note)
-            tagsView(tags: $entry.tags)
+            tagsView()
         }
     }
 }
@@ -72,12 +75,63 @@ private extension EntryEditor {
         }
     }
     
-    func tagsView(
-        tags: Binding<[String]>
-    ) -> some View {
+    func tagsView() -> some View {
         
-        Text("Tags (TBD): \(tags.wrappedValue.joined(separator: ", "))")
-            .padding(.horizontal)
+        VStack(alignment: .leading, spacing: 8) {
+            
+            if let newTag {
+                
+                TextField(
+                    "Enter tag",
+                    text: .init(
+                        get: { newTag },
+                        set: { self.newTag = $0 }
+                    )
+                )
+                .submitLabel(.join)
+                .focused($isFocused)
+                .onSubmit(of: .text) {
+                    
+                    if !newTag.isEmpty {
+                        entry.tags.append(newTag)
+                    }
+                    
+                    self.newTag = nil
+                }
+            }
+            
+            HStack {
+                
+                if !isFocused {
+                    
+                    Button {
+                        newTag = ""
+                        isFocused = true
+                    } label: {
+                        
+                        Label("Show tag input field", systemImage: "plus.circle")
+                            .imageScale(.large)
+                    }
+                    .labelStyle(.iconOnly)
+                }
+                
+                Text(entry.tagsText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+private extension Entry {
+    
+    var tagsText: String {
+        
+        if tags.isEmpty {
+            return "No Tags"
+        } else {
+            return tags.sorted().map { "#\($0)" }.joined(separator: ", ")
+        }
     }
 }
 

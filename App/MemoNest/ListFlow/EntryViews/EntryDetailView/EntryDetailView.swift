@@ -64,6 +64,7 @@ private extension EntryDetailView {
     func textView() -> some View {
         
         if !entry.text.isEmpty {
+            
             Text(entry.text)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -77,6 +78,7 @@ private extension EntryDetailView {
     ) -> some View {
         
         entry.tagsString.map(Text.init)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

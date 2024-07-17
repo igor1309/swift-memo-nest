@@ -11,6 +11,6 @@ extension Entry {
         
         guard !tags.isEmpty else { return nil }
         
-        return tags.map { "#\($0)" }.joined(separator: ", ")
+        return tags.sorted().map { "#\($0)" }.joined(separator: ", ")
     }
 }
