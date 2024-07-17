@@ -119,7 +119,28 @@ private extension ListFlowView {
         
         switch modal {
         case .editor:
-            Text("TBD: Editor")
+            NavigationStack {
+                
+                Text("TBD: Editor")
+                    .toolbar {
+                        
+                        ToolbarItem(placement: .cancellationAction) {
+                            
+                            Button("Cancel") { model.event(.dismiss(.modal)) }
+                        }
+                        
+                        ToolbarItem(placement: .confirmationAction) {
+                            
+#warning("or update if editing existing")
+                            Button("Save") {
+                                
+#warning("ADD SAVE!!!!!!!!!")
+                                model.event(.dismiss(.modal))
+                            }
+                            //   .disabled(!node.canSave)
+                        }
+                    }
+            }
         }
     }
 }

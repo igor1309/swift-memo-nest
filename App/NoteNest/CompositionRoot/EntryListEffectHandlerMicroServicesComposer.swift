@@ -41,7 +41,7 @@ private extension EntryListEffectHandlerMicroServicesComposer {
     private func random(
         _ completion: @escaping MicroServices.LoadCompletion
     ) {
-        DispatchQueue.main.delay(for: .seconds(2)) {
+        DispatchQueue.main.delay(for: .seconds(1)) {
             
             if Bool.random() {
                 completion(.success(.stub(Int.random(in: 1...20))))
