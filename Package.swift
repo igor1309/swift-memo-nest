@@ -76,6 +76,7 @@ private extension Target {
     static let entryListFeatureTests = testTarget(
         name: .entryListFeatureTests,
         dependencies: [
+            .customDump,
             .entryListFeature
         ]
     )
