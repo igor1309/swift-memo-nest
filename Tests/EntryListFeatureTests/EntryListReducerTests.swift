@@ -5,22 +5,28 @@
 //  Created by Igor Malyarov on 17.07.2024.
 //
 
-struct EntryListState: Equatable {
+struct EntryListState<Entry> {
     
+    var entries: [Entry]
     var isLoading = false
 }
 
-enum EntryListEvent: Equatable {
+extension EntryListState: Equatable where Entry: Equatable {}
+
+enum EntryListEvent<Entry> {
     
     case load
+    case loaded([Entry])
 }
+
+extension EntryListEvent: Equatable where Entry: Equatable {}
 
 enum EntryListEffect: Equatable {
     
     case load
 }
 
-final class EntryListReducer {}
+final class EntryListReducer<Entry> {}
 
 extension EntryListReducer {
     
@@ -35,6 +41,9 @@ extension EntryListReducer {
         switch event {
         case .load:
             load(&state, &effect)
+            
+        case let .loaded(newEntries):
+            state.entries += newEntries
         }
         
         return (state, effect)
@@ -43,8 +52,8 @@ extension EntryListReducer {
 
 extension EntryListReducer {
     
-    typealias State = EntryListState
-    typealias Event = EntryListEvent
+    typealias State = EntryListState<Entry>
+    typealias Event = EntryListEvent<Entry>
     typealias Effect = EntryListEffect
 }
 
@@ -90,9 +99,43 @@ final class EntryListReducerTests: XCTestCase {
         assert(.load, on: makeState(), effect: .load)
     }
     
+    // MARK: - loaded
+    
+    func test_loaded_shouldSetEntriesToLoadedOnEmpty() {
+        
+        let loaded = makeEntries()
+        
+        assertState(.loaded(loaded), on: makeState(entries: [])) {
+            
+            $0.entries = loaded
+        }
+    }
+    
+    func test_loaded_shouldNotDeliverEffectOnEmpty() {
+        
+        assert(.loaded(makeEntries()), on: makeState(entries: []), effect: nil)
+    }
+    
+    func test_loaded_shouldAppendEntriesToNonEmpty() {
+        
+        let existing = makeEntries()
+        let loaded = makeEntries()
+        
+        assertState(.loaded(loaded), on: makeState(entries: existing)) {
+            
+            $0.entries = existing + loaded
+        }
+    }
+    
+    func test_loaded_shouldNotDeliverEffectOnNonEmpty() {
+        
+        assert(.loaded(makeEntries()), on: makeState(entries: makeEntries()), effect: nil)
+    }
+    
     // MARK: - Helpers
     
-    private typealias SUT = EntryListReducer
+    private typealias Entry = String
+    private typealias SUT = EntryListReducer<Entry>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -106,11 +149,22 @@ final class EntryListReducerTests: XCTestCase {
         return sut
     }
     
+    private func makeEntries(
+        count: Int = .random(in: 1...100)
+    ) -> [Entry] {
+        
+        (0..<count).map { _ in UUID().uuidString }
+    }
+    
     private func makeState(
+        entries: [Entry]? = nil,
         isLoading: Bool = false
     ) -> SUT.State {
         
-        return .init(isLoading: isLoading)
+        return .init(
+            entries: entries ?? makeEntries(),
+            isLoading: isLoading
+        )
     }
     
     private typealias UpdateStateToExpected<State> = (_ state: inout State) -> Void
