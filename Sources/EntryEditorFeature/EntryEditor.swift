@@ -40,6 +40,7 @@ public struct EntryEditor: View {
                 .keyboardType(.URL)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
+                .textContentType(.URL)
             }
             .listSectionSeparator(.hidden)
             
