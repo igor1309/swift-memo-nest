@@ -30,7 +30,12 @@ extension ListFlowViewComposer {
     func composeViewModel() -> ListFlowModel {
         
         let model = makeEntryListModel()
-        let reducer = ListFlowReducer()
+        let reducer = ListFlowReducer(
+            isValid: {
+                
+                !$0.text.isEmpty || !$0.tags.isEmpty || !$0.title.isEmpty || $0.url != nil
+            }
+        )
         let effectHandler = ListFlowEffectHandler()
         
         return .init(

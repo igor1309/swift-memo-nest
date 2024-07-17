@@ -11,7 +11,7 @@ extension ListFlowModel {
         initialState: ListFlowState = .init(content: .preview())
     ) -> Self {
         
-        let reducer = ListFlowReducer()
+        let reducer = ListFlowReducer(isValid: { _ in true })
         let effectHandler = ListFlowEffectHandler()
         
         return .init(

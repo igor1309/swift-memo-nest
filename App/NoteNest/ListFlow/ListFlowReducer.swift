@@ -7,7 +7,17 @@
 
 import EntryEditorFeature
 
-final class ListFlowReducer {}
+final class ListFlowReducer {
+    
+    private let isValid: IsValid
+    
+    init(isValid: @escaping IsValid) {
+        
+        self.isValid = isValid
+    }
+    
+    typealias IsValid = (Entry) -> Bool
+}
 
 extension ListFlowReducer {
     
@@ -72,7 +82,6 @@ private extension ListFlowReducer {
         _ state: inout State,
         edit entry: Entry
     ) {
-        print("TBD: edit entry", entry)
         if case var .detail(detail) = state.destination,
            detail.entry == entry {
             
@@ -80,15 +89,18 @@ private extension ListFlowReducer {
             state.destination = .detail(detail)
             return
         }
-        
-        // else { fatalError("impossible state") }
     }
     
     func reduce(
         _ state: inout State,
         save entry: Entry
     ) {
-#warning("add validation?")
+        guard isValid(entry) else {
+            
+            print("Entry is not valid")
+            return
+        }
+        
         state.content.event(.save(entry))
         
         if state.modal == .editor {
