@@ -25,12 +25,10 @@ struct EntryEditorWrapperView: View {
         self.onSave = onSave
     }
     
-    typealias Entry = EntryEditorFeature.Entry
-    
     var body: some View {
         NavigationStack {
             
-            EntryEditor(entry: $entry)
+            EntryEditor(entry: $entry.editorEntry)
                 .navigationTitle("Entry Editor")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -51,7 +49,30 @@ struct EntryEditorWrapperView: View {
     }
 }
 
-extension EntryEditorFeature.Entry {
+// MARK: - Adapters
+
+extension Binding where Value == Entry {
     
-    static let empty: Self = .init()
+    var editorEntry: Binding<EntryEditorFeature.Entry> {
+        
+        return .init(
+            get: {
+                return .init(
+                    title: wrappedValue.title,
+                    url: wrappedValue.url,
+                    note: wrappedValue.text,
+                    tags: wrappedValue.tags
+                )
+            },
+            set: {
+                self.wrappedValue = .init(
+                    id: wrappedValue.id,
+                    title: $0.title,
+                    url: $0.url,
+                    text: $0.note,
+                    tags: $0.tags
+                )
+            }
+        )
+    }
 }

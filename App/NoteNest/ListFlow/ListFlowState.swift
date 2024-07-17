@@ -22,7 +22,18 @@ extension ListFlowState {
     
     enum Destination: Equatable {
         
-        case detail(Entry)
+        case detail(Detail)
+        
+        struct Detail: Equatable {
+            
+            let entry: Entry
+            var modal: Modal? = nil
+            
+            enum Modal: Equatable {
+                
+                case editor(Entry)
+            }
+        }
     }
     
     enum Modal: Equatable {

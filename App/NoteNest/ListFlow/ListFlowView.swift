@@ -99,16 +99,21 @@ private extension ListFlowView {
     ) -> some View {
         
         switch destination {
-        case let .detail(entry):
-            EntryDetailView(entry: entry)
+        case let .detail(detail):
+            EntryDetailView(entry: detail.entry)
                 .navigationBarTitleDisplayMode(.inline)
+                .sheet(
+                    modal: detail.modal,
+                    dismissModal: { model.event(.dismiss(.destinationModal)) },
+                    content: modalContent
+                )
                 .toolbar {
                     
                     ToolbarItem {
                         
                         Button("Edit Entry", systemImage: "square.and.pencil") {
                             
-                            print("TBD: edit entry", entry)
+                            model.event(.edit(detail.entry))
                         }
                     }
                 }
@@ -129,7 +134,40 @@ private extension ListFlowView {
             )
         }
     }
+    
+    @ViewBuilder
+    func modalContent(
+        modal: ListFlowState.Destination.Detail.Modal
+    ) -> some View {
+        
+        switch modal {
+        case let .editor(entry):
+            EntryEditorWrapperView(
+                entry: entry,
+                onCancel: { model.event(.dismiss(.destinationModal)) },
+                onSave: { model.event(.save($0)) }
+            )
+        }
+    }
 }
+
+extension ListFlowState.Destination.Detail.Modal: Identifiable {
+    
+    var id: ID {
+        
+        switch self {
+        case let .editor(entry):
+            return .editor(entry.id)
+        }
+    }
+    
+    enum ID: Hashable {
+        
+        case editor(Entry.ID)
+    }
+}
+
+// MARK: - Previews
 
 #Preview {
     

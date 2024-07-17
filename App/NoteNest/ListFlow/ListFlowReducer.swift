@@ -21,7 +21,7 @@ extension ListFlowReducer {
         
         switch event {
         case .addEntry:
-            guard state.destination == nil 
+            guard state.destination == nil
             else { fatalError("impossible state") }
             
             state.modal = .editor
@@ -29,11 +29,14 @@ extension ListFlowReducer {
         case let .dismiss(dismiss):
             reduce(&state, dismiss)
             
+        case let .edit(entry):
+            reduce(&state, edit: entry)
+            
         case let .select(entry):
-            state.destination = .detail(entry)
+            state.destination = .detail(.init(entry: entry))
             
         case let .save(entry):
-            reduce(&state, entry)
+            reduce(&state, save: entry)
         }
         
         return (state, effect)
@@ -48,7 +51,7 @@ extension ListFlowReducer {
 }
 
 private extension ListFlowReducer {
-
+    
     func reduce(
         _ state: inout State,
         _ dismiss: Event.Dismiss
@@ -56,22 +59,48 @@ private extension ListFlowReducer {
         switch dismiss {
         case .destination:
             state.destination = nil
-        
+            
         case .modal:
             state.modal = nil
+            
+        case .destinationModal:
+            state.destination?.detailModal = nil
         }
     }
-
+    
     func reduce(
         _ state: inout State,
-        _ entry: EntryEditorFeature.Entry
+        edit entry: Entry
     ) {
-        guard case .editor = state.modal
-        else { fatalError("impossible state") }
+        print("TBD: edit entry", entry)
+        if case var .detail(detail) = state.destination,
+           detail.entry == entry {
+            
+            detail.modal = .editor(entry)
+            state.destination = .detail(detail)
+            return
+        }
         
-        #warning("add validation?")
-        state.content.event(.save(.init(entry)))
-        state.modal = .none
+        // else { fatalError("impossible state") }
+    }
+    
+    func reduce(
+        _ state: inout State,
+        save entry: Entry
+    ) {
+#warning("add validation?")
+        state.content.event(.save(entry))
+        
+        if state.modal == .editor {
+            
+            state.modal = .none
+        }
+        
+        if case let .detail(detail) = state.destination,
+           case .editor = detail.modal {
+            
+            state.destination = .detail(.init(entry: entry))
+        }
     }
 }
 
@@ -86,5 +115,26 @@ private extension Entry {
             text: entry.note,
             tags: entry.tags
         )
+    }
+}
+
+private extension ListFlowState.Destination {
+    
+    var detailModal: Detail.Modal? {
+        
+        get {
+            switch self {
+            case let .detail(detail):
+                return detail.modal
+            }
+        }
+        
+        set {
+            guard case var .detail(detail) = self
+            else { return }
+            
+            detail.modal = newValue
+            self = .detail(detail)
+        }
     }
 }
