@@ -5,33 +5,36 @@
 //  Created by Igor Malyarov on 17.07.2024.
 //
 
-struct EntryListState<Entry, Sort> {
+struct EntryListState<Entry, Filter, Sort> {
     
     var entries: [Entry]
+    var filter: Filter
     var sort: Sort
     var isLoading = false
 }
 
-extension EntryListState: Equatable where Entry: Equatable, Sort: Equatable {}
+extension EntryListState: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
-enum EntryListEvent<Entry, Sort> {
+enum EntryListEvent<Entry, Filter, Sort> {
     
     case load
     case loaded([Entry])
+    case setFilter(Filter)
     case setSort(Sort)
 }
 
-extension EntryListEvent: Equatable where Entry: Equatable, Sort: Equatable {}
+extension EntryListEvent: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
-enum EntryListEffect<Sort> {
+enum EntryListEffect<Filter, Sort> {
     
-    case load(Sort)
+    case load(Filter, Sort)
 }
 
-extension EntryListEffect: Equatable where Sort: Equatable {}
+extension EntryListEffect: Equatable where Filter: Equatable, Sort: Equatable {}
 
-final class EntryListReducer<Entry, Sort>
-where Sort: Equatable {}
+final class EntryListReducer<Entry, Filter, Sort>
+where Filter: Equatable,
+      Sort: Equatable {}
 
 extension EntryListReducer {
     
@@ -51,6 +54,9 @@ extension EntryListReducer {
             state.entries += newEntries
             state.isLoading = false
             
+        case let .setFilter(filter):
+            reduce(&state, &effect, with: filter)
+            
         case let .setSort(sort):
             reduce(&state, &effect, with: sort)
         }
@@ -61,9 +67,9 @@ extension EntryListReducer {
 
 extension EntryListReducer {
     
-    typealias State = EntryListState<Entry, Sort>
-    typealias Event = EntryListEvent<Entry, Sort>
-    typealias Effect = EntryListEffect<Sort>
+    typealias State = EntryListState<Entry, Filter, Sort>
+    typealias Event = EntryListEvent<Entry, Filter, Sort>
+    typealias Effect = EntryListEffect<Filter, Sort>
 }
 
 private extension EntryListReducer {
@@ -75,7 +81,20 @@ private extension EntryListReducer {
         guard !state.isLoading else { return }
         
         state.isLoading = true
-        effect = .load(state.sort)
+        effect = .load(state.filter, state.sort)
+    }
+    
+    func reduce(
+        _ state: inout State,
+        _ effect: inout Effect?,
+        with filter: Filter
+    ) {
+        guard filter != state.filter else { return }
+        
+        state.entries = []
+        state.filter = filter
+        state.isLoading = true
+        effect = .load(filter, state.sort)
     }
     
     func reduce(
@@ -88,7 +107,7 @@ private extension EntryListReducer {
         state.entries = []
         state.sort = sort
         state.isLoading = true
-        effect = .load(sort)
+        effect = .load(state.filter, sort)
     }
 }
 
@@ -121,7 +140,7 @@ final class EntryListReducerTests: XCTestCase {
         let sort = makeSort()
         let state = makeState(sort: sort)
         
-        assert(.load, on: state, effect: .load(sort))
+        assert(.load, on: state, effect: .load(state.filter, sort))
     }
     
     // MARK: - loaded
@@ -198,15 +217,55 @@ final class EntryListReducerTests: XCTestCase {
     func test_setSort_shouldDeliverEffectWithSort() {
     
         let sort = makeSort()
+        let state = makeState()
         
-        assert(.setSort(sort), on: makeState(), effect: .load(sort))
+        assert(.setSort(sort), on: state, effect: .load(state.filter, sort))
+    }
+    
+    // MARK: - setFilter
+    
+    func test_setFilter_shouldNotChangeStateOnSameFilter() {
+        
+        let filter = makeFilter()
+        
+        assertState(.setFilter(filter), on: makeState(filter: filter))
+    }
+    
+    func test_setFilter_shouldNotDeliverEffectOnSameFilter() {
+    
+        let filter = makeFilter()
+        
+        assert(.setFilter(filter), on: makeState(filter: filter), effect: nil)
+    }
+    
+    func test_setFilter_shouldResetEntriesSetFilterAndSetIsLoadingToTrue() {
+        
+        let (oldFilter, filter) = (makeFilter(), makeFilter())
+        let state = makeState(filter: oldFilter)
+        
+        assertState(.setFilter(filter), on: state) {
+            
+            XCTAssertFalse(state.entries.isEmpty)
+            $0.entries = []
+            $0.filter = filter
+            $0.isLoading = true
+        }
+    }
+    
+    func test_setFilter_shouldDeliverEffectWithFilter() {
+    
+        let filter = makeFilter()
+        let state = makeState()
+        
+        assert(.setFilter(filter), on: state, effect: .load(filter, state.sort))
     }
     
     // MARK: - Helpers
     
     private typealias Entry = String
+    private typealias Filter = String
     private typealias Sort = String
-    private typealias SUT = EntryListReducer<Entry, Sort>
+    private typealias SUT = EntryListReducer<Entry, Filter, Sort>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -227,6 +286,13 @@ final class EntryListReducerTests: XCTestCase {
         (0..<count).map { _ in UUID().uuidString }
     }
     
+    private func makeFilter(
+        _ value: String = UUID().uuidString
+    ) -> Filter {
+        
+        return value
+    }
+    
     private func makeSort(
         _ value: String = UUID().uuidString
     ) -> Sort {
@@ -236,12 +302,14 @@ final class EntryListReducerTests: XCTestCase {
     
     private func makeState(
         entries: [Entry]? = nil,
+        filter: Filter? = nil,
         sort: Sort? = nil,
         isLoading: Bool = false
     ) -> SUT.State {
         
         return .init(
             entries: entries ?? makeEntries(),
+            filter: filter ?? makeFilter(),
             sort: sort ?? makeSort(),
             isLoading: isLoading
         )
