@@ -70,11 +70,16 @@ private extension EntryRowLabel {
     }
 }
 
-#Preview {
+#if DEBUG
+struct EntryRowLabel_Previews: PreviewProvider {
     
-    List {
-        EntryRowLabel(entry: .empty)
-        EntryRowLabel(entry: .preview)
+    static var previews: some View {
+        
+        List {
+            EntryRowLabel(entry: .empty)
+            EntryRowLabel(entry: .preview)
+        }
+        .listStyle(.plain)
     }
-    .listStyle(.plain)
 }
+#endif

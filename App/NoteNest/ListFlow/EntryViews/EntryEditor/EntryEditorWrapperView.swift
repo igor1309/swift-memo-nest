@@ -76,3 +76,15 @@ extension Binding where Value == Entry {
         )
     }
 }
+
+// MARK: - Helpers
+
+extension Entry {
+    
+    static let empty: Self = .init(
+        title: "",
+        url: nil,
+        text: "",
+        tags: []
+    )
+}

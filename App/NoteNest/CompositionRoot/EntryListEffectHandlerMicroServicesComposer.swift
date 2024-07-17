@@ -44,7 +44,7 @@ private extension EntryListEffectHandlerMicroServicesComposer {
         DispatchQueue.main.delay(for: .seconds(1)) {
             
             if Bool.random() {
-                completion(.success(.stub(Int.random(in: 1...20))))
+                completion(.success(.stub(count: Int.random(in: 1...20))))
             } else {
                 completion(.failure(.init()))
             }
@@ -54,5 +54,14 @@ private extension EntryListEffectHandlerMicroServicesComposer {
 
 private extension Array where Element == Entry {
     
-    static let stub = preview
+    static func stub(count: Int = 10) -> Self {
+        
+        (0..<count).map { _ in
+            
+            return .init(
+                title: "Title \(String(UUID().uuidString.prefix(6)))",
+                text: UUID().uuidString
+            )
+        }
+    }
 }

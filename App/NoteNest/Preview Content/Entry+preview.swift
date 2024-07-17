@@ -9,13 +9,6 @@ import Foundation
 
 extension Entry {
     
-    static let empty: Self = .init(
-        title: "",
-        url: nil,
-        text: "",
-        tags: []
-    )
-    
     static let preview: Self = .init(
         title: "Entry title",
         url: .init(string: "https://a.com"),

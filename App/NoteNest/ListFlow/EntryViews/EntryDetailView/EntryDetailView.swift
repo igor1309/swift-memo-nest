@@ -132,7 +132,9 @@ private func entryDetailView(
     }
 }
 
+#if DEBUG
 #Preview {
     
     EntryDetailView(entry: .preview)
 }
+#endif

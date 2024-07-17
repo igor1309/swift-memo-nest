@@ -170,10 +170,15 @@ extension ListFlowState.Destination.Detail.Modal: Identifiable {
 
 // MARK: - Previews
 
-#Preview {
+#if DEBUG
+struct ListFlowView_Previews: PreviewProvider {
     
-    NavigationStack {
-        
-        ListFlowView(model: .preview(), factory: .preview())
+    static var previews: some View {
+ 
+        NavigationStack {
+            
+            ListFlowView(model: .preview(), factory: .preview())
+        }
     }
 }
+#endif
