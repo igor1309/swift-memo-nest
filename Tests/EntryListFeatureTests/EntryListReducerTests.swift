@@ -5,28 +5,33 @@
 //  Created by Igor Malyarov on 17.07.2024.
 //
 
-struct EntryListState<Entry> {
+struct EntryListState<Entry, Sort> {
     
     var entries: [Entry]
+    var sort: Sort
     var isLoading = false
 }
 
-extension EntryListState: Equatable where Entry: Equatable {}
+extension EntryListState: Equatable where Entry: Equatable, Sort: Equatable {}
 
-enum EntryListEvent<Entry> {
+enum EntryListEvent<Entry, Sort> {
     
     case load
     case loaded([Entry])
+    case setSort(Sort)
 }
 
-extension EntryListEvent: Equatable where Entry: Equatable {}
+extension EntryListEvent: Equatable where Entry: Equatable, Sort: Equatable {}
 
-enum EntryListEffect: Equatable {
+enum EntryListEffect<Sort> {
     
-    case load
+    case load(Sort)
 }
 
-final class EntryListReducer<Entry> {}
+extension EntryListEffect: Equatable where Sort: Equatable {}
+
+final class EntryListReducer<Entry, Sort>
+where Sort: Equatable {}
 
 extension EntryListReducer {
     
@@ -44,6 +49,10 @@ extension EntryListReducer {
             
         case let .loaded(newEntries):
             state.entries += newEntries
+            state.isLoading = false
+            
+        case let .setSort(sort):
+            reduce(&state, &effect, with: sort)
         }
         
         return (state, effect)
@@ -52,9 +61,9 @@ extension EntryListReducer {
 
 extension EntryListReducer {
     
-    typealias State = EntryListState<Entry>
-    typealias Event = EntryListEvent<Entry>
-    typealias Effect = EntryListEffect
+    typealias State = EntryListState<Entry, Sort>
+    typealias Event = EntryListEvent<Entry, Sort>
+    typealias Effect = EntryListEffect<Sort>
 }
 
 private extension EntryListReducer {
@@ -64,9 +73,22 @@ private extension EntryListReducer {
         _ effect: inout Effect?
     ) {
         guard !state.isLoading else { return }
-
+        
         state.isLoading = true
-        effect = .load
+        effect = .load(state.sort)
+    }
+    
+    func reduce(
+        _ state: inout State,
+        _ effect: inout Effect?,
+        with sort: Sort
+    ) {
+        guard sort != state.sort else { return }
+        
+        state.entries = []
+        state.sort = sort
+        state.isLoading = true
+        effect = .load(sort)
     }
 }
 
@@ -96,46 +118,95 @@ final class EntryListReducerTests: XCTestCase {
     
     func test_load_shouldDeliverEffect() {
         
-        assert(.load, on: makeState(), effect: .load)
+        let sort = makeSort()
+        let state = makeState(sort: sort)
+        
+        assert(.load, on: state, effect: .load(sort))
     }
     
     // MARK: - loaded
     
-    func test_loaded_shouldSetEntriesToLoadedOnEmpty() {
+    func test_loaded_shouldSetEntriesToLoadedOnEmptyAndIsLoadingToFalse() {
         
+        let state = makeState(entries: [], isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(loaded), on: makeState(entries: [])) {
+        assertState(.loaded(loaded), on: state) {
             
             $0.entries = loaded
+            $0.isLoading = false
         }
     }
     
     func test_loaded_shouldNotDeliverEffectOnEmpty() {
+    
+        let state = makeState(entries: [], isLoading: true)
         
-        assert(.loaded(makeEntries()), on: makeState(entries: []), effect: nil)
+        assert(.loaded(makeEntries()), on: state, effect: nil)
     }
     
-    func test_loaded_shouldAppendEntriesToNonEmpty() {
+    func test_loaded_shouldAppendEntriesToNonEmptyAndFlipIsLoadingToFalse() {
         
         let existing = makeEntries()
+        let state = makeState(entries: existing, isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(loaded), on: makeState(entries: existing)) {
+        assertState(.loaded(loaded), on: state) {
             
             $0.entries = existing + loaded
+            $0.isLoading = false
         }
     }
     
     func test_loaded_shouldNotDeliverEffectOnNonEmpty() {
         
-        assert(.loaded(makeEntries()), on: makeState(entries: makeEntries()), effect: nil)
+        let state = makeState(entries: makeEntries(), isLoading: true)
+        
+        assert(.loaded(makeEntries()), on: state, effect: nil)
+    }
+    
+    // MARK: - setSort
+    
+    func test_setSort_shouldNotChangeStateOnSameSort() {
+        
+        let sort = makeSort()
+        
+        assertState(.setSort(sort), on: makeState(sort: sort))
+    }
+    
+    func test_setSort_shouldNotDeliverEffectOnSameSort() {
+    
+        let sort = makeSort()
+        
+        assert(.setSort(sort), on: makeState(sort: sort), effect: nil)
+    }
+    
+    func test_setSort_shouldResetEntriesSetSortAndSetIsLoadingToTrue() {
+        
+        let (oldSort, sort) = (makeSort(), makeSort())
+        let state = makeState(sort: oldSort)
+        
+        assertState(.setSort(sort), on: state) {
+            
+            XCTAssertFalse(state.entries.isEmpty)
+            $0.entries = []
+            $0.sort = sort
+            $0.isLoading = true
+        }
+    }
+    
+    func test_setSort_shouldDeliverEffectWithSort() {
+    
+        let sort = makeSort()
+        
+        assert(.setSort(sort), on: makeState(), effect: .load(sort))
     }
     
     // MARK: - Helpers
     
     private typealias Entry = String
-    private typealias SUT = EntryListReducer<Entry>
+    private typealias Sort = String
+    private typealias SUT = EntryListReducer<Entry, Sort>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -156,13 +227,22 @@ final class EntryListReducerTests: XCTestCase {
         (0..<count).map { _ in UUID().uuidString }
     }
     
+    private func makeSort(
+        _ value: String = UUID().uuidString
+    ) -> Sort {
+        
+        return value
+    }
+    
     private func makeState(
         entries: [Entry]? = nil,
+        sort: Sort? = nil,
         isLoading: Bool = false
     ) -> SUT.State {
         
         return .init(
             entries: entries ?? makeEntries(),
+            sort: sort ?? makeSort(),
             isLoading: isLoading
         )
     }
