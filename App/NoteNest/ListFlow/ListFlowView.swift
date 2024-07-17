@@ -100,7 +100,7 @@ private extension ListFlowView {
         
         switch destination {
         case let .detail(entry):
-            Text("TBD: Detail View for \(entry)")
+            EntryDetailView(entry: entry)
                 .toolbar {
                     
                     ToolbarItem {
