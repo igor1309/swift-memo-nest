@@ -7,13 +7,18 @@
 
 import EntryListFeature
 
-struct ListFlowState: Equatable {
-    
+#warning("explore a way to conform to Equatable")
+struct ListFlowState {
+ 
+    #warning("explore a way to decouple from concrete content type")
+    let content: Content
     var destination: Destination? = nil
     var modal: Modal? = nil
 }
 
 extension ListFlowState {
+    
+    typealias Content = EntryListModel<Entry>
     
     enum Destination: Equatable {
         

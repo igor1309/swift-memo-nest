@@ -1,5 +1,5 @@
 //
-//  ContentViewComposer.swift
+//  ListFlowViewComposer.swift
 //  NoteNest
 //
 //  Created by Igor Malyarov on 16.07.2024.
@@ -9,7 +9,7 @@ import CombineSchedulers
 import EntryListFeature
 import Foundation
 
-final class ContentViewComposer {
+final class ListFlowViewComposer {
     
     private let makeEntryListModel: MakeEntryListModel
     private let scheduler: AnySchedulerOf<DispatchQueue>
@@ -25,17 +25,16 @@ final class ContentViewComposer {
     typealias MakeEntryListModel = () -> EntryListModel<Entry>
 }
 
-extension ContentViewComposer {
+extension ListFlowViewComposer {
     
-    func composeViewModel(
-        initialState: ListFlowState = .init()
-    ) -> ListFlowModel {
+    func composeViewModel() -> ListFlowModel {
         
+        let model = makeEntryListModel()
         let reducer = ListFlowReducer()
         let effectHandler = ListFlowEffectHandler()
         
         return .init(
-            initialState: initialState,
+            initialState: .init(content: model),
             reduce: reducer.reduce(_:_:),
             handleEffect: effectHandler.handleEffect(_:_:),
             scheduler: scheduler
@@ -44,6 +43,6 @@ extension ContentViewComposer {
     
     func composeFactory() -> ListFlowFactory {
         
-        return .init(model: makeEntryListModel())
+        return .init()
     }
 }

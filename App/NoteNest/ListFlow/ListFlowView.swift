@@ -26,7 +26,7 @@ struct ListFlowView: View {
     
     var body: some View {
         
-        factory.makeEntryListView { entry in
+        factory.makeEntryListView(model: model.state.content) { entry in
             
             entryRow(entry, event: { model.event(.select(entry)) })
         }

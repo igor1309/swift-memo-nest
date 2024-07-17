@@ -8,7 +8,7 @@
 extension ListFlowModel {
     
     static func preview(
-        initialState: ListFlowState = .init()
+        initialState: ListFlowState = .init(content: .preview())
     ) -> Self {
         
         let reducer = ListFlowReducer()

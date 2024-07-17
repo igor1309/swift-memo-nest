@@ -22,7 +22,7 @@
 		2A324DAA2C464F75008E7EB6 /* EntryListModel+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DA92C464F75008E7EB6 /* EntryListModel+preview.swift */; };
 		2A324DAC2C465CDB008E7EB6 /* ListFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DAB2C465CDB008E7EB6 /* ListFlowFactory.swift */; };
 		2A324DAE2C465CFE008E7EB6 /* ListFlowFactory+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DAD2C465CFE008E7EB6 /* ListFlowFactory+preview.swift */; };
-		2A324DB22C465E27008E7EB6 /* ContentViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */; };
+		2A324DB22C465E27008E7EB6 /* ListFlowViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DB12C465E27008E7EB6 /* ListFlowViewComposer.swift */; };
 		2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324DB42C465EFF008E7EB6 /* CombineSchedulers */; };
 		2A324DC12C46687A008E7EB6 /* EntryListModelComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC02C46687A008E7EB6 /* EntryListModelComposer.swift */; };
 		2A324DC62C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */; };
@@ -48,7 +48,7 @@
 		2A324DA92C464F75008E7EB6 /* EntryListModel+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryListModel+preview.swift"; sourceTree = "<group>"; };
 		2A324DAB2C465CDB008E7EB6 /* ListFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowFactory.swift; sourceTree = "<group>"; };
 		2A324DAD2C465CFE008E7EB6 /* ListFlowFactory+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListFlowFactory+preview.swift"; sourceTree = "<group>"; };
-		2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewComposer.swift; sourceTree = "<group>"; };
+		2A324DB12C465E27008E7EB6 /* ListFlowViewComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowViewComposer.swift; sourceTree = "<group>"; };
 		2A324DC02C46687A008E7EB6 /* EntryListModelComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListModelComposer.swift; sourceTree = "<group>"; };
 		2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2A324DC72C467381008E7EB6 /* [Entry]+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Entry]+preview.swift"; sourceTree = "<group>"; };
@@ -83,6 +83,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A25DB6F2C47B04100653E07 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				2A0CC5362C46B90A00B34E91 /* Entry.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2A25DB702C47B14A00653E07 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		2A324D8A2C464913008E7EB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,11 +109,9 @@
 		2A324DC22C466B04008E7EB6 /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
-				2A0CC5362C46B90A00B34E91 /* Entry.swift */,
-				2A324DB12C465E27008E7EB6 /* ContentViewComposer.swift */,
+				2A324DB12C465E27008E7EB6 /* ListFlowViewComposer.swift */,
 				2A324DC02C46687A008E7EB6 /* EntryListModelComposer.swift */,
 				2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */,
-				2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -126,9 +140,11 @@
 			children = (
 				2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */,
 				2A33A3D82C4642C700CE3C96 /* ContentView.swift */,
+				2A25DB6F2C47B04100653E07 /* Domain */,
 				2A324DC22C466B04008E7EB6 /* CompositionRoot */,
 				2A33A3E72C4644AF00CE3C96 /* ListFlow */,
 				2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */,
+				2A25DB702C47B14A00653E07 /* Helpers */,
 				2A33A3DC2C4642C900CE3C96 /* Preview Content */,
 			);
 			path = NoteNest;
@@ -269,7 +285,7 @@
 				2A324D992C464BDD008E7EB6 /* ListFlowState.swift in Sources */,
 				2A324DAC2C465CDB008E7EB6 /* ListFlowFactory.swift in Sources */,
 				2A33A3E62C46449000CE3C96 /* ListFlowView.swift in Sources */,
-				2A324DB22C465E27008E7EB6 /* ContentViewComposer.swift in Sources */,
+				2A324DB22C465E27008E7EB6 /* ListFlowViewComposer.swift in Sources */,
 				2A33A3E92C4644BA00CE3C96 /* ListFlowModel.swift in Sources */,
 				2A324DCC2C4682C7008E7EB6 /* DispatchQueue+delay.swift in Sources */,
 				2A324D9F2C464CC4008E7EB6 /* ListFlowEffectHandler.swift in Sources */,

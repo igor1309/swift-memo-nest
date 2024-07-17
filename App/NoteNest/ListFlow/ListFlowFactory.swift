@@ -8,21 +8,12 @@
 import EntryListFeature
 import SwiftUI
 
-final class ListFlowFactory {
-    
-    private let model: Model
-    
-    init(model: Model) {
-        
-        self.model = model
-    }
-    
-    typealias Model = EntryListModel<Entry>
-}
+final class ListFlowFactory {}
 
 extension ListFlowFactory {
     
     func makeEntryListView(
+        model: EntryListModel<Entry>,
         entryView: @escaping (Entry) -> some View
     ) -> some View {
         

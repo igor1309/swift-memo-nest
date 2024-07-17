@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    private let composer: ContentViewComposer
+    private let composer: ListFlowViewComposer
     
     init() {
         

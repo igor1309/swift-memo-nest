@@ -12,6 +12,6 @@ extension ListFlowFactory {
     
     static func preview() -> Self {
         
-        return .init(model: .preview())
+        return .init()
     }
 }
