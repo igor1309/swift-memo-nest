@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
-               BuildableName = "NoteNest.app"
-               BlueprintName = "NoteNest"
+               BuildableName = "MemoNest.app"
+               BlueprintName = "MemoNest"
                ReferencedContainer = "container:NoteNest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
-            BuildableName = "NoteNest.app"
-            BlueprintName = "NoteNest"
+            BuildableName = "MemoNest.app"
+            BlueprintName = "MemoNest"
             ReferencedContainer = "container:NoteNest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -67,8 +67,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
-            BuildableName = "NoteNest.app"
-            BlueprintName = "NoteNest"
+            BuildableName = "MemoNest.app"
+            BlueprintName = "MemoNest"
             ReferencedContainer = "container:NoteNest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

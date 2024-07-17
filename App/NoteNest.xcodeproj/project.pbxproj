@@ -63,7 +63,7 @@
 		2A324DC52C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2A324DC72C467381008E7EB6 /* [Entry]+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Entry]+preview.swift"; sourceTree = "<group>"; };
 		2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+delay.swift"; sourceTree = "<group>"; };
-		2A33A3D32C4642C700CE3C96 /* NoteNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A33A3D32C4642C700CE3C96 /* MemoNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A33A3D62C4642C700CE3C96 /* NoteNestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
 		2A33A3D82C4642C700CE3C96 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2A33A3DA2C4642C900CE3C96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 		2A33A3D42C4642C700CE3C96 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2A33A3D32C4642C700CE3C96 /* NoteNest.app */,
+				2A33A3D32C4642C700CE3C96 /* MemoNest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,9 +230,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A33A3D22C4642C700CE3C96 /* NoteNest */ = {
+		2A33A3D22C4642C700CE3C96 /* MemoNest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A33A3E12C4642C900CE3C96 /* Build configuration list for PBXNativeTarget "NoteNest" */;
+			buildConfigurationList = 2A33A3E12C4642C900CE3C96 /* Build configuration list for PBXNativeTarget "MemoNest" */;
 			buildPhases = (
 				2A33A3CF2C4642C700CE3C96 /* Sources */,
 				2A33A3D02C4642C700CE3C96 /* Frameworks */,
@@ -242,7 +242,7 @@
 			);
 			dependencies = (
 			);
-			name = NoteNest;
+			name = MemoNest;
 			packageProductDependencies = (
 				2A324D8D2C464975008E7EB6 /* UIPrimitives */,
 				2A324D922C464B7E008E7EB6 /* IMRx */,
@@ -252,7 +252,7 @@
 				2A2415CB2C4782C10099B836 /* EntryEditorFeature */,
 			);
 			productName = NoteNest;
-			productReference = 2A33A3D32C4642C700CE3C96 /* NoteNest.app */;
+			productReference = 2A33A3D32C4642C700CE3C96 /* MemoNest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -287,7 +287,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2A33A3D22C4642C700CE3C96 /* NoteNest */,
+				2A33A3D22C4642C700CE3C96 /* MemoNest */,
 			);
 		};
 /* End PBXProject section */
@@ -469,6 +469,7 @@
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MemoNest;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -498,6 +499,7 @@
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MemoNest;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -528,7 +530,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2A33A3E12C4642C900CE3C96 /* Build configuration list for PBXNativeTarget "NoteNest" */ = {
+		2A33A3E12C4642C900CE3C96 /* Build configuration list for PBXNativeTarget "MemoNest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A33A3E22C4642C900CE3C96 /* Debug */,
