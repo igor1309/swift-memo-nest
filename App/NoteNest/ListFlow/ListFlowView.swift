@@ -5,8 +5,9 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-import SwiftUI
+import EntryEditorFeature
 import EntryListFeature
+import SwiftUI
 import UIPrimitives
 
 struct ListFlowView: View {
@@ -121,7 +122,7 @@ private extension ListFlowView {
         case .editor:
             NavigationStack {
                 
-                Text("TBD: Editor")
+                EntryEditor()
                     .toolbar {
                         
                         ToolbarItem(placement: .cancellationAction) {
