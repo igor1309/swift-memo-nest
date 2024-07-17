@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "7B125776-E875-4D99-A54E-96E94DA8746F",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "EntryListFeatureTests",
+        "name" : "EntryListFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ToolsTests",
+        "name" : "ToolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

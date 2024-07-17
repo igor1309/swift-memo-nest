@@ -10,6 +10,7 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
+        .entryEditorFeature,
         .entryListFeature,
         .tools,
         .uiPrimitives,
@@ -19,6 +20,7 @@ let package = Package(
         .imRx
     ],
     targets: [
+        .entryEditorFeature,
         .entryListFeature,
         .entryListFeatureTests,
         .tools,
@@ -28,6 +30,13 @@ let package = Package(
 )
 
 private extension Product {
+    
+    static let entryEditorFeature = library(
+        name: .entryEditorFeature,
+        targets: [
+            .entryEditorFeature,
+        ]
+    )
     
     static let entryListFeature = library(
         name: .entryListFeature,
@@ -52,6 +61,10 @@ private extension Product {
 }
 
 private extension Target {
+    
+    static let entryEditorFeature = target(
+        name: .entryEditorFeature
+    )
     
     static let entryListFeature = target(
         name: .entryListFeature,
@@ -87,6 +100,8 @@ private extension Target {
 
 private extension Target.Dependency {
     
+    static let entryEditorFeature: Self = byName(name: .entryListFeature)
+    
     static let entryListFeature: Self = byName(name: .entryListFeature)
     
     static let tools: Self = byName(name: .tools)
@@ -95,6 +110,8 @@ private extension Target.Dependency {
 }
 
 private extension String {
+    
+    static let entryEditorFeature = "EntryEditorFeature"
     
     static let entryListFeature = "EntryListFeature"
     static let entryListFeatureTests = "EntryListFeatureTests"
