@@ -31,6 +31,9 @@ public extension EntryListReducer {
         case let .loadMore(after: id):
             state.status = .inflight
             effect = .loadMore(after: id)
+            
+        case let .save(entry):
+            reduce(&state, with: entry)
         }
         
         return (state, effect)
@@ -73,5 +76,20 @@ private extension EntryListReducer {
                 state.result = .success(existingEntries)
             }
         }
+    }
+    
+    func reduce(
+        _ state: inout State,
+        with entry: Entry
+    ) {
+        var entries = (try? state.result?.get()) ?? []
+        
+        if let index = entries.firstIndex(where: { $0.id == entry.id }) {
+            entries[index] = entry
+        } else {
+            entries.append(entry)
+        }
+        
+        state.result = .success(entries)
     }
 }

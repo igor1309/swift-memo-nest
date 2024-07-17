@@ -114,34 +114,18 @@ private extension ListFlowView {
         }
     }
     
+    @ViewBuilder
     func modalContent(
         modal: ListFlowState.Modal
     ) -> some View {
         
         switch modal {
         case .editor:
-            NavigationStack {
-                
-                EntryEditor()
-                    .toolbar {
-                        
-                        ToolbarItem(placement: .cancellationAction) {
-                            
-                            Button("Cancel") { model.event(.dismiss(.modal)) }
-                        }
-                        
-                        ToolbarItem(placement: .confirmationAction) {
-                            
-#warning("or update if editing existing")
-                            Button("Save") {
-                                
-#warning("ADD SAVE!!!!!!!!!")
-                                model.event(.dismiss(.modal))
-                            }
-                            //   .disabled(!node.canSave)
-                        }
-                    }
-            }
+#warning("pass non empty for editing")
+            EntryEditorWrapperView(
+                onCancel: { model.event(.dismiss(.modal)) },
+                onSave: { model.event(.save($0)) }
+            )
         }
     }
 }

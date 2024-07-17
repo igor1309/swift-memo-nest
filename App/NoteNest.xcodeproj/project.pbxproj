@@ -10,6 +10,7 @@
 		2A0CC5352C46A58400B34E91 /* EntryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A0CC5342C46A58400B34E91 /* EntryListFeature */; };
 		2A0CC5372C46B90A00B34E91 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0CC5362C46B90A00B34E91 /* Entry.swift */; };
 		2A2415CC2C4782C10099B836 /* EntryEditorFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A2415CB2C4782C10099B836 /* EntryEditorFeature */; };
+		2A25DB732C47BA7500653E07 /* EntryEditorWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25DB722C47BA7500653E07 /* EntryEditorWrapperView.swift */; };
 		2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D8D2C464975008E7EB6 /* UIPrimitives */; };
 		2A324D902C464ABF008E7EB6 /* ListFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */; };
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		2A0CC5362C46B90A00B34E91 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "swift-note-nest-Package.xctestplan"; path = "TestPlans/swift-note-nest-Package.xctestplan"; sourceTree = "<group>"; };
+		2A25DB722C47BA7500653E07 /* EntryEditorWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryEditorWrapperView.swift; sourceTree = "<group>"; };
 		2A324D8F2C464ABF008E7EB6 /* ListFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEvent.swift; sourceTree = "<group>"; };
 		2A324D962C464BCE008E7EB6 /* ListFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowEffect.swift; sourceTree = "<group>"; };
 		2A324D982C464BDD008E7EB6 /* ListFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowState.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 				2A324DCB2C4682C7008E7EB6 /* DispatchQueue+delay.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2A25DB712C47BA6600653E07 /* EntryEditor */ = {
+			isa = PBXGroup;
+			children = (
+				2A25DB722C47BA7500653E07 /* EntryEditorWrapperView.swift */,
+			);
+			path = EntryEditor;
 			sourceTree = "<group>";
 		};
 		2A324D8A2C464913008E7EB6 /* Frameworks */ = {
@@ -172,6 +182,7 @@
 				2A324D9E2C464CC4008E7EB6 /* ListFlowEffectHandler.swift */,
 				2A33A3E82C4644BA00CE3C96 /* ListFlowModel.swift */,
 				2A33A3E52C46449000CE3C96 /* ListFlowView.swift */,
+				2A25DB712C47BA6600653E07 /* EntryEditor */,
 				2A324DAB2C465CDB008E7EB6 /* ListFlowFactory.swift */,
 			);
 			path = ListFlow;
@@ -270,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A25DB732C47BA7500653E07 /* EntryEditorWrapperView.swift in Sources */,
 				2A324D9B2C464C44008E7EB6 /* ListFlowModel+preview.swift in Sources */,
 				2A324DC12C46687A008E7EB6 /* EntryListModelComposer.swift in Sources */,
 				2A324DC62C4671B1008E7EB6 /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */,

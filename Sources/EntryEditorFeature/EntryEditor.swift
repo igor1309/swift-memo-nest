@@ -9,11 +9,11 @@ import SwiftUI
 
 public struct EntryEditor: View {
     
-    @State private var entry: Entry
+    @Binding private var entry: Entry
     
-    public init(entry: Entry? = nil) {
+    public init(entry: Binding<Entry>) {
         
-        self.entry = entry ?? .empty
+        self._entry = entry
     }
     
     public var body: some View {
@@ -25,11 +25,6 @@ public struct EntryEditor: View {
             tagsView(tags: $entry.tags)
         }
     }
-}
-
-extension Entry {
-    
-    static let empty: Self = .init(title: "", note: "", tags: [])
 }
 
 private extension EntryEditor {
@@ -97,7 +92,7 @@ extension URL.FormatStyle {
 // MARK: - Previews
 
 private func entryEditorDemo(
-    entry: Entry? = nil
+    entry: Binding<Entry>
 ) -> some View {
     
     NavigationStack {
@@ -110,12 +105,12 @@ private func entryEditorDemo(
 
 #Preview {
     
-    entryEditorDemo()
+    entryEditorDemo(entry: .constant(.init()))
 }
 
 #Preview {
     
-    entryEditorDemo(entry: .preview)
+    entryEditorDemo(entry: .constant(.preview))
 }
 
 private extension Entry {

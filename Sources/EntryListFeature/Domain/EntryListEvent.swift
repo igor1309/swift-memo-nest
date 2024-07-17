@@ -10,6 +10,7 @@ public enum EntryListEvent<Entry: Identifiable> {
     case load
     case loaded(LoadResult)
     case loadMore(after: Entry.ID)
+    case save(Entry)
 }
 
 extension EntryListEvent {

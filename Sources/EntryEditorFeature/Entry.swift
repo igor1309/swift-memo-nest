@@ -19,10 +19,10 @@ public struct Entry: Equatable {
     
     public init(
         //        link: Link? = nil,
-        title: String,
+        title: String = "",
         url: URL? = nil,
-        note: String,
-        tags: [String]
+        note: String = "",
+        tags: [String] = []
     ) {
         //        self.link = link
         self.title = title

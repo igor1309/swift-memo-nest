@@ -5,6 +5,8 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
+import EntryEditorFeature
+
 final class ListFlowReducer {}
 
 extension ListFlowReducer {
@@ -19,7 +21,9 @@ extension ListFlowReducer {
         
         switch event {
         case .addEntry:
-            guard state.destination == nil else { fatalError("impossible state") }
+            guard state.destination == nil 
+            else { fatalError("impossible state") }
+            
             state.modal = .editor
             
         case let .dismiss(dismiss):
@@ -27,6 +31,9 @@ extension ListFlowReducer {
             
         case let .select(entry):
             state.destination = .detail(entry)
+            
+        case let .save(entry):
+            reduce(&state, entry)
         }
         
         return (state, effect)
@@ -53,5 +60,25 @@ private extension ListFlowReducer {
         case .modal:
             state.modal = nil
         }
+    }
+
+    func reduce(
+        _ state: inout State,
+        _ entry: EntryEditorFeature.Entry
+    ) {
+        guard case .editor = state.modal
+        else { fatalError("impossible state") }
+        
+        #warning("add validation?")
+        state.content.event(.save(.init(entry)))
+        state.modal = .none
+    }
+}
+
+private extension Entry {
+    
+    init(_ entry: EntryEditorFeature.Entry) {
+        
+        self.init(id: .init(), text: entry.note)
     }
 }
