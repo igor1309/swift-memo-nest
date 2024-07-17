@@ -10,8 +10,8 @@ import Foundation
 public struct Entry: Equatable {
     
     //public var link: Link?
-    var title: String
-    var url: URL?
+    public var title: String
+    public var url: URL?
     
     // TODO: switch to `AttributedString` for Markdown
     public var note: String

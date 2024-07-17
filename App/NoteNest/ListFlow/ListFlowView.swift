@@ -101,6 +101,7 @@ private extension ListFlowView {
         switch destination {
         case let .detail(entry):
             EntryDetailView(entry: entry)
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     
                     ToolbarItem {

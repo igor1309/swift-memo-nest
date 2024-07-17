@@ -13,3 +13,5 @@
 - [Advanced SwiftUI TextField - Formatting and Validation | Fatbobman's Blog](https://fatbobman.com/en/posts/textfield-1/)
 
 - [Advanced SwiftUI TextField - Events, Focus, Keyboard | Fatbobman's Blog](https://fatbobman.com/en/posts/textfield-event-focus-keyboard/)
+
+- [How to open URL in Safari in SwiftUI | Sarunw](https://sarunw.com/posts/swiftui-open-url/)

@@ -79,6 +79,12 @@ private extension Entry {
     
     init(_ entry: EntryEditorFeature.Entry) {
         
-        self.init(id: .init(), text: entry.note)
+        self.init(
+            id: .init(),
+            title: entry.title,
+            url: entry.url,
+            text: entry.note,
+            tags: entry.tags
+        )
     }
 }
