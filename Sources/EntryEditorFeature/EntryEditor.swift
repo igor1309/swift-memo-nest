@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-extension URL.FormatStyle {
-    
-    static let urlStyle: Self = .init(
-        path: .omitWhen(.path, matches: ["/"]),
-        query: .omitWhen(.query, matches: [""])
-    )
-}
-
 public struct EntryEditor: View {
     
     @State private var entry: Entry
@@ -27,41 +19,10 @@ public struct EntryEditor: View {
     public var body: some View {
         
         VStack(alignment: .leading, spacing: 24) {
-
-            VStack(alignment: .leading, spacing: 6) {
-                
-                TextField("Title", text: $entry.title)
-                    .padding(.horizontal)
-                
-                TextField(
-                    "URL",
-                    value: $entry.url,
-                    format: URL.FormatStyle.urlStyle
-                )
-                .keyboardType(.URL)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
-                .textContentType(.URL)
-                .padding(.horizontal)
-            }
             
-            ZStack(alignment: .topLeading) {
-             
-                if entry.note.isEmpty {
-                    
-                    Text("Note")
-                        .foregroundStyle(.tertiary)
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
-                }
-                
-                TextEditor(text: $entry.note)
-                    .scrollContentBackground(.hidden)
-                    .padding(.horizontal, 12)
-            }
-            
-            Text("Tags (TBD)")
-                .padding(.horizontal)
+            linkView(title: $entry.title, url: $entry.url)
+            textEditor(text: $entry.note)
+            tagsView(tags: $entry.tags)
         }
     }
 }
@@ -69,6 +30,68 @@ public struct EntryEditor: View {
 extension Entry {
     
     static let empty: Self = .init(title: "", note: "", tags: [])
+}
+
+private extension EntryEditor {
+    
+    func linkView(
+        title: Binding<String>,
+        url: Binding<URL?>
+    ) -> some View {
+        
+        VStack(alignment: .leading, spacing: 6) {
+            
+            TextField("Title", text: title)
+                .padding(.horizontal)
+            
+            TextField(
+                "URL",
+                value: url,
+                format: URL.FormatStyle.urlStyle
+            )
+            .keyboardType(.URL)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .textContentType(.URL)
+            .padding(.horizontal)
+        }
+    }
+    
+    func textEditor(
+        text: Binding<String>
+    ) -> some View {
+        
+        ZStack(alignment: .topLeading) {
+            
+            if text.wrappedValue.isEmpty {
+                
+                Text("Note")
+                    .foregroundStyle(.tertiary)
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+            }
+            
+            TextEditor(text: text)
+                .scrollContentBackground(.hidden)
+                .padding(.horizontal, 12)
+        }
+    }
+    
+    func tagsView(
+        tags: Binding<[String]>
+    ) -> some View {
+        
+        Text("Tags (TBD): \(tags.wrappedValue.joined(separator: ", "))")
+            .padding(.horizontal)
+    }
+}
+
+extension URL.FormatStyle {
+    
+    static let urlStyle: Self = .init(
+        path: .omitWhen(.path, matches: ["/"]),
+        query: .omitWhen(.query, matches: [""])
+    )
 }
 
 // MARK: - Previews
