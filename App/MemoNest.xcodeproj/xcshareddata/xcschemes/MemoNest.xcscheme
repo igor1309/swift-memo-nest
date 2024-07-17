@@ -18,27 +18,27 @@
                BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
                BuildableName = "MemoNest.app"
                BlueprintName = "MemoNest"
-               ReferencedContainer = "container:NoteNest.xcodeproj">
+               ReferencedContainer = "container:MemoNest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:TestPlans/NoteNest.xctestplan"
+            reference = "container:TestPlans/MemoNest.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -52,7 +52,7 @@
             BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
             BuildableName = "MemoNest.app"
             BlueprintName = "MemoNest"
-            ReferencedContainer = "container:NoteNest.xcodeproj">
+            ReferencedContainer = "container:MemoNest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -69,12 +69,12 @@
             BlueprintIdentifier = "2A33A3D22C4642C700CE3C96"
             BuildableName = "MemoNest.app"
             BlueprintName = "MemoNest"
-            ReferencedContainer = "container:NoteNest.xcodeproj">
+            ReferencedContainer = "container:MemoNest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
