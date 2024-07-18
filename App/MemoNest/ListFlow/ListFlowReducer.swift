@@ -116,20 +116,6 @@ private extension ListFlowReducer {
     }
 }
 
-private extension Entry {
-    
-    init(_ entry: EntryEditorFeature.Entry) {
-        
-        self.init(
-            id: .init(),
-            title: entry.title,
-            url: entry.url,
-            note: entry.note,
-            tags: entry.tags
-        )
-    }
-}
-
 private extension ListFlowState.Destination {
     
     var detailModal: Detail.Modal? {
