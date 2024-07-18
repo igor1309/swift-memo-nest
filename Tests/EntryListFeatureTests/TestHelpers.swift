@@ -7,30 +7,42 @@
 
 import Foundation
 
-typealias Entry = String
-typealias Filter = String
-typealias Sort = String
+struct Entry: Equatable {
+    
+    let value: String
+}
+
+struct Filter: Equatable {
+    
+    let value: String
+}
+
+struct Sort: Equatable {
+    
+    let value: String
+}
+
 typealias State = EntryListState<Entry, Filter, Sort>
 
 func makeEntries(
     count: Int = .random(in: 1...100)
 ) -> [Entry] {
     
-    (0..<count).map { _ in UUID().uuidString }
+    (0..<count).map { _ in .init(value: UUID().uuidString) }
 }
 
 func makeFilter(
     _ value: String = UUID().uuidString
 ) -> Filter {
     
-    return value
+    return .init(value: value)
 }
 
 func makeSort(
     _ value: String = UUID().uuidString
 ) -> Sort {
     
-    return value
+    return .init(value: value)
 }
 
 func makeState(
