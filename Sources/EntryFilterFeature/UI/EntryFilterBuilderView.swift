@@ -10,22 +10,25 @@ import SwiftUI
 struct EntryFilterBuilderView: View {
     
     @ObservedObject var model: EntryFilterBuilderModel
-
+    
     var body: some View {
         
-        ScrollView(showsIndicators: false) {
+        List {
             
-            VStack(alignment: .leading, spacing: 32) {
+            Group {
                 
-                combinationPicker()
                 searchTextField()
                 tagsTextField()
                 dateRangePicker()
+                combinationPicker()
             }
-            .padding()
+            .listRowSeparator(.hidden)
         }
+        .listRowSpacing(6)
+        .listStyle(.plain)
         
         Text("Current Filter: \(model.state.filter)")
+            .foregroundStyle(.secondary)
             .font(.footnote)
             .padding(.horizontal)
     }
@@ -76,7 +79,7 @@ private extension EntryFilterBuilderView {
             get: { model.state.startDate },
             set: { model.event(.setStartDate($0)) }
         ), displayedComponents: .date)
-
+        
         DatePicker("End Date", selection: .init(
             get: { model.state.endDate },
             set: { model.event(.setEndDate($0)) }
