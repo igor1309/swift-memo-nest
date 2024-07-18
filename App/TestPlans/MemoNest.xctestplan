@@ -30,6 +30,13 @@
         "identifier" : "ToolsTests",
         "name" : "ToolsTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SortBuilderFeatureTests",
+        "name" : "SortBuilderFeatureTests"
+      }
     }
   ],
   "version" : 1

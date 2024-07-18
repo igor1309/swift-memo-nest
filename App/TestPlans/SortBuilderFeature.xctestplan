@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "7B125776-E875-4D99-A54E-96E94DA8746F",
+      "id" : "E3BD7CD9-631E-4B00-B103-9B8BE708822E",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -12,20 +12,6 @@
     "testExecutionOrdering" : "random"
   },
   "testTargets" : [
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "EntryListFeatureTests",
-        "name" : "EntryListFeatureTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "ToolsTests",
-        "name" : "ToolsTests"
-      }
-    },
     {
       "target" : {
         "containerPath" : "container:",
