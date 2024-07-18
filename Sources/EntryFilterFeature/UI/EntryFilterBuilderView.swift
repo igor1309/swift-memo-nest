@@ -95,7 +95,8 @@ struct EntryFilterBuilderView_Previews: PreviewProvider {
         let reducer = EntryFilterBuilderReducer()
         let model = EntryFilterBuilderModel(
             initialState: .init(), 
-            reduce: reducer.reduce(state:event:)
+            reduce: reducer.reduce(_:_:),
+            handleEffect: { _,_ in }
         )
         
         NavigationStack {

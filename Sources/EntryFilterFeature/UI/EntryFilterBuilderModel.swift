@@ -5,32 +5,24 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-import Foundation
+import IMRx
 
-#warning("replace with RxViewModel")
-final class EntryFilterBuilderModel: ObservableObject {
-    
-    @Published private(set) var state: State
-    
-    private let reduce: Reduce
-    
-    init(
-        initialState: State,
-        reduce: @escaping Reduce
-    ) {
-        self.state = initialState
-        self.reduce = reduce
-    }
-    
-    typealias Reduce = (inout State, Event) -> Void
-    typealias State = EntryFilterBuilderState
-    typealias Event = EntryFilterBuilderEvent
-}
+typealias EntryFilterBuilderModel = RxViewModel<EntryFilterBuilderState, EntryFilterBuilderEvent, EntryFilterBuilderEffect>
 
-extension EntryFilterBuilderModel {
-    
-    func event(_ event: EntryFilterBuilderEvent) {
+enum EntryFilterBuilderEffect: Equatable {}
 
-        reduce(&state, event)
+extension EntryFilterBuilderReducer {
+    
+    typealias Effect = EntryFilterBuilderEffect
+    
+    func reduce(
+        _ state: State,
+        _ event: Event
+    ) -> (State, Effect?) {
+        
+        var state = state
+        reduce(state: &state, event: event)
+        
+        return (state, nil)
     }
 }
