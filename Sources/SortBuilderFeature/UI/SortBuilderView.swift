@@ -101,7 +101,7 @@ private extension SortBuilderView {
             .alert(
                 isPresented: .init(
                     get: { viewModel.state.showingAlert },
-                    set: { _ in viewModel.event(.updateSelectedKeyPath(nil)) }
+                    set: { if !$0 { viewModel.event(.dismissAlert) }}
                 )
             ) {
                 .init(

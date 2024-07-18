@@ -10,6 +10,7 @@ import Foundation
 enum SortBuilderEvent {
     
     case addComparator
+    case dismissAlert
     case deleteComparators(IndexSet)
     case updateSelectedKeyPath(String?)
     case updateSortOrder(SortOrder)

@@ -11,6 +11,8 @@ final class SortBuilderReducer<T> {}
 
 extension SortBuilderReducer {
     
+#warning("add tests")
+
     func reduce(
         state: inout SortBuilderState<T>,
         event: SortBuilderEvent
@@ -21,6 +23,9 @@ extension SortBuilderReducer {
             
         case let .deleteComparators(offsets):
             state.selectedComparators.remove(atOffsets: offsets)
+            
+        case .dismissAlert:
+            state.showingAlert = false
             
         case let .updateSelectedKeyPath(newValue):
             state.selectedKeyPath = newValue
