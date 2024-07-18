@@ -109,7 +109,7 @@ private extension EntryListReducer {
         
         state.isLoading = true
         effect = .load(.init(
-            lastEntry: state.entries.last, 
+            lastEntry: state.entries.last,
             filter: state.filter,
             sort: state.sort
         ))
@@ -203,7 +203,7 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_loaded_shouldNotDeliverEffectOnEmptyStateOnLoadFailure() {
-    
+        
         let state = makeState(entries: [], isLoading: true)
         
         assert(.loaded(.failure(.init())), on: state, effect: nil)
@@ -222,7 +222,7 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_loaded_shouldNotDeliverEffectOnEmptyStateOnLoadSuccess() {
-    
+        
         let state = makeState(entries: [], isLoading: true)
         
         assert(.loaded(.success(makeEntries())), on: state, effect: nil)
@@ -276,7 +276,7 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_setSort_shouldNotDeliverEffectOnSameSort() {
-    
+        
         let sort = makeSort()
         
         assert(.setSort(sort), on: makeState(sort: sort), effect: nil)
@@ -297,7 +297,7 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_setSort_shouldDeliverEffectWithSort() {
-    
+        
         let sort = makeSort()
         let state = makeState()
         
@@ -314,7 +314,7 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_setFilter_shouldNotDeliverEffectOnSameFilter() {
-    
+        
         let filter = makeFilter()
         
         assert(.setFilter(filter), on: makeState(filter: filter), effect: nil)
@@ -335,11 +335,82 @@ final class EntryListReducerTests: XCTestCase {
     }
     
     func test_setFilter_shouldDeliverEffectWithFilter() {
-    
+        
         let filter = makeFilter()
         let state = makeState()
         
         assert(.setFilter(filter), on: state, effect: .load(.init(filter: filter, sort: state.sort)))
+    }
+    
+    // MARK: - series
+    
+    func test_events() {
+        
+        var state = makeState(entries: [])
+        
+        state = assertState(.load, on: state) {
+            
+            $0.isLoading = true
+        }
+        
+        let entries = makeEntries(count: 5)
+        state = assertState(.loaded(.success(entries)), on: state) {
+            
+            $0.entries = entries
+            $0.isLoading = false
+        }
+        
+        state = assertState(.load, on: state) {
+            
+            $0.isLoading = true
+        }
+        
+        let entries2 = makeEntries(count: 7)
+        state = assertState(.loaded(.success(entries2)), on: state) {
+            
+            $0.entries = entries + entries2
+            $0.isLoading = false
+        }
+        
+        state = assertState(.load, on: state) {
+            
+            $0.isLoading = true
+        }
+        
+        state = assertState(.loaded(.failure(.init())), on: state) {
+            
+            $0.isLoading = false
+        }
+        
+        let filter = makeFilter()
+        state = assertState(.setFilter(filter), on: state) {
+            
+            $0.entries = []
+            $0.filter = filter
+            $0.isLoading = true
+        }
+        
+        let entries3 = makeEntries(count: 3)
+        state = assertState(.loaded(.success(entries3)), on: state) {
+            
+            $0.entries = entries3
+            $0.isLoading = false
+        }
+        
+        let sort = makeSort()
+        state = assertState(.setSort(sort), on: state) {
+            
+            $0.entries = []
+            $0.sort = sort
+            $0.isLoading = true
+        }
+        
+        let entries4 = makeEntries(count: 4)
+        state = assertState(.loaded(.success(entries4)), on: state) {
+            
+            $0.entries = entries4
+            $0.isLoading = false
+        }
     }
     
     // MARK: - Helpers
@@ -360,6 +431,7 @@ final class EntryListReducerTests: XCTestCase {
     
     private typealias UpdateStateToExpected<State> = (_ state: inout State) -> Void
     
+    @discardableResult
     private func assertState(
         sut: SUT? = nil,
         _ event: SUT.Event,
@@ -367,7 +439,8 @@ final class EntryListReducerTests: XCTestCase {
         updateStateToExpected: UpdateStateToExpected<SUT.State>? = nil,
         file: StaticString = #file,
         line: UInt = #line
-    ) {
+    ) -> SUT.State {
+        
         let sut = sut ?? makeSUT(file: file, line: line)
         
         var expectedState = state
@@ -381,6 +454,8 @@ final class EntryListReducerTests: XCTestCase {
             "\nExpected \(expectedState), but got \(receivedState) instead.",
             file: file, line: line
         )
+        
+        return receivedState
     }
     
     private func assert(
