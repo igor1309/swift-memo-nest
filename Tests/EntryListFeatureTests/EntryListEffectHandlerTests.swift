@@ -5,7 +5,20 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-final class EntryListEffectHandler<Entry, Filter, Sort> {}
+final class EntryListEffectHandler<Entry, Filter, Sort> {
+    
+    private let load: Load
+    
+    init(load: @escaping Load) {
+        
+        self.load = load
+    }
+    
+    typealias LoadPayload = (Filter, Sort)
+    typealias LoadResult = Result<[Entry], Error>
+    typealias LoadCompletion = (LoadResult) -> Void
+    typealias Load = (LoadPayload, @escaping LoadCompletion) -> Void
+}
 
 extension EntryListEffectHandler {
     
@@ -15,7 +28,7 @@ extension EntryListEffectHandler {
     ) {
         switch effect {
         case let .load(filter, sort):
-            break
+            load(filter, sort, dispatch)
         }
     }
 }
@@ -28,24 +41,64 @@ extension EntryListEffectHandler {
     typealias Effect = EntryListEffect<Filter, Sort>
 }
 
+private extension EntryListEffectHandler {
+    
+    func load(
+        _ filter: Filter,
+        _ sort: Sort,
+        _ dispatch: @escaping Dispatch
+    ) {
+        load((filter, sort)) { _ in }
+    }
+}
+
 import XCTest
 
 final class EntryListEffectHandlerTests: XCTestCase {
     
+    // MARK: - init
+    
+    func test_init_shouldNotCallCollaborators() {
+        
+        let (_, loadSpy) = makeSUT()
+        
+        XCTAssertEqual(loadSpy.callCount, 0)
+    }
+    
+    // MARK: - load
+    
+    func test_load_shouldCallLoadWithFilterAndSort() {
+        
+        let (filter, sort) = (makeFilter(), makeSort())
+        let (sut, loadSpy) = makeSUT()
+        
+        sut.handleEffect(.load(filter, sort)) { _ in }
+        
+        XCTAssertNoDiff(loadSpy.payloads.map(\.0), [filter])
+        XCTAssertNoDiff(loadSpy.payloads.map(\.1), [sort])
+    }
+    
     // MARK: - Helpers
     
     private typealias SUT = EntryListEffectHandler<Entry, Filter, Sort>
+    private typealias LoadSpy = Spy<(Filter, Sort), [Entry], Error>
     
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
-    ) -> SUT {
-        
-        let sut = SUT()
+    ) -> (
+        sut: SUT,
+        loadSpy: LoadSpy
+    ) {
+        let loadSpy = LoadSpy()
+        let sut = SUT(
+            load: loadSpy.process
+        )
         
         trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(loadSpy, file: file, line: line)
         
-        return sut
+        return (sut, loadSpy)
     }
     
     private func expect(
