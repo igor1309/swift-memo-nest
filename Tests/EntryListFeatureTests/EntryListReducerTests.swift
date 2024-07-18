@@ -33,9 +33,27 @@ extension EntryListEvent: Equatable where Entry: Equatable, Filter: Equatable, S
 
 enum EntryListEffect<Filter, Sort> {
     
-    case load(Filter, Sort)
+    case load(LoadPayload)
 }
 
+extension EntryListEffect {
+    
+    struct LoadPayload {
+        
+        let filter: Filter
+        let sort: Sort
+        
+        init(
+            filter: Filter,
+            sort: Sort
+        ) {
+            self.filter = filter
+            self.sort = sort
+        }
+    }
+}
+
+extension EntryListEffect.LoadPayload: Equatable where Filter: Equatable, Sort: Equatable {}
 extension EntryListEffect: Equatable where Filter: Equatable, Sort: Equatable {}
 
 final class EntryListReducer<Entry, Filter, Sort>
@@ -87,7 +105,7 @@ private extension EntryListReducer {
         guard !state.isLoading else { return }
         
         state.isLoading = true
-        effect = .load(state.filter, state.sort)
+        effect = .load(.init(filter: state.filter, sort: state.sort))
     }
     
     func reduce(
@@ -100,7 +118,7 @@ private extension EntryListReducer {
         state.entries = []
         state.filter = filter
         state.isLoading = true
-        effect = .load(filter, state.sort)
+        effect = .load(.init(filter: filter, sort: state.sort))
     }
     
     func reduce(
@@ -113,7 +131,7 @@ private extension EntryListReducer {
         state.entries = []
         state.sort = sort
         state.isLoading = true
-        effect = .load(state.filter, sort)
+        effect = .load(.init(filter: state.filter, sort: sort))
     }
 }
 
@@ -143,10 +161,9 @@ final class EntryListReducerTests: XCTestCase {
     
     func test_load_shouldDeliverEffect() {
         
-        let sort = makeSort()
-        let state = makeState(sort: sort)
+        let state = makeState()
         
-        assert(.load, on: state, effect: .load(state.filter, sort))
+        assert(.load, on: state, effect: .load(.init(filter: state.filter, sort: state.sort)))
     }
     
     // MARK: - loaded
@@ -260,7 +277,7 @@ final class EntryListReducerTests: XCTestCase {
         let sort = makeSort()
         let state = makeState()
         
-        assert(.setSort(sort), on: state, effect: .load(state.filter, sort))
+        assert(.setSort(sort), on: state, effect: .load(.init(filter: state.filter, sort: sort)))
     }
     
     // MARK: - setFilter
@@ -298,7 +315,7 @@ final class EntryListReducerTests: XCTestCase {
         let filter = makeFilter()
         let state = makeState()
         
-        assert(.setFilter(filter), on: state, effect: .load(filter, state.sort))
+        assert(.setFilter(filter), on: state, effect: .load(.init(filter: filter, sort: state.sort)))
     }
     
     // MARK: - Helpers

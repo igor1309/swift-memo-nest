@@ -17,7 +17,7 @@ final class EntryListEffectHandler<Entry, Filter, Sort> {
 
 extension EntryListEffectHandler {
     
-    typealias LoadPayload = (Filter, Sort)
+    typealias LoadPayload = Effect.LoadPayload
     typealias LoadResult = Result<[Entry], Error>
     typealias LoadCompletion = (LoadResult) -> Void
     typealias Load = (LoadPayload, @escaping LoadCompletion) -> Void
@@ -30,8 +30,8 @@ extension EntryListEffectHandler {
         _ dispatch: @escaping Dispatch
     ) {
         switch effect {
-        case let .load(filter, sort):
-            load(filter, sort, dispatch)
+        case let .load(payload):
+            self.load(payload, dispatch)
         }
     }
 }
@@ -47,11 +47,10 @@ extension EntryListEffectHandler {
 private extension EntryListEffectHandler {
     
     func load(
-        _ filter: Filter,
-        _ sort: Sort,
+        _ payload: Effect.LoadPayload,
         _ dispatch: @escaping Dispatch
     ) {
-        load((filter, sort)) {
+        load(payload) {
             
             switch $0 {
             case .failure:
@@ -79,23 +78,21 @@ final class EntryListEffectHandlerTests: XCTestCase {
     
     // MARK: - load
     
-    func test_load_shouldCallLoadWithFilterAndSort() {
+    func test_load_shouldCallLoadWithPayload() {
         
-        let (filter, sort) = (makeFilter(), makeSort())
+        let payload = makePayload()
         let (sut, loadSpy) = makeSUT()
         
-        sut.handleEffect(.load(filter, sort)) { _ in }
+        sut.handleEffect(.load(payload)) { _ in }
         
-        XCTAssertNoDiff(loadSpy.payloads.map(\.0), [filter])
-        XCTAssertNoDiff(loadSpy.payloads.map(\.1), [sort])
+        XCTAssertNoDiff(loadSpy.payloads, [payload])
     }
     
     func test_load_shouldDeliverFailureOnLoadFailure() {
         
-        let (filter, sort) = (makeFilter(), makeSort())
         let (sut, loadSpy) = makeSUT()
         
-        expect(sut, toDeliver: .loaded(.failure(.init())), for: .load(filter, sort)) {
+        expect(sut, toDeliver: .loaded(.failure(.init())), for: .load(makePayload())) {
             
             loadSpy.complete(with: .failure(anyError()))
         }
@@ -103,11 +100,10 @@ final class EntryListEffectHandlerTests: XCTestCase {
     
     func test_load_shouldDeliverEntriesOnLoadSuccess() {
         
-        let (filter, sort) = (makeFilter(), makeSort())
         let entries = makeEntries()
         let (sut, loadSpy) = makeSUT()
         
-        expect(sut, toDeliver: .loaded(.success(entries)), for: .load(filter, sort)) {
+        expect(sut, toDeliver: .loaded(.success(entries)), for: .load(makePayload())) {
             
             loadSpy.complete(with: .success(entries))
         }
@@ -116,7 +112,7 @@ final class EntryListEffectHandlerTests: XCTestCase {
     // MARK: - Helpers
     
     private typealias SUT = EntryListEffectHandler<Entry, Filter, Sort>
-    private typealias LoadSpy = Spy<(Filter, Sort), [Entry], Error>
+    private typealias LoadSpy = Spy<SUT.Effect.LoadPayload, [Entry], Error>
     
     private func makeSUT(
         file: StaticString = #file,

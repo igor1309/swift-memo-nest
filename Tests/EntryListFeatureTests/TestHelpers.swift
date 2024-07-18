@@ -23,6 +23,7 @@ struct Sort: Equatable {
 }
 
 typealias State = EntryListState<Entry, Filter, Sort>
+typealias Effect = EntryListEffect<Filter, Sort>
 
 func makeEntries(
     count: Int = .random(in: 1...100)
@@ -36,6 +37,14 @@ func makeFilter(
 ) -> Filter {
     
     return .init(value: value)
+}
+
+func makePayload(
+    filter: Filter = makeFilter(),
+    sort: Sort = makeSort()
+) -> Effect.LoadPayload {
+    
+    return .init(filter: filter, sort: sort)
 }
 
 func makeSort(
