@@ -5,7 +5,8 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-actor InMemoryStore<Item> {
+actor InMemoryStore<Item>
+where Item: Identifiable {
     
     private var items: [Item]?
 }
@@ -25,9 +26,48 @@ extension InMemoryStore {
 
 extension InMemoryStore {
     
-    func cache(_ items: [Item]) throws {
+    func cache(_ item: Item) throws {
+        
+        guard var items
+        else { throw PreloadFailure() }
+        
+        if let index = items.firstIndex(matchingID: item.id) {
+            items[index] = item
+        } else {
+            items.append(item)
+        }
         
         self.items = items
+    }
+    
+    func cache(_ items: [Item]) {
+        
+        self.items = items
+    }
+}
+
+extension InMemoryStore {
+    
+    func remove(byID id: Item.ID) throws {
+        
+        guard var items
+        else { throw PreloadFailure() }
+        
+        items.removeAll { $0.id == id }
+        self.items = items
+    }
+    
+    func clear() {
+        
+        self.items = nil
+    }
+}
+
+extension Array where Element: Identifiable {
+    
+    func firstIndex(matchingID id: Element.ID) -> Index? {
+        
+        return firstIndex(where: { $0.id == id })
     }
 }
 
@@ -55,7 +95,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         let sut = makeSUT()
         
-        try await sut.cache([])
+        await sut.cache([])
         let retrieved = try await retrieve(sut)
         
         XCTAssertNoDiff(retrieved, [])
@@ -66,7 +106,7 @@ final class InMemoryStoreTests: XCTestCase {
         let item = makeItem()
         let sut = makeSUT()
         
-        try await sut.cache([item])
+        await sut.cache([item])
         let retrieved = try await retrieve(sut)
         
         XCTAssertNoDiff(retrieved, [item])
@@ -77,7 +117,7 @@ final class InMemoryStoreTests: XCTestCase {
         let items = makeItems(count: 13)
         let sut = makeSUT()
         
-        try await sut.cache(items)
+        await sut.cache(items)
         let retrieved = try await retrieve(sut)
         
         XCTAssertNoDiff(retrieved, items)
@@ -88,11 +128,98 @@ final class InMemoryStoreTests: XCTestCase {
         let items = makeItems(count: 7)
         let sut = makeSUT()
         
-        try await sut.cache(makeItems(count: 13))
-        try await sut.cache(items)
+        await sut.cache(makeItems(count: 13))
+        await sut.cache(items)
         let retrieved = try await retrieve(sut)
         
         XCTAssertNoDiff(retrieved, items)
+    }
+    
+    func test_cache_shouldAddNewItem() async throws {
+        
+        let items = makeItems(count: 7)
+        let item = makeItem()
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        try await sut.cache(item)
+        let retrieved = try await retrieve(sut)
+        
+        XCTAssertNoDiff(retrieved, items + [item])
+    }
+    
+    func test_cache_shouldUpdateFirstExistingItem() async throws {
+        
+        var items = makeItems(count: 7)
+        let item = makeItem(id: items[0].id)
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        try await sut.cache(item)
+        let retrieved = try await retrieve(sut)
+        
+        items[0] = item
+        XCTAssertNoDiff(retrieved[0], item)
+        XCTAssertNoDiff(retrieved, items)
+    }
+    
+    func test_cache_shouldUpdateExistingItem() async throws {
+        
+        var items = makeItems(count: 7)
+        let item = makeItem(id: items[1].id)
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        try await sut.cache(item)
+        let retrieved = try await retrieve(sut)
+        
+        items[1] = item
+        XCTAssertNoDiff(retrieved[1], item)
+        XCTAssertNoDiff(retrieved, items)
+    }
+    
+    func test_cache_shouldUpdateLastExistingItem() async throws {
+        
+        var items = makeItems(count: 7)
+        let item = makeItem(id: items[6].id)
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        try await sut.cache(item)
+        let retrieved = try await retrieve(sut)
+        
+        items[6] = item
+        XCTAssertNoDiff(retrieved[6], item)
+        XCTAssertNoDiff(retrieved, items)
+    }
+    
+    func test_remove_shouldRemoveItemByID() async throws {
+        
+        var items = makeItems(count: 7)
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        try await sut.remove(byID: items[3].id)
+        let retrieved = try await retrieve(sut)
+        
+        items.remove(at: 3)
+        XCTAssertNoDiff(retrieved, items)
+    }
+    
+    func test_clear_shouldEmptyCache() async throws {
+        
+        let items = makeItems(count: 7)
+        let sut = makeSUT()
+        
+        await sut.cache(items)
+        await sut.clear()
+        
+        await assertThrowsAsyncError(try await retrieve(sut)) {
+            XCTAssertNoDiff(
+                $0 as! InMemoryStoreTests.SUT.PreloadFailure,
+                SUT.PreloadFailure()
+            )
+        }
     }
     
     // MARK: - Helpers
@@ -111,8 +238,9 @@ final class InMemoryStoreTests: XCTestCase {
         return sut
     }
     
-    private struct Item: Equatable {
+    private struct Item: Equatable, Identifiable {
         
+        let id: UUID
         let value: String
     }
     
@@ -130,10 +258,11 @@ final class InMemoryStoreTests: XCTestCase {
     }
     
     private func makeItem(
+        id: UUID = .init(),
         _ value: String = UUID().uuidString
     ) -> Item {
         
-        return .init(value: value)
+        return .init(id: id, value: value)
     }
     
     // MARK: - DSL
