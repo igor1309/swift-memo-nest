@@ -8,7 +8,7 @@
 import Foundation
 
 
-public struct EntryFilterBuilderState {
+public struct EntryFilterBuilderState: Equatable {
     
     public var searchText: String
     public var tags: String
