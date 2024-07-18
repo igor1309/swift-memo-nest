@@ -10,12 +10,12 @@ import Foundation
 #warning("replace with RxViewModel")
 final class EntryFilterBuilderModel: ObservableObject {
     
-    @Published private(set) var state: EntryFilterBuilderState
+    @Published private(set) var state: State
     
     private let reduce: Reduce
     
     init(
-        initialState: EntryFilterBuilderState = EntryFilterBuilderState(),
+        initialState: State,
         reduce: @escaping Reduce
     ) {
         self.state = initialState
