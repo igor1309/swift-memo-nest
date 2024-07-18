@@ -41,7 +41,7 @@ extension EntryListEffectHandler {
     typealias Dispatch = (Event) -> Void
     
     typealias Event = EntryListEvent<Entry, Filter, Sort>
-    typealias Effect = EntryListEffect<Filter, Sort>
+    typealias Effect = EntryListEffect<Entry, Filter, Sort>
 }
 
 private extension EntryListEffectHandler {

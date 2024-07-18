@@ -23,13 +23,20 @@ struct Sort: Equatable {
 }
 
 typealias State = EntryListState<Entry, Filter, Sort>
-typealias Effect = EntryListEffect<Filter, Sort>
+typealias Effect = EntryListEffect<Entry, Filter, Sort>
+
+func makeEntry(
+    _ value: String = UUID().uuidString
+) -> Entry {
+    
+    return .init(value: value)
+}
 
 func makeEntries(
     count: Int = .random(in: 1...100)
 ) -> [Entry] {
     
-    (0..<count).map { _ in .init(value: UUID().uuidString) }
+    (0..<count).map { _ in makeEntry() }
 }
 
 func makeFilter(
@@ -40,11 +47,12 @@ func makeFilter(
 }
 
 func makePayload(
+    lastEntry: Entry? = nil,
     filter: Filter = makeFilter(),
     sort: Sort = makeSort()
 ) -> Effect.LoadPayload {
     
-    return .init(filter: filter, sort: sort)
+    return .init(lastEntry: lastEntry, filter: filter, sort: sort)
 }
 
 func makeSort(

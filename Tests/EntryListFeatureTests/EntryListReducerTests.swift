@@ -31,7 +31,7 @@ extension EntryListEvent {
 
 extension EntryListEvent: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
-enum EntryListEffect<Filter, Sort> {
+enum EntryListEffect<Entry, Filter, Sort> {
     
     case load(LoadPayload)
 }
@@ -40,21 +40,24 @@ extension EntryListEffect {
     
     struct LoadPayload {
         
+        let lastEntry: Entry?
         let filter: Filter
         let sort: Sort
         
         init(
+            lastEntry: Entry? = nil,
             filter: Filter,
             sort: Sort
         ) {
+            self.lastEntry = lastEntry
             self.filter = filter
             self.sort = sort
         }
     }
 }
 
-extension EntryListEffect.LoadPayload: Equatable where Filter: Equatable, Sort: Equatable {}
-extension EntryListEffect: Equatable where Filter: Equatable, Sort: Equatable {}
+extension EntryListEffect.LoadPayload: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
+extension EntryListEffect: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
 final class EntryListReducer<Entry, Filter, Sort>
 where Filter: Equatable,
@@ -93,7 +96,7 @@ extension EntryListReducer {
     
     typealias State = EntryListState<Entry, Filter, Sort>
     typealias Event = EntryListEvent<Entry, Filter, Sort>
-    typealias Effect = EntryListEffect<Filter, Sort>
+    typealias Effect = EntryListEffect<Entry, Filter, Sort>
 }
 
 private extension EntryListReducer {
@@ -105,7 +108,11 @@ private extension EntryListReducer {
         guard !state.isLoading else { return }
         
         state.isLoading = true
-        effect = .load(.init(filter: state.filter, sort: state.sort))
+        effect = .load(.init(
+            lastEntry: state.entries.last, 
+            filter: state.filter,
+            sort: state.sort
+        ))
     }
     
     func reduce(
@@ -151,7 +158,22 @@ final class EntryListReducerTests: XCTestCase {
         assert(.load, on: makeState(isLoading: true), effect: nil)
     }
     
-    func test_load_shouldSetIsLoadingToTrue() {
+    func test_load_shouldSetIsLoadingToTrueOnEmptyEntries() {
+        
+        assertState(.load, on: makeState(entries: [])) {
+            
+            $0.isLoading = true
+        }
+    }
+    
+    func test_load_shouldDeliverEffectWithNilLastEntryOnEmptyEntries() {
+        
+        let state = makeState(entries: [])
+        
+        assert(.load, on: state, effect: .load(.init(lastEntry: nil, filter: state.filter, sort: state.sort)))
+    }
+    
+    func test_load_shouldSetIsLoadingToTrueOnNonEmpty() {
         
         assertState(.load, on: makeState()) {
             
@@ -159,11 +181,13 @@ final class EntryListReducerTests: XCTestCase {
         }
     }
     
-    func test_load_shouldDeliverEffect() {
+    func test_load_shouldDeliverEffectWithLastEntryOnNonEmpty() {
         
-        let state = makeState()
+        let entries =  makeEntries(count: 5)
+        let last = makeEntry()
+        let state = makeState(entries: entries + [last])
         
-        assert(.load, on: state, effect: .load(.init(filter: state.filter, sort: state.sort)))
+        assert(.load, on: state, effect: .load(.init(lastEntry: last, filter: state.filter, sort: state.sort)))
     }
     
     // MARK: - loaded
