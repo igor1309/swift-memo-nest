@@ -18,7 +18,9 @@ struct EntryDetailView: View {
             linkView(link: entry.link)
             textView()
             tagsView(entry.tags)
+            datesView()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
     }
 }
@@ -78,7 +80,37 @@ private extension EntryDetailView {
     ) -> some View {
         
         entry.tagsString.map(Text.init)
-            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    func datesView(
+    ) -> some View {
+        
+        VStack(alignment: .leading, spacing: 6) {
+            
+            Text("Created: \(entry.creationDate.formatted())")
+            
+            if entry.modificationDate.isSignificantlyDifferent(from: entry.creationDate) {
+                
+                Text("Modified: \(entry.modificationDate.formatted())")
+            }
+        }
+        .foregroundStyle(.secondary)
+        .font(.caption)
+    }
+}
+
+private extension Date {
+    
+    func isSignificantlyDifferent(
+        from other: Date,
+        calendar: Calendar = .autoupdatingCurrent
+    ) -> Bool {
+        
+        let diffComponents = Calendar.current.dateComponents([.minute], from: other, to: self)
+        guard let minutes = diffComponents.minute
+        else { return false }
+        
+        return minutes > 1
     }
 }
 
@@ -118,8 +150,25 @@ private func entryDetailView(
     note: String = ""
 ) -> some View {
     
-    EntryDetailView(entry: .init(title: title, url: url, note: note, tags: []))
+    EntryDetailView(entry: .init(title, url, note: note))
         .border(.tertiary)
+}
+
+private extension Entry {
+    
+    init(
+        _ title: String,
+        _ url: URL?,
+        note: String = ""
+    ) {
+        self.init(
+            creationDate: .init().addingTimeInterval(-3_600),
+            modificationDate: .init(),
+            title: title,
+            url: url,
+            note: note
+        )
+    }
 }
 
 #Preview {
@@ -127,6 +176,7 @@ private func entryDetailView(
     VStack(alignment: .leading) {
         
         EntryDetailView(entry: .empty)
+            .border(.tertiary)
         entryDetailView(title: "", url: .init(string: "https://a.com"))
         entryDetailView(title: "Entry Title", url: .none)
         entryDetailView(title: "Entry Title", url: .init(string: "https://a.com"))

@@ -10,6 +10,8 @@ import Foundation
 extension Entry {
     
     static let preview: Self = .init(
+        creationDate: .init().addingTimeInterval(-3_600),
+        modificationDate: .init(),
         title: "Entry title",
         url: .init(string: "https://a.com"),
         note: .loremIpsum,

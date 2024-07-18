@@ -15,6 +15,8 @@ extension Array where Element == Entry {
         (0..<count).map { _ in
             
             return .init(
+                creationDate: .init(),
+                modificationDate: .init(),
                 title: "Title \(String(UUID().uuidString.prefix(6)))",
                 note: UUID().uuidString
             )

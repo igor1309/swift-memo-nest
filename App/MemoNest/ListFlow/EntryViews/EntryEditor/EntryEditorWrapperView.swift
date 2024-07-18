@@ -67,6 +67,8 @@ extension Binding where Value == Entry {
             set: {
                 self.wrappedValue = .init(
                     id: wrappedValue.id,
+                    creationDate: wrappedValue.creationDate,
+                    modificationDate: .init(),
                     title: $0.title,
                     url: $0.url,
                     note: $0.note,
@@ -82,6 +84,8 @@ extension Binding where Value == Entry {
 extension Entry {
     
     static let empty: Self = .init(
+        creationDate: .init(),
+        modificationDate: .init(),
         title: "",
         url: nil,
         note: "",
