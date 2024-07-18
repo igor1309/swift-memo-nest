@@ -25,7 +25,7 @@
 		2AA27D0F2C48198B0032FA1F /* ListFlowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF22C48198B0032FA1F /* ListFlowEffect.swift */; };
 		2AA27D102C48198B0032FA1F /* ListFlowEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF32C48198B0032FA1F /* ListFlowEffectHandler.swift */; };
 		2AA27D112C48198B0032FA1F /* ListFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF42C48198B0032FA1F /* ListFlowEvent.swift */; };
-		2AA27D122C48198B0032FA1F /* ListFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF52C48198B0032FA1F /* ListFlowFactory.swift */; };
+		2AA27D122C48198B0032FA1F /* ListFlowViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF52C48198B0032FA1F /* ListFlowViewFactory.swift */; };
 		2AA27D132C48198B0032FA1F /* ListFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF62C48198B0032FA1F /* ListFlowModel.swift */; };
 		2AA27D142C48198B0032FA1F /* ListFlowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF72C48198B0032FA1F /* ListFlowReducer.swift */; };
 		2AA27D152C48198B0032FA1F /* ListFlowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CF82C48198B0032FA1F /* ListFlowState.swift */; };
@@ -58,7 +58,7 @@
 		2AA27CF22C48198B0032FA1F /* ListFlowEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowEffect.swift; sourceTree = "<group>"; };
 		2AA27CF32C48198B0032FA1F /* ListFlowEffectHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowEffectHandler.swift; sourceTree = "<group>"; };
 		2AA27CF42C48198B0032FA1F /* ListFlowEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowEvent.swift; sourceTree = "<group>"; };
-		2AA27CF52C48198B0032FA1F /* ListFlowFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowFactory.swift; sourceTree = "<group>"; };
+		2AA27CF52C48198B0032FA1F /* ListFlowViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowViewFactory.swift; sourceTree = "<group>"; };
 		2AA27CF62C48198B0032FA1F /* ListFlowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowModel.swift; sourceTree = "<group>"; };
 		2AA27CF72C48198B0032FA1F /* ListFlowReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowReducer.swift; sourceTree = "<group>"; };
 		2AA27CF82C48198B0032FA1F /* ListFlowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowState.swift; sourceTree = "<group>"; };
@@ -187,14 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				2AA27CF12C48198B0032FA1F /* EntryViews */,
-				2AA27CF22C48198B0032FA1F /* ListFlowEffect.swift */,
-				2AA27CF32C48198B0032FA1F /* ListFlowEffectHandler.swift */,
-				2AA27CF42C48198B0032FA1F /* ListFlowEvent.swift */,
-				2AA27CF52C48198B0032FA1F /* ListFlowFactory.swift */,
-				2AA27CF62C48198B0032FA1F /* ListFlowModel.swift */,
-				2AA27CF72C48198B0032FA1F /* ListFlowReducer.swift */,
-				2AA27CF82C48198B0032FA1F /* ListFlowState.swift */,
-				2AA27CF92C48198B0032FA1F /* ListFlowView.swift */,
+				2AE934CC2C490864006501A4 /* Domain */,
+				2AE934CE2C4908C1006501A4 /* Logic */,
+				2AE934CD2C4908B2006501A4 /* UI */,
 			);
 			path = ListFlow;
 			sourceTree = "<group>";
@@ -215,16 +210,45 @@
 		2AA27D052C48198B0032FA1F /* MemoNest */ = {
 			isa = PBXGroup;
 			children = (
+				2AA27D042C48198B0032FA1F /* NoteNestApp.swift */,
+				2AA27D032C48198B0032FA1F /* ContentView.swift */,
 				2AA27CE62C48198B0032FA1F /* CompositionRoot */,
 				2AA27CE82C48198B0032FA1F /* Domain */,
-				2AA27CEA2C48198B0032FA1F /* Helpers */,
 				2AA27CFA2C48198B0032FA1F /* ListFlow */,
-				2AA27D012C48198B0032FA1F /* Preview Content */,
+				2AA27CEA2C48198B0032FA1F /* Helpers */,
 				2AA27D022C48198B0032FA1F /* Assets.xcassets */,
-				2AA27D032C48198B0032FA1F /* ContentView.swift */,
-				2AA27D042C48198B0032FA1F /* NoteNestApp.swift */,
+				2AA27D012C48198B0032FA1F /* Preview Content */,
 			);
 			path = MemoNest;
+			sourceTree = "<group>";
+		};
+		2AE934CC2C490864006501A4 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				2AA27CF22C48198B0032FA1F /* ListFlowEffect.swift */,
+				2AA27CF42C48198B0032FA1F /* ListFlowEvent.swift */,
+				2AA27CF82C48198B0032FA1F /* ListFlowState.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2AE934CD2C4908B2006501A4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2AA27CF52C48198B0032FA1F /* ListFlowViewFactory.swift */,
+				2AA27CF62C48198B0032FA1F /* ListFlowModel.swift */,
+				2AA27CF92C48198B0032FA1F /* ListFlowView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2AE934CE2C4908C1006501A4 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				2AA27CF32C48198B0032FA1F /* ListFlowEffectHandler.swift */,
+				2AA27CF72C48198B0032FA1F /* ListFlowReducer.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,7 +351,7 @@
 				2AA27D182C48198B0032FA1F /* Entry+preview.swift in Sources */,
 				2AA27D132C48198B0032FA1F /* ListFlowModel.swift in Sources */,
 				2AA27D0D2C48198B0032FA1F /* Entry+tagsString.swift in Sources */,
-				2AA27D122C48198B0032FA1F /* ListFlowFactory.swift in Sources */,
+				2AA27D122C48198B0032FA1F /* ListFlowViewFactory.swift in Sources */,
 				2AA27D172C48198B0032FA1F /* [Entry]+preview.swift in Sources */,
 				2AA27D102C48198B0032FA1F /* ListFlowEffectHandler.swift in Sources */,
 				2AA27D162C48198B0032FA1F /* ListFlowView.swift in Sources */,

@@ -46,7 +46,7 @@ extension ListFlowViewComposer {
         )
     }
     
-    func composeFactory() -> ListFlowFactory {
+    func composeFactory() -> ListFlowViewFactory {
         
         return .init()
     }

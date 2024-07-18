@@ -1,5 +1,5 @@
 //
-//  ListFlowFactory.swift
+//  ListFlowViewFactory.swift
 //  NoteNest
 //
 //  Created by Igor Malyarov on 16.07.2024.
@@ -8,9 +8,9 @@
 import EntryListFeature
 import SwiftUI
 
-final class ListFlowFactory {}
+final class ListFlowViewFactory {}
 
-extension ListFlowFactory {
+extension ListFlowViewFactory {
     
     func makeEntryListView(
         model: EntryListModel<Entry>,

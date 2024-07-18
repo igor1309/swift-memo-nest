@@ -14,11 +14,11 @@ struct ListFlowView: View {
     
     @StateObject private var model: ListFlowModel
     
-    private let factory: ListFlowFactory
+    private let factory: ListFlowViewFactory
     
     init(
         model: ListFlowModel,
-        factory: ListFlowFactory
+        factory: ListFlowViewFactory
     ) {
         self._model = .init(wrappedValue: model)
         self.factory = factory
