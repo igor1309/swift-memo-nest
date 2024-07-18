@@ -15,12 +15,14 @@ where Item: Identifiable {
 
 public extension InMemoryStore {
     
-    func retrieve() throws -> [Item] {
+    func retrieve(
+        predicate: (Item) -> Bool
+    ) throws -> [Item] {
         
         guard let items
         else { throw PreloadFailure() }
         
-        return items
+        return items.filter(predicate)
     }
     
     struct PreloadFailure: Error, Equatable {}
