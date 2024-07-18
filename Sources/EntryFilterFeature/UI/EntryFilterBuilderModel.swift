@@ -7,9 +7,9 @@
 
 import IMRx
 
-typealias EntryFilterBuilderModel = RxViewModel<EntryFilterBuilderState, EntryFilterBuilderEvent, EntryFilterBuilderEffect>
+public typealias EntryFilterBuilderModel = RxViewModel<EntryFilterBuilderState, EntryFilterBuilderEvent, EntryFilterBuilderEffect>
 
-enum EntryFilterBuilderEffect: Equatable {}
+public enum EntryFilterBuilderEffect: Equatable {}
 
 extension EntryFilterBuilderReducer {
     

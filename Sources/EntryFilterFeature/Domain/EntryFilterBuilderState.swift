@@ -8,16 +8,30 @@
 import Foundation
 
 
-struct EntryFilterBuilderState {
+public struct EntryFilterBuilderState {
     
-    var searchText: String = ""
-    var tags: String = ""
-    var startDate: Date = Date().addingTimeInterval(-7 * 86400)
-    var endDate: Date = Date()
-    var combination: FilterCombination = .and
+    public var searchText: String
+    public var tags: String
+    public var startDate: Date
+    public var endDate: Date
+    public var combination: FilterCombination
+    
+    public init(
+        searchText: String = "",
+        tags: String = "",
+        startDate: Date = .init().addingTimeInterval(-7 * 86400),
+        endDate: Date = .init(),
+        combination: FilterCombination = .and
+    ) {
+        self.searchText = searchText
+        self.tags = tags
+        self.startDate = startDate
+        self.endDate = endDate
+        self.combination = combination
+    }
 }
 
-extension EntryFilterBuilderState {
+public extension EntryFilterBuilderState {
     
     var filter: EntryFilter {
         

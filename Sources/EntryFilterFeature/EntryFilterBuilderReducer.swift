@@ -5,9 +5,12 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-final class EntryFilterBuilderReducer {}
+public final class EntryFilterBuilderReducer {
+    
+    public init() {}
+}
 
-extension EntryFilterBuilderReducer {
+public extension EntryFilterBuilderReducer {
     
     typealias State = EntryFilterBuilderState
     typealias Event = EntryFilterBuilderEvent

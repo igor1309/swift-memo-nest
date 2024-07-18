@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EntryFilterBuilderEvent {
+public enum EntryFilterBuilderEvent {
     
     case setSearchText(String)
     case setTags(String)

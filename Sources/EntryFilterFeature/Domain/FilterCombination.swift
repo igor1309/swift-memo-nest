@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-enum FilterCombination {
+public enum FilterCombination {
     
     case and, or
 }

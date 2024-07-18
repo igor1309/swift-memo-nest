@@ -7,11 +7,16 @@
 
 import SwiftUI
 
-struct EntryFilterBuilderView: View {
+public struct EntryFilterBuilderView: View {
     
-    @ObservedObject var model: EntryFilterBuilderModel
+    @StateObject var model: Model
     
-    var body: some View {
+    public init(model: Model) {
+        
+        self._model = .init(wrappedValue: model)
+    }
+    
+    public var body: some View {
         
         List {
             
@@ -32,6 +37,11 @@ struct EntryFilterBuilderView: View {
             .font(.footnote)
             .padding(.horizontal)
     }
+}
+
+public extension EntryFilterBuilderView {
+    
+    typealias Model = EntryFilterBuilderModel
 }
 
 private extension EntryFilterBuilderView {

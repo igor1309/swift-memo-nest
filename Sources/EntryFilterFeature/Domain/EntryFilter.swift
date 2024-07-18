@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct EntryFilter: Equatable {
+public struct EntryFilter: Equatable {
     
-    let searchText: String?
-    let tags: [String]?
-    let dateRange: DateInterval?
-    let combination: FilterCombination
+    public let searchText: String?
+    public let tags: [String]?
+    public let dateRange: DateInterval?
+    public let combination: FilterCombination
 
-    init(
+    public init(
         searchText: String? = nil,
         tags: [String]? = nil,
         dateRange: DateInterval? = nil,
