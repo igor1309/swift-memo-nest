@@ -33,6 +33,13 @@ public extension InMemoryStore {
         }
     }
     
+    func retrieve(byID id: Item.ID) throws -> Item? {
+        
+        guard let items else { throw PreloadFailure() }
+        
+        return items.first(matchingID: id)
+    }
+    
     struct PreloadFailure: Error, Equatable {}
 }
 
@@ -75,6 +82,11 @@ public extension InMemoryStore {
 }
 
 extension Array where Element: Identifiable {
+    
+    func first(matchingID id: Element.ID) -> Element? {
+        
+        return first(where: { $0.id == id })
+    }
     
     func firstIndex(matchingID id: Element.ID) -> Index? {
         
