@@ -66,6 +66,17 @@ final class InMemoryStoreTests: XCTestCase {
         XCTAssertNoDiff(retrieved, [a])
     }
     
+    func test_retrieve_shouldDeliverSortedItems() async throws {
+        
+        let (a, b) = (makeItem("a"), makeItem("b"))
+        let sut = makeSUT()
+        
+        await sut.cache([a, b])
+        let retrieved = try await retrieve(sut, areInIncreasingOrder: { $0.value > $1.value })
+        
+        XCTAssertNoDiff(retrieved, [b, a])
+    }
+    
     func test_retrieve_shouldDeliverNewCachedItems() async throws {
         
         let items = makeItems(count: 7)
@@ -210,11 +221,15 @@ final class InMemoryStoreTests: XCTestCase {
     
     private func retrieve(
         _ sut: SUT? = nil,
-        filter: (Item) -> Bool = { _ in true }
+        filter predicate: (Item) -> Bool = { _ in true },
+        areInIncreasingOrder: ((Item, Item) -> Bool)? = nil
     ) async throws -> [Item] {
         
         let sut = sut ?? makeSUT()
         
-        return try await sut.retrieve(predicate: filter)
+        return try await sut.retrieve(
+            predicate: predicate,
+            areInIncreasingOrder: areInIncreasingOrder
+        )
     }
 }

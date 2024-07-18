@@ -1,9 +1,11 @@
 //
 //  InMemoryStore.swift
-//  
+//
 //
 //  Created by Igor Malyarov on 18.07.2024.
 //
+
+import Foundation
 
 public actor InMemoryStore<Item>
 where Item: Identifiable {
@@ -16,13 +18,19 @@ where Item: Identifiable {
 public extension InMemoryStore {
     
     func retrieve(
-        predicate: (Item) -> Bool
+        predicate: (Item) -> Bool,
+        areInIncreasingOrder: ((Item, Item) -> Bool)? = nil
     ) throws -> [Item] {
         
-        guard let items
-        else { throw PreloadFailure() }
+        guard let items else { throw PreloadFailure() }
         
-        return items.filter(predicate)
+        let filtered = items.filter(predicate)
+        
+        if let areInIncreasingOrder {
+            return filtered.sorted(by: areInIncreasingOrder)
+        } else {
+            return filtered
+        }
     }
     
     struct PreloadFailure: Error, Equatable {}
@@ -32,8 +40,7 @@ public extension InMemoryStore {
     
     func cache(_ item: Item) throws {
         
-        guard var items
-        else { throw PreloadFailure() }
+        guard var items else { throw PreloadFailure() }
         
         if let index = items.firstIndex(matchingID: item.id) {
             items[index] = item
