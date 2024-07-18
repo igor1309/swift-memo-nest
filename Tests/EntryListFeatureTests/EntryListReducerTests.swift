@@ -150,7 +150,7 @@ final class EntryListReducerTests: XCTestCase {
     
     func test_load_shouldNotChangeStateOnIsLoading() {
         
-        assertState(.load, on: makeState(isLoading: true))
+        assert(makeState(isLoading: true), event: .load)
     }
     
     func test_load_shouldNotDeliverEffectOnIsLoading() {
@@ -160,7 +160,7 @@ final class EntryListReducerTests: XCTestCase {
     
     func test_load_shouldSetIsLoadingToTrueOnEmptyEntries() {
         
-        assertState(.load, on: makeState(entries: [])) {
+        assert(makeState(entries: []), event: .load) {
             
             $0.isLoading = true
         }
@@ -175,7 +175,7 @@ final class EntryListReducerTests: XCTestCase {
     
     func test_load_shouldSetIsLoadingToTrueOnNonEmpty() {
         
-        assertState(.load, on: makeState()) {
+        assert(makeState(), event: .load) {
             
             $0.isLoading = true
         }
@@ -196,7 +196,7 @@ final class EntryListReducerTests: XCTestCase {
         
         let state = makeState(entries: [], isLoading: true)
         
-        assertState(.loaded(.failure(.init())), on: state) {
+        assert(state, event: .loaded(.failure(.init()))) {
             
             $0.isLoading = false
         }
@@ -214,7 +214,7 @@ final class EntryListReducerTests: XCTestCase {
         let state = makeState(entries: [], isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(.success(loaded)), on: state) {
+        assert(state, event: .loaded(.success(loaded))) {
             
             $0.entries = loaded
             $0.isLoading = false
@@ -233,7 +233,7 @@ final class EntryListReducerTests: XCTestCase {
         let existing = makeEntries()
         let state = makeState(entries: existing, isLoading: true)
         
-        assertState(.loaded(.failure(.init())), on: state) {
+        assert(state, event: .loaded(.failure(.init()))) {
             
             $0.isLoading = false
         }
@@ -252,7 +252,7 @@ final class EntryListReducerTests: XCTestCase {
         let state = makeState(entries: existing, isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(.success(loaded)), on: state) {
+        assert(state, event: .loaded(.success(loaded))) {
             
             $0.entries = existing + loaded
             $0.isLoading = false
@@ -272,7 +272,7 @@ final class EntryListReducerTests: XCTestCase {
         
         let sort = makeSort()
         
-        assertState(.setSort(sort), on: makeState(sort: sort))
+        assert(makeState(sort: sort), event: .setSort(sort))
     }
     
     func test_setSort_shouldNotDeliverEffectOnSameSort() {
@@ -287,7 +287,7 @@ final class EntryListReducerTests: XCTestCase {
         let (oldSort, sort) = (makeSort(), makeSort())
         let state = makeState(sort: oldSort)
         
-        assertState(.setSort(sort), on: state) {
+        assert(state, event: .setSort(sort)) {
             
             XCTAssertFalse(state.entries.isEmpty)
             $0.entries = []
@@ -310,7 +310,7 @@ final class EntryListReducerTests: XCTestCase {
         
         let filter = makeFilter()
         
-        assertState(.setFilter(filter), on: makeState(filter: filter))
+        assert(makeState(filter: filter), event: .setFilter(filter))
     }
     
     func test_setFilter_shouldNotDeliverEffectOnSameFilter() {
@@ -325,7 +325,7 @@ final class EntryListReducerTests: XCTestCase {
         let (oldFilter, filter) = (makeFilter(), makeFilter())
         let state = makeState(filter: oldFilter)
         
-        assertState(.setFilter(filter), on: state) {
+        assert(state, event: .setFilter(filter)) {
             
             XCTAssertFalse(state.entries.isEmpty)
             $0.entries = []
@@ -348,42 +348,42 @@ final class EntryListReducerTests: XCTestCase {
         
         var state = makeState(entries: [])
         
-        state = assertState(.load, on: state) {
+        state = assert(state, event: .load) {
             
             $0.isLoading = true
         }
         
         let entries = makeEntries(count: 5)
-        state = assertState(.loaded(.success(entries)), on: state) {
+        state = assert(state, event: .loaded(.success(entries))) {
             
             $0.entries = entries
             $0.isLoading = false
         }
         
-        state = assertState(.load, on: state) {
+        state = assert(state, event: .load) {
             
             $0.isLoading = true
         }
         
         let entries2 = makeEntries(count: 7)
-        state = assertState(.loaded(.success(entries2)), on: state) {
+        state = assert(state, event: .loaded(.success(entries2))) {
             
             $0.entries = entries + entries2
             $0.isLoading = false
         }
         
-        state = assertState(.load, on: state) {
+        state = assert(state, event: .load) {
             
             $0.isLoading = true
         }
         
-        state = assertState(.loaded(.failure(.init())), on: state) {
+        state = assert(state, event: .loaded(.failure(.init()))) {
             
             $0.isLoading = false
         }
         
         let filter = makeFilter()
-        state = assertState(.setFilter(filter), on: state) {
+        state = assert(state, event: .setFilter(filter)) {
             
             $0.entries = []
             $0.filter = filter
@@ -391,14 +391,14 @@ final class EntryListReducerTests: XCTestCase {
         }
         
         let entries3 = makeEntries(count: 3)
-        state = assertState(.loaded(.success(entries3)), on: state) {
+        state = assert(state, event: .loaded(.success(entries3))) {
             
             $0.entries = entries3
             $0.isLoading = false
         }
         
         let sort = makeSort()
-        state = assertState(.setSort(sort), on: state) {
+        state = assert(state, event: .setSort(sort)) {
             
             $0.entries = []
             $0.sort = sort
@@ -406,7 +406,7 @@ final class EntryListReducerTests: XCTestCase {
         }
         
         let entries4 = makeEntries(count: 4)
-        state = assertState(.loaded(.success(entries4)), on: state) {
+        state = assert(state, event: .loaded(.success(entries4))) {
             
             $0.entries = entries4
             $0.isLoading = false
@@ -432,10 +432,10 @@ final class EntryListReducerTests: XCTestCase {
     private typealias UpdateStateToExpected<State> = (_ state: inout State) -> Void
     
     @discardableResult
-    private func assertState(
+    private func assert(
         sut: SUT? = nil,
-        _ event: SUT.Event,
-        on state: SUT.State,
+        _ state: SUT.State,
+        event: SUT.Event,
         updateStateToExpected: UpdateStateToExpected<SUT.State>? = nil,
         file: StaticString = #file,
         line: UInt = #line
