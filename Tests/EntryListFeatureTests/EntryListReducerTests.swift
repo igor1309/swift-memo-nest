@@ -262,9 +262,6 @@ final class EntryListReducerTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private typealias Entry = String
-    private typealias Filter = String
-    private typealias Sort = String
     private typealias SUT = EntryListReducer<Entry, Filter, Sort>
     
     private func makeSUT(
@@ -277,42 +274,6 @@ final class EntryListReducerTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return sut
-    }
-    
-    private func makeEntries(
-        count: Int = .random(in: 1...100)
-    ) -> [Entry] {
-        
-        (0..<count).map { _ in UUID().uuidString }
-    }
-    
-    private func makeFilter(
-        _ value: String = UUID().uuidString
-    ) -> Filter {
-        
-        return value
-    }
-    
-    private func makeSort(
-        _ value: String = UUID().uuidString
-    ) -> Sort {
-        
-        return value
-    }
-    
-    private func makeState(
-        entries: [Entry]? = nil,
-        filter: Filter? = nil,
-        sort: Sort? = nil,
-        isLoading: Bool = false
-    ) -> SUT.State {
-        
-        return .init(
-            entries: entries ?? makeEntries(),
-            filter: filter ?? makeFilter(),
-            sort: sort ?? makeSort(),
-            isLoading: isLoading
-        )
     }
     
     private typealias UpdateStateToExpected<State> = (_ state: inout State) -> Void
