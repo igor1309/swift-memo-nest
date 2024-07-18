@@ -13,6 +13,9 @@ final class EntryListEffectHandler<Entry, Filter, Sort> {
         
         self.load = load
     }
+}
+
+extension EntryListEffectHandler {
     
     typealias LoadPayload = (Filter, Sort)
     typealias LoadResult = Result<[Entry], Error>
@@ -48,7 +51,16 @@ private extension EntryListEffectHandler {
         _ sort: Sort,
         _ dispatch: @escaping Dispatch
     ) {
-        load((filter, sort)) { _ in }
+        load((filter, sort)) {
+            
+            switch $0 {
+            case .failure:
+                dispatch(.loaded(.failure(.init())))
+                
+            case let .success(entries):
+                dispatch(.loaded(.success(entries)))
+            }
+        }
     }
 }
 
@@ -76,6 +88,29 @@ final class EntryListEffectHandlerTests: XCTestCase {
         
         XCTAssertNoDiff(loadSpy.payloads.map(\.0), [filter])
         XCTAssertNoDiff(loadSpy.payloads.map(\.1), [sort])
+    }
+    
+    func test_load_shouldDeliverFailureOnLoadFailure() {
+        
+        let (filter, sort) = (makeFilter(), makeSort())
+        let (sut, loadSpy) = makeSUT()
+        
+        expect(sut, toDeliver: .loaded(.failure(.init())), for: .load(filter, sort)) {
+            
+            loadSpy.complete(with: .failure(anyError()))
+        }
+    }
+    
+    func test_load_shouldDeliverEntriesOnLoadSuccess() {
+        
+        let (filter, sort) = (makeFilter(), makeSort())
+        let entries = makeEntries()
+        let (sut, loadSpy) = makeSUT()
+        
+        expect(sut, toDeliver: .loaded(.success(entries)), for: .load(filter, sort)) {
+            
+            loadSpy.complete(with: .success(entries))
+        }
     }
     
     // MARK: - Helpers

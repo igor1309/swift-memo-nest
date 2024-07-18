@@ -18,9 +18,15 @@ extension EntryListState: Equatable where Entry: Equatable, Filter: Equatable, S
 enum EntryListEvent<Entry, Filter, Sort> {
     
     case load
-    case loaded([Entry])
+    case loaded(LoadResult)
     case setFilter(Filter)
     case setSort(Sort)
+}
+
+extension EntryListEvent {
+    
+    struct LoadFailure: Error, Equatable {}
+    typealias LoadResult = Result<[Entry], LoadFailure>
 }
 
 extension EntryListEvent: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
@@ -50,8 +56,8 @@ extension EntryListReducer {
         case .load:
             load(&state, &effect)
             
-        case let .loaded(newEntries):
-            state.entries += newEntries
+        case let .loaded(result):
+            state.entries += (try? result.get()) ?? []
             state.isLoading = false
             
         case let .setFilter(filter):
@@ -145,43 +151,78 @@ final class EntryListReducerTests: XCTestCase {
     
     // MARK: - loaded
     
-    func test_loaded_shouldSetEntriesToLoadedOnEmptyAndIsLoadingToFalse() {
+    func test_loaded_shouldNotChangeEntriesAndSetIsLoadingToFalseOnLoadFailure() {
+        
+        let state = makeState(entries: [], isLoading: true)
+        
+        assertState(.loaded(.failure(.init())), on: state) {
+            
+            $0.isLoading = false
+        }
+    }
+    
+    func test_loaded_shouldNotDeliverEffectOnEmptyStateOnLoadFailure() {
+    
+        let state = makeState(entries: [], isLoading: true)
+        
+        assert(.loaded(.failure(.init())), on: state, effect: nil)
+    }
+    
+    func test_loaded_shouldSetEntriesToLoadedOnEmptyAndIsLoadingToFalseOnLoadSuccess() {
         
         let state = makeState(entries: [], isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(loaded), on: state) {
+        assertState(.loaded(.success(loaded)), on: state) {
             
             $0.entries = loaded
             $0.isLoading = false
         }
     }
     
-    func test_loaded_shouldNotDeliverEffectOnEmpty() {
+    func test_loaded_shouldNotDeliverEffectOnEmptyStateOnLoadSuccess() {
     
         let state = makeState(entries: [], isLoading: true)
         
-        assert(.loaded(makeEntries()), on: state, effect: nil)
+        assert(.loaded(.success(makeEntries())), on: state, effect: nil)
     }
     
-    func test_loaded_shouldAppendEntriesToNonEmptyAndFlipIsLoadingToFalse() {
+    func test_loaded_shouldNotChangeNonEmptyAndSetFlipIsLoadingToFalseOnLoadFailure() {
+        
+        let existing = makeEntries()
+        let state = makeState(entries: existing, isLoading: true)
+        
+        assertState(.loaded(.failure(.init())), on: state) {
+            
+            $0.isLoading = false
+        }
+    }
+    
+    func test_loaded_shouldNotDeliverEffectOnNonEmptyOnLoadFailure() {
+        
+        let state = makeState(entries: makeEntries(), isLoading: true)
+        
+        assert(.loaded(.failure(.init())), on: state, effect: nil)
+    }
+    
+    func test_loaded_shouldAppendEntriesToNonEmptyAndFlipIsLoadingToFalseOnLoadSuccess() {
         
         let existing = makeEntries()
         let state = makeState(entries: existing, isLoading: true)
         let loaded = makeEntries()
         
-        assertState(.loaded(loaded), on: state) {
+        assertState(.loaded(.success(loaded)), on: state) {
             
             $0.entries = existing + loaded
             $0.isLoading = false
         }
     }
     
-    func test_loaded_shouldNotDeliverEffectOnNonEmpty() {
+    func test_loaded_shouldNotDeliverEffectOnNonEmptyOnLoadSuccess() {
         
         let state = makeState(entries: makeEntries(), isLoading: true)
         
-        assert(.loaded(makeEntries()), on: state, effect: nil)
+        assert(.loaded(.success(makeEntries())), on: state, effect: nil)
     }
     
     // MARK: - setSort
