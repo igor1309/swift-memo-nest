@@ -7,6 +7,7 @@
 
 import Foundation
 
+#warning("replace with RxViewModel")
 final class SortBuilderModel<T>: ObservableObject {
     
     @Published private(set) var state: SortBuilderState<T>
