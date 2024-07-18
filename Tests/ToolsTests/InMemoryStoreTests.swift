@@ -5,72 +5,7 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-actor InMemoryStore<Item>
-where Item: Identifiable {
-    
-    private var items: [Item]?
-}
-
-extension InMemoryStore {
-    
-    func retrieve() throws -> [Item] {
-        
-        guard let items
-        else { throw PreloadFailure() }
-        
-        return items
-    }
-    
-    struct PreloadFailure: Error, Equatable {}
-}
-
-extension InMemoryStore {
-    
-    func cache(_ item: Item) throws {
-        
-        guard var items
-        else { throw PreloadFailure() }
-        
-        if let index = items.firstIndex(matchingID: item.id) {
-            items[index] = item
-        } else {
-            items.append(item)
-        }
-        
-        self.items = items
-    }
-    
-    func cache(_ items: [Item]) {
-        
-        self.items = items
-    }
-}
-
-extension InMemoryStore {
-    
-    func remove(byID id: Item.ID) throws {
-        
-        guard var items
-        else { throw PreloadFailure() }
-        
-        items.removeAll { $0.id == id }
-        self.items = items
-    }
-    
-    func clear() {
-        
-        self.items = nil
-    }
-}
-
-extension Array where Element: Identifiable {
-    
-    func firstIndex(matchingID id: Element.ID) -> Index? {
-        
-        return firstIndex(where: { $0.id == id })
-    }
-}
-
+import Tools
 import XCTest
 
 final class InMemoryStoreTests: XCTestCase {
@@ -84,10 +19,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await retrieve()) {
             
-            XCTAssertNoDiff(
-                $0 as! InMemoryStoreTests.SUT.PreloadFailure,
-                SUT.PreloadFailure()
-            )
+            XCTAssertTrue($0 is SUT.PreloadFailure)
         }
     }
     
@@ -215,10 +147,8 @@ final class InMemoryStoreTests: XCTestCase {
         await sut.clear()
         
         await assertThrowsAsyncError(try await retrieve(sut)) {
-            XCTAssertNoDiff(
-                $0 as! InMemoryStoreTests.SUT.PreloadFailure,
-                SUT.PreloadFailure()
-            )
+            
+            XCTAssertTrue($0 is SUT.PreloadFailure)
         }
     }
     
