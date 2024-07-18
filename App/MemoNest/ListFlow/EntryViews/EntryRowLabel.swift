@@ -77,7 +77,7 @@ struct EntryRowLabel_Previews: PreviewProvider {
         
         List {
             EntryRowLabel(entry: .empty)
-            EntryRowLabel(entry: .preview)
+            EntryRowLabel(entry: .preview())
         }
         .listStyle(.plain)
     }

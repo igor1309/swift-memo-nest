@@ -187,6 +187,11 @@ private extension Entry {
 #if DEBUG
 #Preview {
     
-    EntryDetailView(entry: .preview)
+    EntryDetailView(entry: .preview(note: .loremIpsumShort))
+}
+
+#Preview {
+    
+    EntryDetailView(entry: .preview())
 }
 #endif

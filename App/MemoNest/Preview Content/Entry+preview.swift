@@ -9,17 +9,26 @@ import Foundation
 
 extension Entry {
     
-    static let preview: Self = .init(
-        creationDate: .init().addingTimeInterval(-3_600),
-        modificationDate: .init(),
-        title: "Entry title",
-        url: .init(string: "https://a.com"),
-        note: .loremIpsum,
-        tags: ["a", "bb", "cc"]
-    )
+    static func preview(
+        note: String = .loremIpsum
+    ) -> Self {
+        
+        return .init(
+            creationDate: .init().addingTimeInterval(-3_600),
+            modificationDate: .init(),
+            title: "Entry title",
+            url: .init(string: "https://a.com"),
+            note: note,
+            tags: ["a", "bb", "cc"]
+        )
+    }
 }
 
-private extension String {
+extension String {
+    
+    static let loremIpsumShort = """
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+"""
     
     static let loremIpsum = """
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
