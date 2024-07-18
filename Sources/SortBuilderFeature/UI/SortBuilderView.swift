@@ -1,87 +1,9 @@
 //
-//  SwiftUIView.swift
+//  SortBuilderView.swift
 //
 //
 //  Created by Igor Malyarov on 18.07.2024.
 //
-
-#if canImport(SwiftUI)
-import Foundation
-
-struct SortBuilderState<T> {
-    
-    var selectedComparators: [KeyPathComparator<T>] = []
-    var selectedKeyPath: String? = nil
-    var sortOrder: SortOrder = .forward
-    var showingAlert = false
-    let keyPaths: [String: PartialKeyPath<T>]
-}
-
-enum SortBuilderEvent {
-    
-    case addComparator
-    case deleteComparators(IndexSet)
-    case updateSelectedKeyPath(String?)
-    case updateSortOrder(SortOrder)
-}
-
-final class SortBuilderReducer<T> {
-    
-    func reduce(
-        state: inout SortBuilderState<T>,
-        event: SortBuilderEvent
-    ) {
-        switch event {
-        case .addComparator:
-            addComparator(state: &state)
-            
-        case let .deleteComparators(offsets):
-            state.selectedComparators.remove(atOffsets: offsets)
-            
-        case let .updateSelectedKeyPath(newValue):
-            state.selectedKeyPath = newValue
-            
-        case let .updateSortOrder(newValue):
-            state.sortOrder = newValue
-        }
-    }
-    
-    private func addComparator(state: inout SortBuilderState<T>) {
-        
-        if let key = state.selectedKeyPath, let keyPath = state.keyPaths[key] {
-            if state.selectedComparators.contains(where: { $0.keyPath == keyPath }) {
-                state.showingAlert = true
-            } else {
-                if let keyPath = keyPath as? KeyPath<T, String> {
-                    state.selectedComparators.append(.init(keyPath, order: state.sortOrder))
-                } else if let keyPath = keyPath as? KeyPath<T, Int> {
-                    state.selectedComparators.append(.init(keyPath, order: state.sortOrder))
-                }
-                // Add more types as needed
-            }
-        }
-    }
-}
-
-final class SortBuilderModel<T>: ObservableObject {
-    
-    @Published private(set) var state: SortBuilderState<T>
-    
-    private let reduce: (inout SortBuilderState<T>, SortBuilderEvent) -> Void
-    
-    init(
-        keyPaths: [String: PartialKeyPath<T>],
-        reduce: @escaping (inout SortBuilderState<T>, SortBuilderEvent) -> Void
-    ) {
-        self.reduce = reduce
-        self.state = .init(selectedKeyPath: keyPaths.keys.first, keyPaths: keyPaths)
-    }
-    
-    func event(_ event: SortBuilderEvent) {
-        
-        reduce(&state, event)
-    }
-}
 
 import SwiftUI
 
@@ -137,6 +59,7 @@ struct SortBuilderView<T>: View {
 #warning("replace alert API with one from UIPrimitives")
             Button("Add Comparator") { viewModel.event(.addComparator) }
                 .padding(.bottom)
+                .disabled(viewModel.state.selectedKeyPath == nil)
                 .alert(
                     isPresented: .init(
                         get: { viewModel.state.showingAlert },
@@ -174,8 +97,11 @@ struct SortBuilderView<T>: View {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
+#if DEBUG
+struct SortBuilderView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        
         let keyPaths: [String: PartialKeyPath<Item>] = [
             "Name": \Item.name,
             "Age": \Item.age
@@ -191,17 +117,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
-struct Sort<T> {
-    let comparators: [KeyPathComparator<T>]
-}
-
-// Example data model
 struct Item: Identifiable {
     let id = UUID()
     let name: String
