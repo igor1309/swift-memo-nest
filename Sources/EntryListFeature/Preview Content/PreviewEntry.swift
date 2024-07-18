@@ -10,13 +10,13 @@ import Foundation
 struct PreviewEntry: Equatable, Identifiable {
     
     let id: UUID
-    let text: String
+    let note: String
     
     init(
-        id: UUID,
-        text: String
+        id: UUID = .init(),
+        note: String
     ) {
         self.id = id
-        self.text = text
+        self.note = note
     }
 }

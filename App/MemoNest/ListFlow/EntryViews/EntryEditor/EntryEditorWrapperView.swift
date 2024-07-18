@@ -60,7 +60,7 @@ extension Binding where Value == Entry {
                 return .init(
                     title: wrappedValue.title,
                     url: wrappedValue.url,
-                    note: wrappedValue.text,
+                    note: wrappedValue.note,
                     tags: wrappedValue.tags
                 )
             },
@@ -69,7 +69,7 @@ extension Binding where Value == Entry {
                     id: wrappedValue.id,
                     title: $0.title,
                     url: $0.url,
-                    text: $0.note,
+                    note: $0.note,
                     tags: $0.tags
                 )
             }
@@ -84,7 +84,7 @@ extension Entry {
     static let empty: Self = .init(
         title: "",
         url: nil,
-        text: "",
+        note: "",
         tags: []
     )
 }

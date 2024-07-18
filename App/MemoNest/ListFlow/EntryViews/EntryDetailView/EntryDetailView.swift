@@ -63,9 +63,9 @@ private extension EntryDetailView {
     @ViewBuilder
     func textView() -> some View {
         
-        if !entry.text.isEmpty {
+        if !entry.note.isEmpty {
             
-            Text(entry.text)
+            Text(entry.note)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         } else {
@@ -115,10 +115,10 @@ private extension Entry {
 private func entryDetailView(
     title: String,
     url: URL?,
-    text: String = ""
+    note: String = ""
 ) -> some View {
     
-    EntryDetailView(entry: .init(title: title, url: url, text: text, tags: []))
+    EntryDetailView(entry: .init(title: title, url: url, note: note, tags: []))
         .border(.tertiary)
 }
 
@@ -130,7 +130,7 @@ private func entryDetailView(
         entryDetailView(title: "", url: .init(string: "https://a.com"))
         entryDetailView(title: "Entry Title", url: .none)
         entryDetailView(title: "Entry Title", url: .init(string: "https://a.com"))
-        entryDetailView(title: "", url: .none, text: "Lorem ipsum dolor sit amet")
+        entryDetailView(title: "", url: .none, note: "Lorem ipsum dolor sit amet")
     }
 }
 

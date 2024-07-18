@@ -60,7 +60,7 @@ private extension Array where Element == Entry {
             
             return .init(
                 title: "Title \(String(UUID().uuidString.prefix(6)))",
-                text: UUID().uuidString
+                note: UUID().uuidString
             )
         }
     }

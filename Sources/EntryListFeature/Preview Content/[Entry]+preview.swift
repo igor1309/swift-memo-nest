@@ -13,10 +13,7 @@ extension Array where Element == PreviewEntry {
         
         (0..<count).map { _ in
             
-            return .init(
-                id: UUID(),
-                text: UUID().uuidString
-            )
+            return .init(note: UUID().uuidString)
         }
     }
 }

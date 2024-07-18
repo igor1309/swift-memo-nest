@@ -116,7 +116,7 @@ private func entryListView(
             event: { print($0) }
         ) { entry in
             
-            Button(entry.text) { print(entry) }
+            Button(entry.note) { print(entry) }
                 .font(.subheadline)
         }
         .navigationTitle("Entries")

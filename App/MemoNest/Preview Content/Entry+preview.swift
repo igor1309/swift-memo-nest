@@ -12,7 +12,7 @@ extension Entry {
     static let preview: Self = .init(
         title: "Entry title",
         url: .init(string: "https://a.com"),
-        text: .loremIpsum,
+        note: .loremIpsum,
         tags: ["a", "bb", "cc"]
     )
 }

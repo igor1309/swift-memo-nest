@@ -50,9 +50,9 @@ private extension EntryRowLabel {
     @ViewBuilder
     func noteView() -> some View {
         
-        if !entry.text.isEmpty {
+        if !entry.note.isEmpty {
             
-            Text(entry.text)
+            Text(entry.note)
                 .lineLimit(3)
                 .font(.footnote)
                 .foregroundStyle(.secondary)

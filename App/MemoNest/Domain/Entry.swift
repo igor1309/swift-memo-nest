@@ -12,20 +12,20 @@ struct Entry: Equatable, Identifiable {
     let id: UUID
     let title: String
     let url: URL?
-    let text: String
+    let note: String
     let tags: [String]
     
     init(
         id: UUID = .init(),
         title: String,
         url: URL? = nil,
-        text: String,
+        note: String,
         tags: [String] = []
     ) {
         self.id = id
         self.title = title
         self.url = url
-        self.text = text
+        self.note = note
         self.tags = tags
     }
 }

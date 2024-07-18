@@ -33,7 +33,7 @@ extension ListFlowViewComposer {
         let reducer = ListFlowReducer(
             isValid: {
                 
-                !$0.text.isEmpty || !$0.tags.isEmpty || !$0.title.isEmpty || $0.url != nil
+                !$0.note.isEmpty || !$0.tags.isEmpty || !$0.title.isEmpty || $0.url != nil
             }
         )
         let effectHandler = ListFlowEffectHandler()

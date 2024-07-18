@@ -124,7 +124,7 @@ private extension Entry {
             id: .init(),
             title: entry.title,
             url: entry.url,
-            text: entry.note,
+            note: entry.note,
             tags: entry.tags
         )
     }
