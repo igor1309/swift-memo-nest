@@ -11,6 +11,7 @@ let package = Package(
     ],
     products: [
         .entryEditorFeature,
+        .entryFilterFeature,
         .entryListFeature,
         .sortBuilderFeature,
         .tools,
@@ -22,6 +23,8 @@ let package = Package(
     ],
     targets: [
         .entryEditorFeature,
+        .entryFilterFeature,
+        .entryFilterFeatureTests,
         .entryListFeature,
         .entryListFeatureTests,
         .sortBuilderFeature,
@@ -33,6 +36,13 @@ let package = Package(
 )
 
 private extension Product {
+    
+    static let entryFilterFeature = library(
+        name: .entryFilterFeature,
+        targets: [
+            .entryFilterFeature,
+        ]
+    )
     
     static let entryEditorFeature = library(
         name: .entryEditorFeature,
@@ -74,6 +84,21 @@ private extension Target {
     
     static let entryEditorFeature = target(
         name: .entryEditorFeature
+    )
+    
+    static let entryFilterFeature = target(
+        name: .entryFilterFeature,
+        dependencies: [
+            .uiPrimitives,
+            .imRx
+        ]
+    )
+    static let entryFilterFeatureTests = testTarget(
+        name: .entryFilterFeatureTests,
+        dependencies: [
+            .customDump,
+            .entryFilterFeature
+        ]
     )
     
     static let entryListFeature = target(
@@ -128,6 +153,8 @@ private extension Target.Dependency {
     
     static let entryEditorFeature: Self = byName(name: .entryListFeature)
     
+    static let entryFilterFeature: Self = byName(name: .entryFilterFeature)
+    
     static let entryListFeature: Self = byName(name: .entryListFeature)
     
     static let sortBuilderFeature: Self = byName(name: .sortBuilderFeature)
@@ -140,6 +167,9 @@ private extension Target.Dependency {
 private extension String {
     
     static let entryEditorFeature = "EntryEditorFeature"
+    
+    static let entryFilterFeature = "EntryFilterFeature"
+    static let entryFilterFeatureTests = "EntryFilterFeatureTests"
     
     static let entryListFeature = "EntryListFeature"
     static let entryListFeatureTests = "EntryListFeatureTests"

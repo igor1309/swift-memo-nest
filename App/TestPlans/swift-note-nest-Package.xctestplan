@@ -32,6 +32,13 @@
         "identifier" : "SortBuilderFeatureTests",
         "name" : "SortBuilderFeatureTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "EntryFilterFeatureTests",
+        "name" : "EntryFilterFeatureTests"
+      }
     }
   ],
   "version" : 1

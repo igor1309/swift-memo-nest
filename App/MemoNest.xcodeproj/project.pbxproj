@@ -47,6 +47,7 @@
 		2A33A3D32C4642C700CE3C96 /* MemoNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A33A3E42C4642F300CE3C96 /* swift-note-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-note-nest"; path = ..; sourceTree = "<group>"; };
 		2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryListFeature.xctestplan; path = TestPlans/EntryListFeature.xctestplan; sourceTree = "<group>"; };
+		2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryFilterFeature.xctestplan; path = TestPlans/EntryFilterFeature.xctestplan; sourceTree = "<group>"; };
 		2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListModelComposer.swift; sourceTree = "<group>"; };
 		2AA27CE52C48198B0032FA1F /* ListFlowViewComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFlowViewComposer.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 			children = (
 				2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */,
 				2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */,
+				2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */,
 				2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */,
 				2A0468692C494C0800C90DA7 /* SortBuilderFeature.xctestplan */,
 				2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */,
