@@ -22,7 +22,7 @@ public extension InMemoryStore {
         areInIncreasingOrder: ((Item, Item) -> Bool)? = nil
     ) throws -> [Item] {
         
-        guard let items else { throw PreloadFailure() }
+        guard let items else { throw UninitialisedCacheFailure() }
         
         let filtered = items.filter(predicate)
         
@@ -35,19 +35,19 @@ public extension InMemoryStore {
     
     func retrieve(byID id: Item.ID) throws -> Item? {
         
-        guard let items else { throw PreloadFailure() }
+        guard let items else { throw UninitialisedCacheFailure() }
         
         return items.first(matchingID: id)
     }
     
-    struct PreloadFailure: Error, Equatable {}
+    struct UninitialisedCacheFailure: Error, Equatable {}
 }
 
 public extension InMemoryStore {
     
     func cache(_ item: Item) throws {
         
-        guard var items else { throw PreloadFailure() }
+        guard var items else { throw UninitialisedCacheFailure() }
         
         if let index = items.firstIndex(matchingID: item.id) {
             items[index] = item
@@ -69,7 +69,7 @@ public extension InMemoryStore {
     func remove(byID id: Item.ID) throws {
         
         guard var items
-        else { throw PreloadFailure() }
+        else { throw UninitialisedCacheFailure() }
         
         items.removeAll { $0.id == id }
         self.items = items

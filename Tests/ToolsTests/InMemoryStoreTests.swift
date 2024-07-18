@@ -19,7 +19,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await retrieve()) {
             
-            XCTAssertTrue($0 is SUT.PreloadFailure)
+            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
         }
     }
     
@@ -95,7 +95,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await sut.retrieve(byID: makeItem().id)) {
             
-            XCTAssertTrue($0 is SUT.PreloadFailure)
+            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
         }
     }
     
@@ -128,7 +128,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await sut.cache(item)) {
             
-            XCTAssertTrue($0 is SUT.PreloadFailure)
+            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
         }
     }
     
@@ -196,7 +196,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await sut.remove(byID: makeItem().id)) {
             
-            XCTAssertTrue($0 is SUT.PreloadFailure)
+            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
         }
     }
     
@@ -223,7 +223,7 @@ final class InMemoryStoreTests: XCTestCase {
         
         await assertThrowsAsyncError(try await retrieve(sut)) {
             
-            XCTAssertTrue($0 is SUT.PreloadFailure)
+            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
         }
     }
     
