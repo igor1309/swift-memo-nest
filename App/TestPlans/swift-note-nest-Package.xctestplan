@@ -39,6 +39,13 @@
         "identifier" : "EntryFilterFeatureTests",
         "name" : "EntryFilterFeatureTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CacheInfraTests",
+        "name" : "CacheInfraTests"
+      }
     }
   ],
   "version" : 1

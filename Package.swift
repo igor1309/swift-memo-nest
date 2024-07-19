@@ -10,6 +10,7 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
+        .cacheInfra,
         .entryEditorFeature,
         .entryFilterFeature,
         .entryListFeature,
@@ -22,6 +23,8 @@ let package = Package(
         .imRx
     ],
     targets: [
+        .cacheInfra,
+        .cacheInfraTests,
         .entryEditorFeature,
         .entryFilterFeature,
         .entryFilterFeatureTests,
@@ -36,6 +39,13 @@ let package = Package(
 )
 
 private extension Product {
+    
+    static let cacheInfra = library(
+        name: .cacheInfra,
+        targets: [
+            .cacheInfra,
+        ]
+    )
     
     static let entryFilterFeature = library(
         name: .entryFilterFeature,
@@ -81,6 +91,21 @@ private extension Product {
 }
 
 private extension Target {
+    
+    static let cacheInfra = target(
+        name: .cacheInfra,
+        dependencies: [
+            .uiPrimitives,
+            .imRx
+        ]
+    )
+    static let cacheInfraTests = testTarget(
+        name: .cacheInfraTests,
+        dependencies: [
+            .customDump,
+            .cacheInfra
+        ]
+    )
     
     static let entryEditorFeature = target(
         name: .entryEditorFeature
@@ -151,6 +176,8 @@ private extension Target {
 
 private extension Target.Dependency {
     
+    static let cacheInfra: Self = byName(name: .cacheInfra)
+    
     static let entryEditorFeature: Self = byName(name: .entryListFeature)
     
     static let entryFilterFeature: Self = byName(name: .entryFilterFeature)
@@ -165,6 +192,9 @@ private extension Target.Dependency {
 }
 
 private extension String {
+    
+    static let cacheInfra = "CacheInfra"
+    static let cacheInfraTests = "CacheInfraTests"
     
     static let entryEditorFeature = "EntryEditorFeature"
     

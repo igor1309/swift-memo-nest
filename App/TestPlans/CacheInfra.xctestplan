@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "020033BD-AEC2-4421-B996-8804F63BC687",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CacheInfraTests",
+        "name" : "CacheInfraTests"
+      }
+    }
+  ],
+  "version" : 1
+}
