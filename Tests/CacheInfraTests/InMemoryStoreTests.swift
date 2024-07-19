@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 18.07.2024.
 //
 
-import Tools
+import CacheInfra
 import XCTest
 
 final class InMemoryStoreTests: XCTestCase {
