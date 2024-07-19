@@ -15,7 +15,7 @@ public final class FallbackCacheLoader<Payload, Success, Failure: Error> {
     /// - Parameters:
     ///   - primaryLoader: The primary loader.
     ///   - secondaryLoader: The secondary loader.
-    ///   - cache: A closure to update the in-memory store with the loaded data.
+    ///   - cache: A closure to update the store with the data loaded with secondary loader.
     public init(
         primaryLoader: any PrimaryLoader,
         secondaryLoader: any SecondaryLoader,
