@@ -39,7 +39,23 @@
 		2AA27D1D2C48198B0032FA1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AA27D022C48198B0032FA1F /* Assets.xcassets */; };
 		2AA27D1E2C48198B0032FA1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27D032C48198B0032FA1F /* ContentView.swift */; };
 		2AA27D1F2C48198B0032FA1F /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27D042C48198B0032FA1F /* NoteNestApp.swift */; };
+		2AA86A152C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */; };
+		2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */; };
+		2AA86A1C2C4A71CA009BC197 /* CacheInfra in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1B2C4A71CA009BC197 /* CacheInfra */; };
+		2AA86A1E2C4A71CA009BC197 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */; };
+		2AA86A202C4A71CA009BC197 /* SortBuilderFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */; };
+		2AA86A222C4A71CA009BC197 /* Tools in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A212C4A71CA009BC197 /* Tools */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2AA86A0F2C4A709E009BC197 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A33A3CB2C4642C700CE3C96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A33A3D22C4642C700CE3C96;
+			remoteInfo = MemoNest;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2A0468692C494C0800C90DA7 /* SortBuilderFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = SortBuilderFeature.xctestplan; path = TestPlans/SortBuilderFeature.xctestplan; sourceTree = "<group>"; };
@@ -75,6 +91,9 @@
 		2AA27D032C48198B0032FA1F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2AA27D042C48198B0032FA1F /* NoteNestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
 		2AA86A062C4A5135009BC197 /* CacheInfra.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CacheInfra.xctestplan; path = TestPlans/CacheInfra.xctestplan; sourceTree = "<group>"; };
+		2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoNestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoaderIntegrationTests.swift; sourceTree = "<group>"; };
+		2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tools.xctestplan; path = TestPlans/Tools.xctestplan; sourceTree = "<group>"; };
 		2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MemoNest.xctestplan; path = TestPlans/MemoNest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,12 +103,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AA86A1C2C4A71CA009BC197 /* CacheInfra in Frameworks */,
 				2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */,
 				2A2415CC2C4782C10099B836 /* EntryEditorFeature in Frameworks */,
 				2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */,
 				2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */,
 				2A0CC5352C46A58400B34E91 /* EntryListFeature in Frameworks */,
+				2AA86A222C4A71CA009BC197 /* Tools in Frameworks */,
+				2AA86A1E2C4A71CA009BC197 /* EntryFilterFeature in Frameworks */,
 				2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */,
+				2AA86A202C4A71CA009BC197 /* SortBuilderFeature in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AA86A082C4A709E009BC197 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +139,7 @@
 				2A36E5AF2C468E670015BA96 /* TestPlans */,
 				2A33A3E42C4642F300CE3C96 /* swift-note-nest */,
 				2AA27D052C48198B0032FA1F /* MemoNest */,
+				2AA86A0C2C4A709E009BC197 /* MemoNestTests */,
 				2A33A3D42C4642C700CE3C96 /* Products */,
 				2A324D8A2C464913008E7EB6 /* Frameworks */,
 			);
@@ -118,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				2A33A3D32C4642C700CE3C96 /* MemoNest.app */,
+				2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,6 +260,23 @@
 			path = MemoNest;
 			sourceTree = "<group>";
 		};
+		2AA86A0C2C4A709E009BC197 /* MemoNestTests */ = {
+			isa = PBXGroup;
+			children = (
+				2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */,
+				2AA86A162C4A712C009BC197 /* Helpers */,
+			);
+			path = MemoNestTests;
+			sourceTree = "<group>";
+		};
+		2AA86A162C4A712C009BC197 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		2AE934CC2C490864006501A4 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,10 +329,32 @@
 				2A324DB42C465EFF008E7EB6 /* CombineSchedulers */,
 				2A0CC5342C46A58400B34E91 /* EntryListFeature */,
 				2A2415CB2C4782C10099B836 /* EntryEditorFeature */,
+				2AA86A1B2C4A71CA009BC197 /* CacheInfra */,
+				2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */,
+				2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */,
+				2AA86A212C4A71CA009BC197 /* Tools */,
 			);
 			productName = NoteNest;
 			productReference = 2A33A3D32C4642C700CE3C96 /* MemoNest.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2AA86A0A2C4A709E009BC197 /* MemoNestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AA86A112C4A709E009BC197 /* Build configuration list for PBXNativeTarget "MemoNestTests" */;
+			buildPhases = (
+				2AA86A072C4A709E009BC197 /* Sources */,
+				2AA86A082C4A709E009BC197 /* Frameworks */,
+				2AA86A092C4A709E009BC197 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2AA86A102C4A709E009BC197 /* PBXTargetDependency */,
+			);
+			name = MemoNestTests;
+			productName = MemoNestTests;
+			productReference = 2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -297,6 +368,11 @@
 				TargetAttributes = {
 					2A33A3D22C4642C700CE3C96 = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					2AA86A0A2C4A709E009BC197 = {
+						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
+						TestTargetID = 2A33A3D22C4642C700CE3C96;
 					};
 				};
 			};
@@ -318,6 +394,7 @@
 			projectRoot = "";
 			targets = (
 				2A33A3D22C4642C700CE3C96 /* MemoNest */,
+				2AA86A0A2C4A709E009BC197 /* MemoNestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -329,6 +406,13 @@
 			files = (
 				2AA27D1C2C48198B0032FA1F /* Preview Assets.xcassets in Resources */,
 				2AA27D1D2C48198B0032FA1F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AA86A092C4A709E009BC197 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +450,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2AA86A072C4A709E009BC197 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AA86A152C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift in Sources */,
+				2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2AA86A102C4A709E009BC197 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A33A3D22C4642C700CE3C96 /* MemoNest */;
+			targetProxy = 2AA86A0F2C4A709E009BC197 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2A33A3DF2C4642C900CE3C96 /* Debug */ = {
@@ -548,6 +649,45 @@
 			};
 			name = Release;
 		};
+		2AA86A122C4A709E009BC197 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VRVJ9YNRQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.igor1309.MemoNestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoNest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MemoNest";
+			};
+			name = Debug;
+		};
+		2AA86A132C4A709E009BC197 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VRVJ9YNRQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.igor1309.MemoNestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoNest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MemoNest";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -565,6 +705,15 @@
 			buildConfigurations = (
 				2A33A3E22C4642C900CE3C96 /* Debug */,
 				2A33A3E32C4642C900CE3C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AA86A112C4A709E009BC197 /* Build configuration list for PBXNativeTarget "MemoNestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AA86A122C4A709E009BC197 /* Debug */,
+				2AA86A132C4A709E009BC197 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -617,6 +766,22 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2A324DB32C465EFF008E7EB6 /* XCRemoteSwiftPackageReference "combine-schedulers" */;
 			productName = CombineSchedulers;
+		};
+		2AA86A1B2C4A71CA009BC197 /* CacheInfra */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CacheInfra;
+		};
+		2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EntryFilterFeature;
+		};
+		2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SortBuilderFeature;
+		};
+		2AA86A212C4A71CA009BC197 /* Tools */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Tools;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

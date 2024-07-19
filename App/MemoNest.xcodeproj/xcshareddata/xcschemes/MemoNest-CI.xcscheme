@@ -34,6 +34,19 @@
             default = "YES">
          </TestPlanReference>
       </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2AA86A0A2C4A709E009BC197"
+               BuildableName = "MemoNestTests.xctest"
+               BlueprintName = "MemoNestTests"
+               ReferencedContainer = "container:MemoNest.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Release"
