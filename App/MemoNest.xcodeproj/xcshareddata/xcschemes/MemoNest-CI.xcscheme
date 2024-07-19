@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:TestPlans/MemoNest.xctestplan"
+            reference = "container:TestPlans/MemoNest-CI.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

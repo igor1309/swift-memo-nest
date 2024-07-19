@@ -1,0 +1,59 @@
+{
+  "configurations" : [
+    {
+      "id" : "090729ED-FB86-400B-B2DB-4B2F10CDB55E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:MemoNest.xcodeproj",
+        "identifier" : "2AA86A0A2C4A709E009BC197",
+        "name" : "MemoNestTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "CacheInfraTests",
+        "name" : "CacheInfraTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "EntryFilterFeatureTests",
+        "name" : "EntryFilterFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "EntryListFeatureTests",
+        "name" : "EntryListFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "SortBuilderFeatureTests",
+        "name" : "SortBuilderFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "ToolsTests",
+        "name" : "ToolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

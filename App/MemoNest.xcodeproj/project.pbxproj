@@ -94,6 +94,7 @@
 		2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoNestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoaderIntegrationTests.swift; sourceTree = "<group>"; };
 		2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		2AA86A242C4A74BC009BC197 /* MemoNest-CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "MemoNest-CI.xctestplan"; path = "TestPlans/MemoNest-CI.xctestplan"; sourceTree = "<group>"; };
 		2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tools.xctestplan; path = TestPlans/Tools.xctestplan; sourceTree = "<group>"; };
 		2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MemoNest.xctestplan; path = TestPlans/MemoNest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */,
+				2AA86A242C4A74BC009BC197 /* MemoNest-CI.xctestplan */,
 				2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */,
 				2AA86A062C4A5135009BC197 /* CacheInfra.xctestplan */,
 				2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */,
@@ -263,7 +265,7 @@
 		2AA86A0C2C4A709E009BC197 /* MemoNestTests */ = {
 			isa = PBXGroup;
 			children = (
-				2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */,
+				2AA86A232C4A7299009BC197 /* IntegrationTests */,
 				2AA86A162C4A712C009BC197 /* Helpers */,
 			);
 			path = MemoNestTests;
@@ -275,6 +277,14 @@
 				2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2AA86A232C4A7299009BC197 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		2AE934CC2C490864006501A4 /* Domain */ = {

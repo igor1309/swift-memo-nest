@@ -19,37 +19,9 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:..",
-        "identifier" : "EntryListFeatureTests",
-        "name" : "EntryListFeatureTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:..",
-        "identifier" : "ToolsTests",
-        "name" : "ToolsTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "CacheInfraTests",
-        "name" : "CacheInfraTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "EntryFilterFeatureTests",
-        "name" : "EntryFilterFeatureTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "SortBuilderFeatureTests",
-        "name" : "SortBuilderFeatureTests"
+        "containerPath" : "container:MemoNest.xcodeproj",
+        "identifier" : "2AA86A0A2C4A709E009BC197",
+        "name" : "MemoNestTests"
       }
     }
   ],
