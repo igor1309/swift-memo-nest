@@ -31,13 +31,13 @@ struct Payload: Equatable, Filtering, Sorting{
     
     func predicate(_ entry: Entry) -> Bool {
         
-        #warning("use Predicate/Filter from module")
+#warning("use Predicate/Filter from module")
         return true
     }
     
     func areInIncreasingOrder(_ lhs: Entry, _ rhs: Entry) -> Bool {
         
-        #warning("use Sort from module")
+#warning("use Sort from module")
         return true
     }
 }
@@ -62,31 +62,50 @@ extension InMemoryStore {
         payload: Payload
     ) throws -> [Item] where Payload: Filtering<Item> & Sorting<Item> {
         
-        #warning("restore `areInIncreasingOrder` line")
+#warning("restore `areInIncreasingOrder` line")
         return try retrieve(
             predicate: payload.predicate(_:),
-             areInIncreasingOrder: nil
+            areInIncreasingOrder: nil
             // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
         )
     }
 }
 
+protocol Store<Item> {
+    
+    associatedtype Item
+    
+    func retrieve() throws -> [Item]
+    func insert(_: [Item]) throws
+    func delete() throws
+}
+
+extension CodableEntryStore: Store {}
+
+import Foundation
+
 final class EntryLoaderComposer {
     
-    private let storeURL: URL
+    #warning("now with `protocol Store<Item>` name `InMemoryStore` looks not good - it does not fit, maybe rename to InMemoryCache?")
+    private let inMemoryStore: InMemoryStore<Entry>
+    private let persistentStore: any Store<Entry>
     
-    init(storeURL: URL) {
-        
-        self.storeURL = storeURL
+    init(
+        inMemoryStore: InMemoryStore<Entry>, 
+        persistentStore: any Store<Entry>
+    ) {
+        self.inMemoryStore = inMemoryStore
+        self.persistentStore = persistentStore
     }
 }
 
 extension EntryLoaderComposer {
     
-    func compose() -> any Loader {
-        
-        let inMemoryStore = InMemoryStore<Entry>()
-        let persistentStore = CodableEntryStore(storeURL: storeURL)
+    typealias LoadResult = Result<[Entry], Error>
+    typealias LoadCompletion = (LoadResult) -> Void
+    typealias Load = (Payload, @escaping LoadCompletion) -> Void
+    
+    func composeLoad() -> Load {
         
         let loader = FallbackCacheLoader<Payload, [Entry], Error>(
             primaryLoad: { payload, completion in
@@ -94,7 +113,7 @@ extension EntryLoaderComposer {
                 Task {
                     
                     do {
-                        let items = try await inMemoryStore.retrieve(payload: payload)
+                        let items = try await self.inMemoryStore.retrieve(payload: payload)
                         completion(.success(items))
                     } catch {
                         completion(.failure(error))
@@ -102,22 +121,22 @@ extension EntryLoaderComposer {
                 }
             },
             secondaryLoad: { _, completion in
-            
+                
                 DispatchQueue.global(qos: .userInitiated).async {
-                 
-                    completion(.init { try persistentStore.retrieve() })
+                    
+                    completion(.init { try self.persistentStore.retrieve() })
                 }
             },
             cache: { _, entries in
                 
-                DispatchQueue.global(qos: .background).async {
+                Task {
                     
-                    try? persistentStore.insert(entries)
+                    await self.inMemoryStore.cache(entries)
                 }
             }
         )
         
-        return loader
+        return loader.load(_:_:)
     }
 }
 
@@ -141,22 +160,45 @@ final class EntryLoaderComposerTests: XCTestCase {
         _ = makeSUT()
     }
     
+    func test_load_shouldDeliverFailureOnUnloadedStore() {
+        
+        assert(with: anyPayload(), toDeliver: .failure(anyError()))
+    }
+    
     // MARK: - Helpers
     
     private typealias Composer = EntryLoaderComposer
-    private typealias SUT = any Loader
+    private typealias Load = Composer.Load
     
+    private typealias InMemoryEntryStore = InMemoryStore<Entry>
+    private typealias PersistentStore = CodableEntryStore
+
     private func makeSUT(
         storeURL: URL? = nil,
         file: StaticString = #file,
         line: UInt = #line
-    ) -> SUT {
+    ) -> (
+        load: Load,
+        inMemory: InMemoryEntryStore,
+        persistent: PersistentStore
+    ) {
+        let inMemory = InMemoryEntryStore()
+        let persistent = PersistentStore(storeURL: storeURL ?? testStoreURL())
         
-        let composer = Composer(storeURL: storeURL ?? testStoreURL())
+        let composer = Composer(inMemoryStore: inMemory, persistentStore: persistent)
         
         trackForMemoryLeaks(composer, file: file, line: line)
+        trackForMemoryLeaks(inMemory, file: file, line: line)
+        trackForMemoryLeaks(persistent, file: file, line: line)
         
-        return composer.compose()
+        return (composer.composeLoad(), inMemory, persistent)
+    }
+    
+    private func anyPayload(
+        lastID: Entry.ID? = nil
+    ) -> Payload {
+        
+        return .init(lastID: lastID)
     }
     
     private func setupEmptyStoreState() {
@@ -185,5 +227,35 @@ final class EntryLoaderComposerTests: XCTestCase {
         return FileManager.default
             .urls(for: .cachesDirectory, in: .userDomainMask)
             .first!
+    }
+    
+    private func assert(
+        load: Load? = nil,
+        with payload: Payload,
+        toDeliver expectedResult: Composer.LoadResult,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        let load = load ?? makeSUT(file: file, line: line).load
+        
+        let exp = expectation(description: "wait for completion")
+        
+        load(.init(lastID: nil)) {
+            
+            switch ($0, expectedResult) {
+            case (.failure, .failure):
+                break
+                
+            case let (.success(receivedEntries), .success(expectedEntries)):
+                XCTAssertNoDiff(receivedEntries, expectedEntries, file: file, line: line)
+                
+            default:
+                XCTFail("Expected \(expectedResult), but got \($0) instead.", file: file, line: line)
+            }
+            
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 0.1)
     }
 }

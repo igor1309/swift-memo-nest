@@ -45,6 +45,9 @@
 		2AA86A1E2C4A71CA009BC197 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */; };
 		2AA86A202C4A71CA009BC197 /* SortBuilderFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */; };
 		2AA86A222C4A71CA009BC197 /* Tools in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A212C4A71CA009BC197 /* Tools */; };
+		2AA86A262C4AB575009BC197 /* anyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A252C4AB575009BC197 /* anyError.swift */; };
+		2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */; };
+		2AA86A2C2C4AB652009BC197 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A2B2C4AB652009BC197 /* CustomDump */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,8 @@
 		2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoaderIntegrationTests.swift; sourceTree = "<group>"; };
 		2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		2AA86A242C4A74BC009BC197 /* MemoNest-CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "MemoNest-CI.xctestplan"; path = "TestPlans/MemoNest-CI.xctestplan"; sourceTree = "<group>"; };
+		2AA86A252C4AB575009BC197 /* anyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyError.swift; sourceTree = "<group>"; };
+		2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTAssertNoDiff.swift; sourceTree = "<group>"; };
 		2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tools.xctestplan; path = TestPlans/Tools.xctestplan; sourceTree = "<group>"; };
 		2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MemoNest.xctestplan; path = TestPlans/MemoNest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AA86A2C2C4AB652009BC197 /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,7 @@
 		2AA86A0C2C4A709E009BC197 /* MemoNestTests */ = {
 			isa = PBXGroup;
 			children = (
+				2AA86A272C4AB62B009BC197 /* ThirdPartyDependencies */,
 				2AA86A232C4A7299009BC197 /* IntegrationTests */,
 				2AA86A162C4A712C009BC197 /* Helpers */,
 			);
@@ -275,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */,
+				2AA86A252C4AB575009BC197 /* anyError.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -285,6 +293,14 @@
 				2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */,
 			);
 			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		2AA86A272C4AB62B009BC197 /* ThirdPartyDependencies */ = {
+			isa = PBXGroup;
+			children = (
+				2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */,
+			);
+			path = ThirdPartyDependencies;
 			sourceTree = "<group>";
 		};
 		2AE934CC2C490864006501A4 /* Domain */ = {
@@ -362,6 +378,9 @@
 				2AA86A102C4A709E009BC197 /* PBXTargetDependency */,
 			);
 			name = MemoNestTests;
+			packageProductDependencies = (
+				2AA86A2B2C4AB652009BC197 /* CustomDump */,
+			);
 			productName = MemoNestTests;
 			productReference = 2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -398,6 +417,7 @@
 			packageReferences = (
 				2A324D912C464B7E008E7EB6 /* XCRemoteSwiftPackageReference "swift-imrx" */,
 				2A324DB32C465EFF008E7EB6 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
+				2AA86A2A2C4AB652009BC197 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 			);
 			productRefGroup = 2A33A3D42C4642C700CE3C96 /* Products */;
 			projectDirPath = "";
@@ -466,6 +486,8 @@
 			files = (
 				2AA86A152C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift in Sources */,
 				2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				2AA86A262C4AB575009BC197 /* anyError.swift in Sources */,
+				2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +769,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		2AA86A2A2C4AB652009BC197 /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -792,6 +822,11 @@
 		2AA86A212C4A71CA009BC197 /* Tools */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Tools;
+		};
+		2AA86A2B2C4AB652009BC197 /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AA86A2A2C4AB652009BC197 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
