@@ -29,7 +29,7 @@ public extension InMemoryStore {
     /// - Returns: An array of items that match the predicate, optionally sorted by the given closure.
     func retrieve(
         predicate: (Item) -> Bool,
-        areInIncreasingOrder: ((Item, Item) -> Bool)? = nil
+        areInIncreasingOrder: ((Item, Item) -> Bool)?
     ) throws -> [Item] {
         
         guard let items else { throw UninitialisedCacheFailure() }
