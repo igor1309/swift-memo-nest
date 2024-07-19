@@ -13,31 +13,35 @@ public final class FallbackCacheLoader<Payload, Success, Failure: Error> {
     
     /// Initialises a new instance of `FallbackCacheLoader`.
     /// - Parameters:
-    ///   - inMemoryLoader: The loader for the in-memory store.
-    ///   - persistentLoader: The loader for the persistent store.
-    ///   - updateInMemoryStore: A closure to update the in-memory store with the loaded data.
+    ///   - primaryLoader: The primary loader.
+    ///   - secondaryLoader: The secondary loader.
+    ///   - cache: A closure to update the in-memory store with the loaded data.
     public init(
-        inMemoryLoader: any Loader<Payload, Success, Error>,
-        persistentLoader: any Loader<Payload, Success, Failure>,
-        updateInMemoryStore: @escaping (Payload, Success) -> Void
+        primaryLoader: any PrimaryLoader,
+        secondaryLoader: any SecondaryLoader,
+        cache: @escaping Cache
     ) {
         let decoratedPersistentLoader = LoaderDecorator(
-            decoratee: persistentLoader,
+            decoratee: secondaryLoader,
             decorate: { payload, result, completion in
                 
                 if case let .success(success) = result {
                     
-                    updateInMemoryStore(payload, success)
+                    cache(payload, success)
                 }
                 completion()
             }
         )
         
         self.loader = StrategyLoader(
-            primary: inMemoryLoader,
+            primary: primaryLoader,
             secondary: decoratedPersistentLoader
         )
     }
+    
+    public typealias PrimaryLoader = Loader<Payload, Success, Error>
+    public typealias SecondaryLoader = Loader<Payload, Success, Failure>
+    public typealias Cache = (Payload, Success) -> Void
 }
 
 extension FallbackCacheLoader: Loader {

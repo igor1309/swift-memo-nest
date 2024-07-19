@@ -12,95 +12,95 @@ final class FallbackCacheLoaderTests: XCTestCase {
     
     func test_init_shouldNotCallCollaborators() {
         
-        let (_, inMemoryLoader, persistentLoader, updateSpy) = makeSUT()
+        let (_, primaryLoader, secondaryLoader, updateSpy) = makeSUT()
         
-        XCTAssertEqual(inMemoryLoader.callCount, 0)
-        XCTAssertEqual(persistentLoader.callCount, 0)
+        XCTAssertEqual(primaryLoader.callCount, 0)
+        XCTAssertEqual(secondaryLoader.callCount, 0)
         XCTAssertEqual(updateSpy.callCount, 0)
     }
     
     func test_load_deliversSuccessFromInMemoryLoader() {
         
         let payload = "testPayload"
-        let inMemorySuccess = "inMemorySuccess"
-        let (sut, inMemoryLoader, _, _) = makeSUT()
+        let primarySuccess = "primarySuccess"
+        let (sut, primaryLoader, _, _) = makeSUT()
         
-        assert(sut, with: payload, toDeliver: .success(inMemorySuccess)) {
+        assert(sut, with: payload, toDeliver: .success(primarySuccess)) {
             
-            inMemoryLoader.complete(with: .success(inMemorySuccess))
+            primaryLoader.complete(with: .success(primarySuccess))
         }
     }
     
     func test_load_fallsBackToPersistentLoaderOnInMemoryFailure() {
         
         let payload = "testPayload"
-        let (sut, inMemoryLoader, persistentLoader, _) = makeSUT()
+        let (sut, primaryLoader, secondaryLoader, _) = makeSUT()
         
         sut.load(payload) { _ in }
-        inMemoryLoader.complete(with: .failure(self.anyError()))
+        primaryLoader.complete(with: .failure(self.anyError()))
         
-        XCTAssertNoDiff(persistentLoader.payloads, [payload])
+        XCTAssertNoDiff(secondaryLoader.payloads, [payload])
     }
     
     func test_load_updatesInMemoryStoreOnPersistentSuccess() {
         
         let payload = "testPayload"
-        let persistentSuccess = "persistentSuccess"
-        let (sut, inMemoryLoader, persistentLoader, updateSpy) = makeSUT()
+        let secondarySuccess = "secondarySuccess"
+        let (sut, primaryLoader, secondaryLoader, updateSpy) = makeSUT()
         
-        assert(sut, with: payload, toDeliver: .success(persistentSuccess)) {
+        assert(sut, with: payload, toDeliver: .success(secondarySuccess)) {
             
-            inMemoryLoader.complete(with: .failure(self.anyError()))
-            persistentLoader.complete(with: .success(persistentSuccess))
+            primaryLoader.complete(with: .failure(self.anyError()))
+            secondaryLoader.complete(with: .success(secondarySuccess))
         }
         
         XCTAssertNoDiff(updateSpy.payloads.map(\.0), ["testPayload"])
-        XCTAssertNoDiff(updateSpy.payloads.map(\.1), ["persistentSuccess"])
+        XCTAssertNoDiff(updateSpy.payloads.map(\.1), ["secondarySuccess"])
     }
     
     func test_load_deliversFailureWhenBothLoadersFail() {
         
         let payload = "testPayload"
         let failure = anyFailure()
-        let (sut, inMemoryLoader, persistentLoader, _) = makeSUT()
+        let (sut, primaryLoader, secondaryLoader, _) = makeSUT()
         
         assert(sut, with: payload, toDeliver: .failure(failure)) {
             
-            inMemoryLoader.complete(with: .failure(self.anyError()))
-            persistentLoader.complete(with: .failure(failure))
+            primaryLoader.complete(with: .failure(self.anyError()))
+            secondaryLoader.complete(with: .failure(failure))
         }
     }
     
     // MARK: - Helpers
     
     private typealias SUT = FallbackCacheLoader<String, String, Failure>
-    private typealias InMemorySpy = Spy<String, String, Error>
-    private typealias PersistentSpy = Spy<String, String, Failure>
-    private typealias UpdateSpy = CallSpy<(String, String), Void>
+    private typealias PrimarySpy = Spy<String, String, Error>
+    private typealias SecondarySpy = Spy<String, String, Failure>
+    private typealias CacheSpy = CallSpy<(String, String), Void>
     
     private func makeSUT(
         file: StaticString = #file,
         line: UInt = #line
     ) -> (
         sut: SUT,
-        inMemory: InMemorySpy,
-        persistent: PersistentSpy,
-        updateSpy: UpdateSpy
+        primary: PrimarySpy,
+        secondary: SecondarySpy,
+        updateSpy: CacheSpy
     ) {
-        let inMemory = InMemorySpy()
-        let persistent = PersistentSpy()
-        let updateSpy = UpdateSpy(stubs: [()])
+        let primary = PrimarySpy()
+        let secondary = SecondarySpy()
+        let updateSpy = CacheSpy(stubs: [()])
         let sut = SUT(
-            inMemoryLoader: inMemory,
-            persistentLoader: persistent,
-            updateInMemoryStore: updateSpy.call
+            primaryLoader: primary,
+            secondaryLoader: secondary,
+            cache: updateSpy.call
         )
         
         trackForMemoryLeaks(sut, file: file, line: line)
-        trackForMemoryLeaks(inMemory, file: file, line: line)
-        trackForMemoryLeaks(persistent, file: file, line: line)
+        trackForMemoryLeaks(primary, file: file, line: line)
+        trackForMemoryLeaks(secondary, file: file, line: line)
         
-        return (sut, inMemory, persistent, updateSpy)
+        return (sut, primary, secondary, updateSpy)
     }
     
     private func assert(
