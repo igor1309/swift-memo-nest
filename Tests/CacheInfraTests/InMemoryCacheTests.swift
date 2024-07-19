@@ -121,17 +121,6 @@ final class InMemoryCacheTests: XCTestCase {
         XCTAssertNil(item)
     }
     
-    func test_cache_shouldThrow() async throws {
-        
-        let item = makeItem()
-        let sut = makeSUT()
-        
-        await assertThrowsAsyncError(try await sut.cache(item)) {
-            
-            XCTAssertTrue($0 is SUT.UninitialisedCacheFailure)
-        }
-    }
-    
     func test_cache_shouldAddNewItem() async throws {
         
         let items = makeItems(count: 7)
@@ -139,7 +128,7 @@ final class InMemoryCacheTests: XCTestCase {
         let sut = makeSUT()
         
         await sut.cache(items)
-        try await sut.cache(item)
+        await sut.cache(item)
         let retrieved = try await retrieve(sut)
         
         XCTAssertNoDiff(retrieved, items + [item])
@@ -152,7 +141,7 @@ final class InMemoryCacheTests: XCTestCase {
         let sut = makeSUT()
         
         await sut.cache(items)
-        try await sut.cache(item)
+        await sut.cache(item)
         let retrieved = try await retrieve(sut)
         
         items[0] = item
@@ -167,7 +156,7 @@ final class InMemoryCacheTests: XCTestCase {
         let sut = makeSUT()
         
         await sut.cache(items)
-        try await sut.cache(item)
+        await sut.cache(item)
         let retrieved = try await retrieve(sut)
         
         items[1] = item
@@ -182,7 +171,7 @@ final class InMemoryCacheTests: XCTestCase {
         let sut = makeSUT()
         
         await sut.cache(items)
-        try await sut.cache(item)
+        await sut.cache(item)
         let retrieved = try await retrieve(sut)
         
         items[6] = item

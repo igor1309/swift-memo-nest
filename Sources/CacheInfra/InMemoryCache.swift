@@ -62,10 +62,13 @@ public extension InMemoryCache {
     
     /// Caches a single item in the cache.
     /// - Parameter item: The item to cache.
-    /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
-    func cache(_ item: Item) throws {
+    func cache(_ item: Item) {
         
-        guard var items else { throw UninitialisedCacheFailure() }
+        guard var items else {
+            
+            self.items = [item]
+            return
+        }
         
         if let index = items.firstIndex(matchingID: item.id) {
             items[index] = item
@@ -76,7 +79,7 @@ public extension InMemoryCache {
         self.items = items
     }
     
-    /// Caches multiple items in the cache.
+    /// Replace items in the cache.
     /// - Parameter items: The array of items to cache.
     func cache(_ items: [Item]) {
         
