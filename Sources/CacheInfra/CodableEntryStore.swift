@@ -61,7 +61,7 @@ public extension CodableEntryStore {
     
     /// Deletes all cached entries from the store.
     /// - Throws: An error if there is an issue removing the data.
-    func deleteCachedFeed() throws {
+    func delete() throws {
         
         try FileManager.default.removeItem(at: storeURL)
     }

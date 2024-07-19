@@ -133,14 +133,14 @@ final class CodableEntryStoreTests: XCTestCase {
         
         let sut = makeSUT()
         
-        XCTAssertThrowsError(try sut.deleteCachedFeed())
+        XCTAssertThrowsError(try sut.delete())
     }
     
     func test_delete_shouldHaveNoSideEffectsOnEmptyCache() throws {
         
         let sut = makeSUT()
         
-        try? sut.deleteCachedFeed()
+        try? sut.delete()
         XCTAssertThrowsError(try sut.retrieve())
     }
     
@@ -151,7 +151,7 @@ final class CodableEntryStoreTests: XCTestCase {
         try sut.insert(entries)
         expect(sut, toRetrieve: .success(entries))
         
-        XCTAssertNoThrow(try sut.deleteCachedFeed())
+        XCTAssertNoThrow(try sut.delete())
     }
     
     func test_delete_shouldEmptyPreviouslyInsertedCache() throws {
@@ -161,7 +161,7 @@ final class CodableEntryStoreTests: XCTestCase {
         try sut.insert(entries)
         expect(sut, toRetrieve: .success(entries))
         
-        try sut.deleteCachedFeed()
+        try sut.delete()
         
         XCTAssertThrowsError(try sut.retrieve())
     }
@@ -170,14 +170,14 @@ final class CodableEntryStoreTests: XCTestCase {
         
         let sut = makeSUT(storeURL: noDeletePermissionURL())
         
-        XCTAssertThrowsError(try sut.deleteCachedFeed())
+        XCTAssertThrowsError(try sut.delete())
     }
     
     func test_delete_shouldHaveNoSideEffectsOnDeletionFailure() {
         
         let sut = makeSUT(storeURL: noDeletePermissionURL())
         
-        XCTAssertThrowsError(try sut.deleteCachedFeed())
+        XCTAssertThrowsError(try sut.delete())
         XCTAssertThrowsError(try sut.retrieve())
     }
     
