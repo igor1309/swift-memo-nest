@@ -56,7 +56,7 @@ protocol Sorting<Item> {
     func areInIncreasingOrder(_: Item, _: Item) -> Bool
 }
 
-extension InMemoryStore {
+extension InMemoryCache {
     
     func retrieve<Payload>(
         payload: Payload
@@ -86,16 +86,15 @@ import Foundation
 
 final class EntryLoaderComposer {
     
-    #warning("now with `protocol Store<Item>` name `InMemoryStore` looks not good - it does not fit, maybe rename to InMemoryCache?")
-    private let inMemoryStore: InMemoryStore<Entry>
-    private let persistentStore: any Store<Entry>
+    private let entryCache: InMemoryCache<Entry>
+    private let persistent: any Store<Entry>
     
     init(
-        inMemoryStore: InMemoryStore<Entry>, 
-        persistentStore: any Store<Entry>
+        entryCache: InMemoryCache<Entry>,
+        persistent: any Store<Entry>
     ) {
-        self.inMemoryStore = inMemoryStore
-        self.persistentStore = persistentStore
+        self.entryCache = entryCache
+        self.persistent = persistent
     }
 }
 
@@ -113,7 +112,7 @@ extension EntryLoaderComposer {
                 Task {
                     
                     do {
-                        let items = try await self.inMemoryStore.retrieve(payload: payload)
+                        let items = try await self.entryCache.retrieve(payload: payload)
                         completion(.success(items))
                     } catch {
                         completion(.failure(error))
@@ -124,14 +123,14 @@ extension EntryLoaderComposer {
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     
-                    completion(.init { try self.persistentStore.retrieve() })
+                    completion(.init { try self.persistent.retrieve() })
                 }
             },
             cache: { _, entries in
                 
                 Task {
                     
-                    await self.inMemoryStore.cache(entries)
+                    await self.entryCache.cache(entries)
                 }
             }
         )
@@ -170,7 +169,7 @@ final class EntryLoaderComposerTests: XCTestCase {
     private typealias Composer = EntryLoaderComposer
     private typealias Load = Composer.Load
     
-    private typealias InMemoryEntryStore = InMemoryStore<Entry>
+    private typealias EntryCache = InMemoryCache<Entry>
     private typealias PersistentStore = CodableEntryStore
 
     private func makeSUT(
@@ -179,19 +178,22 @@ final class EntryLoaderComposerTests: XCTestCase {
         line: UInt = #line
     ) -> (
         load: Load,
-        inMemory: InMemoryEntryStore,
+        inMemory: EntryCache,
         persistent: PersistentStore
     ) {
-        let inMemory = InMemoryEntryStore()
+        let entryCache = EntryCache()
         let persistent = PersistentStore(storeURL: storeURL ?? testStoreURL())
         
-        let composer = Composer(inMemoryStore: inMemory, persistentStore: persistent)
+        let composer = Composer(
+            entryCache: entryCache,
+            persistent: persistent
+        )
         
         trackForMemoryLeaks(composer, file: file, line: line)
-        trackForMemoryLeaks(inMemory, file: file, line: line)
+        trackForMemoryLeaks(entryCache, file: file, line: line)
         trackForMemoryLeaks(persistent, file: file, line: line)
         
-        return (composer.composeLoad(), inMemory, persistent)
+        return (composer.composeLoad(), entryCache, persistent)
     }
     
     private func anyPayload(

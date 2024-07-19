@@ -1,5 +1,5 @@
 //
-//  InMemoryStoreTests.swift
+//  InMemoryCacheTests.swift
 //
 //
 //  Created by Igor Malyarov on 18.07.2024.
@@ -8,7 +8,7 @@
 import CacheInfra
 import XCTest
 
-final class InMemoryStoreTests: XCTestCase {
+final class InMemoryCacheTests: XCTestCase {
     
     func test_init() {
         
@@ -229,7 +229,7 @@ final class InMemoryStoreTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private typealias SUT = InMemoryStore<Item>
+    private typealias SUT = InMemoryCache<Item>
     
     private func makeSUT(
         file: StaticString = #file,

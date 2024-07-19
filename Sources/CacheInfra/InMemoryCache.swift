@@ -1,5 +1,5 @@
 //
-//  InMemoryStore.swift
+//  InMemoryCache.swift
 //
 //
 //  Created by Igor Malyarov on 18.07.2024.
@@ -7,25 +7,25 @@
 
 import Foundation
 
-/// A class representing an in-memory store for items.
+/// A class representing an in-memory cache for items.
 /// The items must conform to the Identifiable protocol.
-public actor InMemoryStore<Item>
+public actor InMemoryCache<Item>
 where Item: Identifiable {
     
-    /// An optional array to hold the items in the store.
+    /// An optional array to hold the items in the cache.
     private var items: [Item]?
     
-    /// Initialises an empty in-memory store.
+    /// Initialises an empty in-memory cache.
     public init() {}
 }
 
-public extension InMemoryStore {
+public extension InMemoryCache {
     
-    /// Retrieves items from the store that match the given predicate.
+    /// Retrieves items from the cache that match the given predicate.
     /// - Parameters:
     ///   - predicate: A closure that takes an item as its argument and returns a Boolean value indicating whether the item should be included in the returned array.
     ///   - areInIncreasingOrder: An optional closure that takes two items as its arguments and returns a Boolean value indicating the order of the items.
-    /// - Throws: `UninitialisedCacheFailure` if the store is uninitialised.
+    /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
     /// - Returns: An array of items that match the predicate, optionally sorted by the given closure.
     func retrieve(
         predicate: (Item) -> Bool,
@@ -43,9 +43,9 @@ public extension InMemoryStore {
         }
     }
     
-    /// Retrieves an item from the store by its identifier.
+    /// Retrieves an item from the cache by its identifier.
     /// - Parameter id: The identifier of the item to retrieve.
-    /// - Throws: `UninitialisedCacheFailure` if the store is uninitialised.
+    /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
     /// - Returns: The item with the specified identifier, or nil if no such item exists.
     func retrieve(byID id: Item.ID) throws -> Item? {
         
@@ -58,11 +58,11 @@ public extension InMemoryStore {
     struct UninitialisedCacheFailure: Error, Equatable {}
 }
 
-public extension InMemoryStore {
+public extension InMemoryCache {
     
-    /// Caches a single item in the store.
+    /// Caches a single item in the cache.
     /// - Parameter item: The item to cache.
-    /// - Throws: `UninitialisedCacheFailure` if the store is uninitialised.
+    /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
     func cache(_ item: Item) throws {
         
         guard var items else { throw UninitialisedCacheFailure() }
@@ -76,7 +76,7 @@ public extension InMemoryStore {
         self.items = items
     }
     
-    /// Caches multiple items in the store.
+    /// Caches multiple items in the cache.
     /// - Parameter items: The array of items to cache.
     func cache(_ items: [Item]) {
         
@@ -84,11 +84,11 @@ public extension InMemoryStore {
     }
 }
 
-public extension InMemoryStore {
+public extension InMemoryCache {
     
-    /// Removes an item from the store by its identifier.
+    /// Removes an item from the cache by its identifier.
     /// - Parameter id: The identifier of the item to remove.
-    /// - Throws: `UninitialisedCacheFailure` if the store is uninitialised.
+    /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
     func remove(byID id: Item.ID) throws {
         
         guard var items else { throw UninitialisedCacheFailure() }
@@ -97,7 +97,7 @@ public extension InMemoryStore {
         self.items = items
     }
     
-    /// Clears all items from the store.
+    /// Clears all items from the cache.
     func clear() {
         
         self.items = nil
