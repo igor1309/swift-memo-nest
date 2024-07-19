@@ -1,16 +1,20 @@
 //
 //  CodableEntryStore.swift
-//  
+//
 //
 //  Created by Igor Malyarov on 19.07.2024.
 //
 
 import Foundation
 
+/// A class responsible for storing and managing entries in a Codable format.
 public final class CodableEntryStore {
     
+    /// The URL where the entries are stored.
     private let storeURL: URL
     
+    /// Initialises a new instance of `CodableEntryStore` with a given URL.
+    /// - Parameter storeURL: The URL where the entries will be stored.
     public init(storeURL: URL) {
         
         self.storeURL = storeURL
@@ -19,6 +23,9 @@ public final class CodableEntryStore {
 
 public extension CodableEntryStore {
     
+    /// Retrieves all the stored entries.
+    /// - Returns: An array of `Entry` objects.
+    /// - Throws: `RetrievalFailure` if there is an error reading or decoding the data.
     func retrieve() throws -> [Entry] {
         
         do {
@@ -32,11 +39,15 @@ public extension CodableEntryStore {
         }
     }
     
+    /// An error type indicating a failure in retrieving the entries.
     struct RetrievalFailure: Error, Equatable {}
 }
 
 public extension CodableEntryStore {
     
+    /// Inserts an array of entries into the store.
+    /// - Parameter entries: The entries to be inserted.
+    /// - Throws: An error if there is an issue encoding or writing the data.
     func insert(_ entries: [Entry]) throws {
         
         let cache = entries.map { Cache(entry: $0) }
@@ -48,6 +59,8 @@ public extension CodableEntryStore {
 
 public extension CodableEntryStore {
     
+    /// Deletes all cached entries from the store.
+    /// - Throws: An error if there is an issue removing the data.
     func deleteCachedFeed() throws {
         
         try FileManager.default.removeItem(at: storeURL)
@@ -56,6 +69,7 @@ public extension CodableEntryStore {
 
 private extension CodableEntryStore {
     
+    /// A structure representing a cache entry.
     struct Cache: Codable {
         
         let id: UUID
@@ -66,6 +80,8 @@ private extension CodableEntryStore {
         let note: String
         let tags: [String]
         
+        /// Initialises a new instance of `Cache` from an `Entry`.
+        /// - Parameter entry: The entry to be cached.
         init(entry: Entry) {
             
             self.id = entry.id
@@ -77,6 +93,7 @@ private extension CodableEntryStore {
             self.tags = entry.tags
         }
         
+        /// Converts the cache entry back to an `Entry`.
         var entry: Entry {
             
             return .init(id: id, creationDate: creationDate, modificationDate: modificationDate, title: title, url: url, note: note, tags: tags)
