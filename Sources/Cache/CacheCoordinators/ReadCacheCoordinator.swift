@@ -8,22 +8,22 @@
 import CacheInfra
 import Tools
 
-/// A coordinator that manages read operations from an in-memory cache and falls back to a retrieval function if necessary.
+/// A coordinator that manages read operations from a cache and falls back to a retrieval function if necessary.
 /// It leverages a `Payload` for filtering and sorting entries and an `Entry` that must be identifiable.
 public final class ReadCacheCoordinator<Payload, Entry>
 where Payload: Filtering<Entry> & Sorting<Entry>,
       Entry: Identifiable {
     
-    /// The in-memory cache for entries.
+    /// The cache for entries.
     private let entryCache: EntryCache
     
     /// The retrieval function to fetch entries when they are not available in the cache.
     private let retrieve: Retrieve
     
-    /// Initialises the ReadCacheCoordinator with the given cache and retrieval function.
+    /// Initializes the `ReadCacheCoordinator` with the given cache and retrieval function.
     ///
     /// - Parameters:
-    ///   - entryCache: An in-memory cache for storing and retrieving entries.
+    ///   - entryCache: A cache for storing and retrieving entries.
     ///   - retrieve: A function that retrieves entries, which can throw an error.
     public init(
         entryCache: EntryCache,
@@ -33,7 +33,7 @@ where Payload: Filtering<Entry> & Sorting<Entry>,
         self.retrieve = retrieve
     }
     
-    /// Typealias for the in-memory cache holding entries.
+    /// Typealias for the cache holding entries.
     public typealias EntryCache = InMemoryCache<Entry>
     
     /// Typealias for the retrieval function which fetches entries.
@@ -53,7 +53,9 @@ extension ReadCacheCoordinator: Loader {
         _ completion: @escaping LoadCompletion
     ) {
         Task { [weak self] in
+            
             guard let self else { return }
+            
             completion(await self.loadWithFallback(payload))
         }
     }
@@ -75,6 +77,7 @@ private extension ReadCacheCoordinator {
     func loadWithFallback(
         _ payload: Payload
     ) async -> Result<[Entry], Error> {
+        
         do {
             let entries = try await self.entryCache.retrieve(payload)
             return .success(entries)

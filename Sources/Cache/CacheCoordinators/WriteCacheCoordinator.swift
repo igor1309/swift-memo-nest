@@ -8,11 +8,15 @@
 /// A coordinator that manages writing entries to a cache and backing them up.
 ///
 /// The `WriteCacheCoordinator` class is responsible for adding, editing, and deleting entries
-/// in a cache, as well as backing up these entries using a specified backup function.
+/// in a cache. It ensures that any changes to the cache are also backed up using a specified
+/// backup function.
 public final class WriteCacheCoordinator<Entry>
 where Entry: Identifiable {
     
+    /// The cache for storing entries.
     private let entryCache: any EntryCache
+    
+    /// The backup function to store entries.
     private let backup: Backup
     
     /// Initialises a new instance of `WriteCacheCoordinator`.
@@ -39,6 +43,8 @@ public extension WriteCacheCoordinator {
     
     /// Adds a new entry to the cache and backs up all entries.
     ///
+    /// This method caches the given entry and then performs a backup of all current entries in the cache.
+    ///
     /// - Parameter entry: The entry to add to the cache.
     /// - Throws: An error if the backup operation fails.
     func add(_ entry: Entry) async throws {
@@ -49,6 +55,8 @@ public extension WriteCacheCoordinator {
     
     /// Edits an existing entry in the cache and backs up all entries.
     ///
+    /// This method updates the given entry in the cache and then performs a backup of all current entries in the cache.
+    ///
     /// - Parameter entry: The entry to edit in the cache.
     /// - Throws: An error if the backup operation fails.
     func edit(_ entry: Entry) async throws {
@@ -58,6 +66,8 @@ public extension WriteCacheCoordinator {
     }
     
     /// Deletes an existing entry from the cache and backs up all entries.
+    ///
+    /// This method removes the specified entry from the cache and then performs a backup of all current entries in the cache.
     ///
     /// - Parameter entry: The entry to delete from the cache.
     /// - Throws: An error if the backup operation fails.
@@ -71,6 +81,8 @@ public extension WriteCacheCoordinator {
 private extension WriteCacheCoordinator {
     
     /// Backs up all entries in the cache.
+    ///
+    /// This method retrieves all current entries from the cache and calls the backup function with these entries.
     ///
     /// - Throws: An error if the backup operation fails.
     func backupAll() async throws {
