@@ -1,5 +1,5 @@
 //
-//  LoaderAdapterSamePayloadTests.swift
+//  LoaderAdapterSamePayloadSameFailureTests.swift
 //
 //
 //  Created by Igor Malyarov on 20.07.2024.
@@ -8,7 +8,7 @@
 import Tools
 import XCTest
 
-final class LoaderAdapterSamePayloadTests: XCTestCase {
+final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
     
     func test_load_shouldDeliverFailureOnOriginalFailure() {
         
@@ -48,7 +48,7 @@ final class LoaderAdapterSamePayloadTests: XCTestCase {
     // MARK: - Helpers
     
     private typealias OriginalLoader = Spy<String, Int, OriginalError>
-    private typealias SUT = LoaderAdapter<OriginalLoader, String, String, TestError>
+    private typealias SUT = LoaderAdapter<OriginalLoader, String, String, OriginalError>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -63,10 +63,6 @@ final class LoaderAdapterSamePayloadTests: XCTestCase {
             mapSuccess: { (originalSuccess: Int) -> String in
                 
                 return "Success: \(originalSuccess)"
-            },
-            mapFailure: { (originalFailure: OriginalError) -> TestError in
-                
-                return TestError(message: originalFailure.message)
             }
         )
         
@@ -77,11 +73,6 @@ final class LoaderAdapterSamePayloadTests: XCTestCase {
     }
     
     private struct OriginalError: Error, Equatable {
-        
-        let message: String
-    }
-    
-    private struct TestError: Error, Equatable {
         
         let message: String
     }

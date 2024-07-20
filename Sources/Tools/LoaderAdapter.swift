@@ -67,3 +67,20 @@ where NewPayload == OriginalLoader.Payload {
         )
     }
 }
+
+public extension LoaderAdapter
+where NewPayload == OriginalLoader.Payload,
+      NewFailure == OriginalLoader.Failure {
+    
+    convenience init(
+        originalLoader: OriginalLoader,
+        mapSuccess: @escaping (OriginalLoader.Success) -> NewSuccess
+    )  {
+        self.init(
+            originalLoader: originalLoader,
+            mapPayload: { $0 },
+            mapSuccess: mapSuccess,
+            mapFailure: { $0 }
+        )
+    }
+}

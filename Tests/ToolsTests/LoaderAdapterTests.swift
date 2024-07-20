@@ -15,7 +15,7 @@ final class LoaderAdapterTests: XCTestCase {
         let message = anyMessage()
         let (sut, originalLoader) = makeSUT()
         
-        expect(sut, with: 0, toCompleteWith: .failure(TestError(message: message))) {
+        expect(sut, with: 0, toCompleteWith: .failure(.init(message: message))) {
             
             originalLoader.complete(with: .failure(.init(message: message)))
         }
