@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "9094E8D5-8030-4549-802D-D1674B9697DF",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CacheTests",
+        "name" : "CacheTests"
+      }
+    }
+  ],
+  "version" : 1
+}

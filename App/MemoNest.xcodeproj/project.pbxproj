@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0C033E2C4BA3DE00DC8179 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 2A0C033D2C4BA3DE00DC8179 /* Cache */; };
 		2A1E993A2C4B765100599C74 /* CacheInfra in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99392C4B765100599C74 /* CacheInfra */; };
 		2A1E993C2C4B765100599C74 /* EntryEditorFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993B2C4B765100599C74 /* EntryEditorFeature */; };
 		2A1E993E2C4B765100599C74 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993D2C4B765100599C74 /* EntryFilterFeature */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		2A0468692C494C0800C90DA7 /* SortBuilderFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = SortBuilderFeature.xctestplan; path = TestPlans/SortBuilderFeature.xctestplan; sourceTree = "<group>"; };
+		2A0C033F2C4BA45E00DC8179 /* Cache.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cache.xctestplan; path = TestPlans/Cache.xctestplan; sourceTree = "<group>"; };
 		2A1E99382C4B761E00599C74 /* swift-memo-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-memo-nest"; path = ..; sourceTree = "<group>"; };
 		2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "swift-note-nest-Package.xctestplan"; path = "TestPlans/swift-note-nest-Package.xctestplan"; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* MemoNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A0C033E2C4BA3DE00DC8179 /* Cache in Frameworks */,
 				2A1E993E2C4B765100599C74 /* EntryFilterFeature in Frameworks */,
 				2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */,
 				2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */,
@@ -168,6 +171,7 @@
 				2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */,
 				2AA86A242C4A74BC009BC197 /* iOS-CI.xctestplan */,
 				2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */,
+				2A0C033F2C4BA45E00DC8179 /* Cache.xctestplan */,
 				2AA86A062C4A5135009BC197 /* CacheInfra.xctestplan */,
 				2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */,
 				2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */,
@@ -361,6 +365,7 @@
 				2A1E99412C4B765100599C74 /* SortBuilderFeature */,
 				2A1E99432C4B765100599C74 /* Tools */,
 				2A1E99452C4B765100599C74 /* UIPrimitives */,
+				2A0C033D2C4BA3DE00DC8179 /* Cache */,
 			);
 			productName = NoteNest;
 			productReference = 2A33A3D32C4642C700CE3C96 /* MemoNest.app */;
@@ -784,6 +789,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2A0C033D2C4BA3DE00DC8179 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Cache;
+		};
 		2A1E99392C4B765100599C74 /* CacheInfra */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CacheInfra;

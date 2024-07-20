@@ -15,22 +15,15 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "EntryListFeatureTests",
-        "name" : "EntryListFeatureTests"
+        "identifier" : "CacheInfraTests",
+        "name" : "CacheInfraTests"
       }
     },
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "ToolsTests",
-        "name" : "ToolsTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "SortBuilderFeatureTests",
-        "name" : "SortBuilderFeatureTests"
+        "identifier" : "CacheTests",
+        "name" : "CacheTests"
       }
     },
     {
@@ -43,8 +36,22 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "CacheInfraTests",
-        "name" : "CacheInfraTests"
+        "identifier" : "EntryListFeatureTests",
+        "name" : "EntryListFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SortBuilderFeatureTests",
+        "name" : "SortBuilderFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ToolsTests",
+        "name" : "ToolsTests"
       }
     }
   ],
