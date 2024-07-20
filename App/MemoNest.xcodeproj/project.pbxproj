@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A0CC5352C46A58400B34E91 /* EntryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A0CC5342C46A58400B34E91 /* EntryListFeature */; };
-		2A2415CC2C4782C10099B836 /* EntryEditorFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A2415CB2C4782C10099B836 /* EntryEditorFeature */; };
-		2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D8D2C464975008E7EB6 /* UIPrimitives */; };
+		2A1E993A2C4B765100599C74 /* CacheInfra in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99392C4B765100599C74 /* CacheInfra */; };
+		2A1E993C2C4B765100599C74 /* EntryEditorFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993B2C4B765100599C74 /* EntryEditorFeature */; };
+		2A1E993E2C4B765100599C74 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993D2C4B765100599C74 /* EntryFilterFeature */; };
+		2A1E99402C4B765100599C74 /* EntryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993F2C4B765100599C74 /* EntryListFeature */; };
+		2A1E99422C4B765100599C74 /* SortBuilderFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99412C4B765100599C74 /* SortBuilderFeature */; };
+		2A1E99442C4B765100599C74 /* Tools in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99432C4B765100599C74 /* Tools */; };
+		2A1E99462C4B765100599C74 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99452C4B765100599C74 /* UIPrimitives */; };
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
 		2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D942C464B7E008E7EB6 /* IMTools */; };
 		2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324DB42C465EFF008E7EB6 /* CombineSchedulers */; };
@@ -41,10 +45,6 @@
 		2AA27D1F2C48198B0032FA1F /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27D042C48198B0032FA1F /* NoteNestApp.swift */; };
 		2AA86A152C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */; };
 		2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */; };
-		2AA86A1C2C4A71CA009BC197 /* CacheInfra in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1B2C4A71CA009BC197 /* CacheInfra */; };
-		2AA86A1E2C4A71CA009BC197 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */; };
-		2AA86A202C4A71CA009BC197 /* SortBuilderFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */; };
-		2AA86A222C4A71CA009BC197 /* Tools in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A212C4A71CA009BC197 /* Tools */; };
 		2AA86A262C4AB575009BC197 /* anyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A252C4AB575009BC197 /* anyError.swift */; };
 		2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */; };
 		2AA86A2C2C4AB652009BC197 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A2B2C4AB652009BC197 /* CustomDump */; };
@@ -62,9 +62,9 @@
 
 /* Begin PBXFileReference section */
 		2A0468692C494C0800C90DA7 /* SortBuilderFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = SortBuilderFeature.xctestplan; path = TestPlans/SortBuilderFeature.xctestplan; sourceTree = "<group>"; };
+		2A1E99382C4B761E00599C74 /* swift-memo-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-memo-nest"; path = ..; sourceTree = "<group>"; };
 		2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "swift-note-nest-Package.xctestplan"; path = "TestPlans/swift-note-nest-Package.xctestplan"; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* MemoNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A33A3E42C4642F300CE3C96 /* swift-note-nest */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-note-nest"; path = ..; sourceTree = "<group>"; };
 		2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryListFeature.xctestplan; path = TestPlans/EntryListFeature.xctestplan; sourceTree = "<group>"; };
 		2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryFilterFeature.xctestplan; path = TestPlans/EntryFilterFeature.xctestplan; sourceTree = "<group>"; };
 		2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
@@ -109,16 +109,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AA86A1C2C4A71CA009BC197 /* CacheInfra in Frameworks */,
+				2A1E993E2C4B765100599C74 /* EntryFilterFeature in Frameworks */,
 				2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */,
-				2A2415CC2C4782C10099B836 /* EntryEditorFeature in Frameworks */,
 				2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */,
+				2A1E993C2C4B765100599C74 /* EntryEditorFeature in Frameworks */,
+				2A1E99462C4B765100599C74 /* UIPrimitives in Frameworks */,
+				2A1E993A2C4B765100599C74 /* CacheInfra in Frameworks */,
+				2A1E99422C4B765100599C74 /* SortBuilderFeature in Frameworks */,
+				2A1E99442C4B765100599C74 /* Tools in Frameworks */,
 				2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */,
-				2A0CC5352C46A58400B34E91 /* EntryListFeature in Frameworks */,
-				2AA86A222C4A71CA009BC197 /* Tools in Frameworks */,
-				2AA86A1E2C4A71CA009BC197 /* EntryFilterFeature in Frameworks */,
-				2A324D8E2C464975008E7EB6 /* UIPrimitives in Frameworks */,
-				2AA86A202C4A71CA009BC197 /* SortBuilderFeature in Frameworks */,
+				2A1E99402C4B765100599C74 /* EntryListFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +143,8 @@
 		2A33A3CA2C4642C700CE3C96 = {
 			isa = PBXGroup;
 			children = (
+				2A1E99382C4B761E00599C74 /* swift-memo-nest */,
 				2A36E5AF2C468E670015BA96 /* TestPlans */,
-				2A33A3E42C4642F300CE3C96 /* swift-note-nest */,
 				2AA27D052C48198B0032FA1F /* MemoNest */,
 				2AA86A0C2C4A709E009BC197 /* MemoNestTests */,
 				2A33A3D42C4642C700CE3C96 /* Products */,
@@ -349,16 +349,16 @@
 			);
 			name = MemoNest;
 			packageProductDependencies = (
-				2A324D8D2C464975008E7EB6 /* UIPrimitives */,
 				2A324D922C464B7E008E7EB6 /* IMRx */,
 				2A324D942C464B7E008E7EB6 /* IMTools */,
 				2A324DB42C465EFF008E7EB6 /* CombineSchedulers */,
-				2A0CC5342C46A58400B34E91 /* EntryListFeature */,
-				2A2415CB2C4782C10099B836 /* EntryEditorFeature */,
-				2AA86A1B2C4A71CA009BC197 /* CacheInfra */,
-				2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */,
-				2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */,
-				2AA86A212C4A71CA009BC197 /* Tools */,
+				2A1E99392C4B765100599C74 /* CacheInfra */,
+				2A1E993B2C4B765100599C74 /* EntryEditorFeature */,
+				2A1E993D2C4B765100599C74 /* EntryFilterFeature */,
+				2A1E993F2C4B765100599C74 /* EntryListFeature */,
+				2A1E99412C4B765100599C74 /* SortBuilderFeature */,
+				2A1E99432C4B765100599C74 /* Tools */,
+				2A1E99452C4B765100599C74 /* UIPrimitives */,
 			);
 			productName = NoteNest;
 			productReference = 2A33A3D32C4642C700CE3C96 /* MemoNest.app */;
@@ -780,15 +780,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2A0CC5342C46A58400B34E91 /* EntryListFeature */ = {
+		2A1E99392C4B765100599C74 /* CacheInfra */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = EntryListFeature;
+			productName = CacheInfra;
 		};
-		2A2415CB2C4782C10099B836 /* EntryEditorFeature */ = {
+		2A1E993B2C4B765100599C74 /* EntryEditorFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EntryEditorFeature;
 		};
-		2A324D8D2C464975008E7EB6 /* UIPrimitives */ = {
+		2A1E993D2C4B765100599C74 /* EntryFilterFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EntryFilterFeature;
+		};
+		2A1E993F2C4B765100599C74 /* EntryListFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EntryListFeature;
+		};
+		2A1E99412C4B765100599C74 /* SortBuilderFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SortBuilderFeature;
+		};
+		2A1E99432C4B765100599C74 /* Tools */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Tools;
+		};
+		2A1E99452C4B765100599C74 /* UIPrimitives */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UIPrimitives;
 		};
@@ -806,22 +822,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2A324DB32C465EFF008E7EB6 /* XCRemoteSwiftPackageReference "combine-schedulers" */;
 			productName = CombineSchedulers;
-		};
-		2AA86A1B2C4A71CA009BC197 /* CacheInfra */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CacheInfra;
-		};
-		2AA86A1D2C4A71CA009BC197 /* EntryFilterFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = EntryFilterFeature;
-		};
-		2AA86A1F2C4A71CA009BC197 /* SortBuilderFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SortBuilderFeature;
-		};
-		2AA86A212C4A71CA009BC197 /* Tools */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Tools;
 		};
 		2AA86A2B2C4AB652009BC197 /* CustomDump */ = {
 			isa = XCSwiftPackageProductDependency;

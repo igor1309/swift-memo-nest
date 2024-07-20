@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-note-nest",
+    name: "swift-memo-nest",
     platforms: [
         .iOS(.v17),
         .macOS(.v13)
