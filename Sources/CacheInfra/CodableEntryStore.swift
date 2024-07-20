@@ -8,6 +8,7 @@
 import Foundation
 
 /// A class responsible for storing and managing entries in a Codable format.
+@available(*, deprecated, message: "Use generic `CodableStore` instead.")
 public final class CodableEntryStore {
     
     /// The URL where the entries are stored.
