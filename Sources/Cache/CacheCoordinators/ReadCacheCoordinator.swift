@@ -37,7 +37,7 @@ where Payload: Filtering<Entry> & Sorting<Entry>,
     public typealias EntryCache = InMemoryCache<Entry>
     
     /// Typealias for the retrieval function which fetches entries.
-    public typealias Retrieve = () throws -> [Entry]
+    public typealias Retrieve = () async throws -> [Entry]
 }
 
 extension ReadCacheCoordinator: Loader {
@@ -82,9 +82,14 @@ private extension ReadCacheCoordinator {
             let entries = try await self.entryCache.retrieve(payload)
             return .success(entries)
         } catch {
-            let result = Result { try self.retrieve() }
-            try? await self.entryCache.cache(result.get())
-            return result
+            
+            do {
+                let entries = try await self.retrieve()
+                await self.entryCache.cache(entries)
+                return .success(entries)
+            } catch {
+                return .failure(error)
+            }
         }
     }
 }
