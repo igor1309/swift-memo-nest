@@ -11,11 +11,13 @@ import XCTest
 final class CodableEntryStoreTests: XCTestCase {
     
     override func setUp() {
+        
         super.setUp()
         setupEmptyStoreState()
     }
     
     override func tearDown() {
+        
         super.tearDown()
         undoStoreSideEffects()
     }
