@@ -105,6 +105,7 @@ private extension Target {
     static let cache = target(
         name: .cache,
         dependencies: [
+            .cacheInfra,
             .tools
         ]
     )

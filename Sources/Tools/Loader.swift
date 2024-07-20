@@ -23,11 +23,14 @@ public protocol Loader<Payload, Success, Failure> {
     ///   - completion: A closure to be called with the result of the load operation.
     func load(
         _: Payload,
-        _: @escaping (LoadResult) -> Void
+        _: @escaping LoadCompletion
     )
     
     /// A typealias for the result of the load operation.
     typealias LoadResult = Result<Success, Failure>
+    
+    /// A typealias for the completion handler called with the result of the load operation.
+    typealias LoadCompletion = (LoadResult) -> Void
 }
 
 /// A default implementation of the `load` method for loaders with `Void` payloads.

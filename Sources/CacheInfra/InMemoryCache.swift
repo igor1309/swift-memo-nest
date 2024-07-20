@@ -54,7 +54,7 @@ public extension InMemoryCache {
         return items.first(matchingID: id)
     }
     
-    /// An error indicating that the cache has not been initialized.
+    /// An error indicating that the cache has not been initialised.
     struct UninitialisedCacheFailure: Error, Equatable {}
 }
 
