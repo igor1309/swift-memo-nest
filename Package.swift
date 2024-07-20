@@ -103,7 +103,10 @@ private extension Product {
 private extension Target {
     
     static let cache = target(
-        name: .cache
+        name: .cache,
+        dependencies: [
+            .tools
+        ]
     )
     static let cacheTests = testTarget(
         name: .cacheTests,
