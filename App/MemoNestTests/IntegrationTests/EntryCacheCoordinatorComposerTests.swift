@@ -5,11 +5,12 @@
 //  Created by Igor Malyarov on 19.07.2024.
 //
 
+import Cache
 import CacheInfra
 @testable import MemoNest
 import Tools
 
-struct Payload<Entry: Identifiable>: Filtering, Sorting {
+struct EntryPayload<Entry: Identifiable>: Filtering, Sorting {
     
     let lastID: Entry.ID?
     
@@ -26,21 +27,7 @@ struct Payload<Entry: Identifiable>: Filtering, Sorting {
     }
 }
 
-extension Payload: Equatable where Entry: Equatable {}
-
-protocol Filtering<Item> {
-    
-    associatedtype Item
-    
-    func predicate(_: Item) -> Bool
-}
-
-protocol Sorting<Item> {
-    
-    associatedtype Item
-    
-    func areInIncreasingOrder(_: Item, _: Item) -> Bool
-}
+extension EntryPayload: Equatable where Entry: Equatable {}
 
 extension InMemoryCache {
     
@@ -93,7 +80,7 @@ extension EntryCacheCoordinatorComposer {
         return composeLoader().load(_:_:)
     }
     
-    typealias LoadPayload = Payload<Entry>
+    typealias LoadPayload = EntryPayload<Entry>
     typealias LoadResult = Result<[Entry], Error>
     typealias LoadCompletion = (LoadResult) -> Void
     typealias Load = (LoadPayload, @escaping LoadCompletion) -> Void
@@ -103,7 +90,7 @@ private extension EntryCacheCoordinatorComposer {
     
     func composeLoader() -> any Loader<LoadPayload, [Entry], Error> {
         
-        return FallbackCacheLoader<Payload, [Entry], Error>(
+        return FallbackCacheLoader<EntryPayload, [Entry], Error>(
             primaryLoad: { payload, completion in
                 
                 Task {
@@ -130,21 +117,6 @@ private extension EntryCacheCoordinatorComposer {
                     await self.entryCache.cache(entries)
                 }
             }
-        )
-    }
-}
-
-extension FallbackCacheLoader {
-    
-    convenience init(
-        primaryLoad: @escaping (Payload, @escaping (Result<Success, Error>) -> Void) -> Void,
-        secondaryLoad: @escaping (Payload, @escaping (LoadResult) -> Void) -> Void,
-        cache: @escaping (Payload, Success) -> Void
-    ) {
-        self.init(
-            primaryLoader: AnyLoader(load: primaryLoad),
-            secondaryLoader: AnyLoader(load: secondaryLoad),
-            cache: cache
         )
     }
 }
@@ -209,7 +181,7 @@ final class EntryCacheCoordinatorComposerTests: XCTestCase {
     
     private func anyPayload(
         lastID: Entry.ID? = nil
-    ) -> Payload<Entry> {
+    ) -> EntryPayload<Entry> {
         
         return .init(lastID: lastID)
     }
@@ -244,7 +216,7 @@ final class EntryCacheCoordinatorComposerTests: XCTestCase {
     
     private func assert(
         _ load: Load,
-        with payload: Payload<Entry>? = nil,
+        with payload: EntryPayload<Entry>? = nil,
         toDeliver expectedResult: Composer.LoadResult,
         file: StaticString = #file,
         line: UInt = #line

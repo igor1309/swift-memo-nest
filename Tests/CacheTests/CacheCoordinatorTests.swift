@@ -5,8 +5,15 @@
 //  Created by Igor Malyarov on 20.07.2024.
 //
 
-final class CacheCoordinator {
+final class CacheCoordinator<Entry> {
     
+}
+
+extension CacheCoordinator {
+    
+    func load(
+        
+    ){}
 }
 
 import Cache
@@ -16,7 +23,7 @@ final class CacheCoordinatorTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private typealias SUT = CacheCoordinator
+    private typealias SUT = CacheCoordinator<String>
     
     private func makeSUT(
         file: StaticString = #file,
