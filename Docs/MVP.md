@@ -1,8 +1,8 @@
-## MVP: initial version of NoteNest
+# MVP: initial version of NoteNest
 
-### User Stories
+## User Stories
 
-#### 1. Adding a New Entry
+### 1. Adding a New Entry
 
 **As a user, I want to add a new entry, so that I can save and organize my notes, tags, and links.**
 
@@ -14,7 +14,7 @@
   - The user can cancel the entry creation by tapping a "Cancel" button, which discards the entry and returns to the list view.
   - The entry is saved and displayed in the list view if "Save" is tapped.
 
-#### 2. Viewing the Entry List
+### 2. Viewing the Entry List
 
 **As a user, I want to see a paginated list of my entries, so that I can easily browse and find specific notes.**
 
@@ -25,7 +25,7 @@
   - A search bar is present to filter entries by title, tags, and content.
   - Tapping an entry navigates to the detailed view of the entry.
 
-#### 3. Viewing Entry Details
+### 3. Viewing Entry Details
 
 **As a user, I want to view the details of an entry, so that I can see the full note content, tags, and primary link.**
 
@@ -35,7 +35,7 @@
   - The detailed view displays the title, tags, primary link, and full note content.
   - An "Edit" button is present to modify the entry.
 
-#### 4. Editing an Entry
+### 4. Editing an Entry
 
 **As a user, I want to edit an existing entry, so that I can update its information as needed.**
 
@@ -47,7 +47,7 @@
   - Changes can be discarded by tapping a "Cancel" button, which returns to the detailed view without saving changes.
   - The updated entry is saved and reflected in the list view if "Save" is tapped.
 
-#### 5. Searching Entries
+### 5. Searching Entries
 
 **As a user, I want to search for entries by keywords, so that I can quickly find specific notes.**
 
@@ -57,7 +57,7 @@
   - Users can enter keywords to filter entries by title, tags, and content.
   - The list updates in real-time to display only the entries that match the search criteria.
 
-### Additional Considerations
+## Additional Considerations
 
 - **User Authentication:** Consider adding user authentication for secure access to personal notes.
 - **Data Backup:** Implement data backup options, such as cloud sync, to ensure data safety.
