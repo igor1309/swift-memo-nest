@@ -201,15 +201,15 @@ final class CodableEntryStoreTests: XCTestCase {
     
     private func setupEmptyStoreState() {
         
-        clearArtifacts()
+        clearArtefacts()
     }
     
     private func undoStoreSideEffects() {
         
-        clearArtifacts()
+        clearArtefacts()
     }
     
-    private func clearArtifacts() {
+    private func clearArtefacts() {
         
         try? FileManager.default.removeItem(at: testStoreURL())
     }
