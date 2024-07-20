@@ -1,0 +1,52 @@
+{
+  "configurations" : [
+    {
+      "id" : "4307FFE4-06B2-435A-8333-9F10F30E68EA",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CacheInfraTests",
+        "name" : "CacheInfraTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "EntryFilterFeatureTests",
+        "name" : "EntryFilterFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "EntryListFeatureTests",
+        "name" : "EntryListFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SortBuilderFeatureTests",
+        "name" : "SortBuilderFeatureTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ToolsTests",
+        "name" : "ToolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}
