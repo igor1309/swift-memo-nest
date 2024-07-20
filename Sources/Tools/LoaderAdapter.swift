@@ -50,3 +50,20 @@ extension LoaderAdapter: Loader {
         }
     }
 }
+
+public extension LoaderAdapter
+where NewPayload == OriginalLoader.Payload {
+    
+    convenience init(
+        originalLoader: OriginalLoader,
+        mapSuccess: @escaping (OriginalLoader.Success) -> NewSuccess,
+        mapFailure: @escaping (OriginalLoader.Failure) -> NewFailure
+    ) {
+        self.init(
+            originalLoader: originalLoader,
+            mapPayload: { $0 },
+            mapSuccess: mapSuccess,
+            mapFailure: mapFailure
+        )
+    }
+}
