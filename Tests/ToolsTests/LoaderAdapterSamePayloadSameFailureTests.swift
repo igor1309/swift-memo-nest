@@ -60,10 +60,7 @@ final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
         let originalLoader = OriginalLoader()
         let sut = SUT(
             originalLoader: originalLoader,
-            mapSuccess: { (originalSuccess: Int) -> String in
-                
-                return "Success: \(originalSuccess)"
-            }
+            mapSuccess: { return "Success: \($0)" }
         )
         
         trackForMemoryLeaks(sut, file: file, line: line)
