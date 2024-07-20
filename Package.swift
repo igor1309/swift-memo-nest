@@ -16,7 +16,6 @@ let package = Package(
         .entryFilterFeature,
         .entryListFeature,
         .sortBuilderFeature,
-        .tools,
         .uiPrimitives,
     ],
     dependencies: [
@@ -35,8 +34,6 @@ let package = Package(
         .entryListFeatureTests,
         .sortBuilderFeature,
         .sortBuilderFeatureTests,
-        .tools,
-        .toolsTests,
         .uiPrimitives,
     ]
 )
@@ -85,13 +82,6 @@ private extension Product {
         ]
     )
     
-    static let tools = library(
-        name: .tools,
-        targets: [
-            .tools,
-        ]
-    )
-    
     static let uiPrimitives = library(
         name: .uiPrimitives,
         targets: [
@@ -106,7 +96,6 @@ private extension Target {
         name: .cache,
         dependencies: [
             .cacheInfra,
-            .tools
         ]
     )
     static let cacheTests = testTarget(
@@ -181,21 +170,6 @@ private extension Target {
         ]
     )
     
-    static let tools = target(
-        name: .tools,
-        dependencies: [
-            .uiPrimitives,
-            .imRx
-        ]
-    )
-    static let toolsTests = testTarget(
-        name: .toolsTests,
-        dependencies: [
-            .customDump,
-            .tools
-        ]
-    )
-    
     static let uiPrimitives = target(name: .uiPrimitives)
 }
 
@@ -212,8 +186,6 @@ private extension Target.Dependency {
     static let entryListFeature: Self = byName(name: .entryListFeature)
     
     static let sortBuilderFeature: Self = byName(name: .sortBuilderFeature)
-    
-    static let tools: Self = byName(name: .tools)
     
     static let uiPrimitives: Self = byName(name: .uiPrimitives)
 }
@@ -236,9 +208,6 @@ private extension String {
     
     static let sortBuilderFeature = "SortBuilderFeature"
     static let sortBuilderFeatureTests = "SortBuilderFeatureTests"
-    
-    static let tools = "Tools"
-    static let toolsTests = "ToolsTests"
     
     static let uiPrimitives = "UIPrimitives"
 }

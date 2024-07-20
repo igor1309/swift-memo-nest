@@ -85,20 +85,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Tools"
-               BuildableName = "Tools"
-               BlueprintName = "Tools"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "UIPrimitives"
                BuildableName = "UIPrimitives"
                BlueprintName = "UIPrimitives"
@@ -156,16 +142,6 @@
                BlueprintIdentifier = "SortBuilderFeatureTests"
                BuildableName = "SortBuilderFeatureTests"
                BlueprintName = "SortBuilderFeatureTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToolsTests"
-               BuildableName = "ToolsTests"
-               BlueprintName = "ToolsTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

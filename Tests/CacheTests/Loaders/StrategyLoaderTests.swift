@@ -5,8 +5,8 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
+import Cache
 import XCTest
-import Tools
 
 final class StrategyLoaderTests: XCTestCase {
     

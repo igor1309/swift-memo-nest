@@ -48,7 +48,7 @@ extension FallbackCacheLoader: Loader {
     
     public func load(
         _ payload: Payload,
-        _ completion: @escaping (LoadResult) -> Void
+        _ completion: @escaping (Result<Success, Failure>) -> Void
     ) {
         loader.load(payload, completion)
     }

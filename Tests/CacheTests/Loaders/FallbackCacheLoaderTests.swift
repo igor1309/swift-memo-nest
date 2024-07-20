@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 16.07.2024.
 //
 
-import Tools
+import Cache
 import XCTest
 
 final class FallbackCacheLoaderTests: XCTestCase {

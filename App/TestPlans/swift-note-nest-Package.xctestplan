@@ -14,44 +14,37 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..",
         "identifier" : "CacheInfraTests",
         "name" : "CacheInfraTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..",
         "identifier" : "CacheTests",
         "name" : "CacheTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..",
         "identifier" : "EntryFilterFeatureTests",
         "name" : "EntryFilterFeatureTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..",
         "identifier" : "EntryListFeatureTests",
         "name" : "EntryListFeatureTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:..",
         "identifier" : "SortBuilderFeatureTests",
         "name" : "SortBuilderFeatureTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "ToolsTests",
-        "name" : "ToolsTests"
       }
     }
   ],

@@ -1,14 +1,14 @@
 //
-//  LoaderAdapterSamePayloadSameFailureTests.swift
+//  LoaderAdapterSamePayloadSameSuccessTests.swift
 //
 //
 //  Created by Igor Malyarov on 20.07.2024.
 //
 
-import Tools
+import Cache
 import XCTest
 
-final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
+final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
     
     func test_load_shouldDeliverFailureOnOriginalFailure() {
         
@@ -25,7 +25,7 @@ final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
         
         let (sut, originalLoader) = makeSUT()
         
-        expect(sut, toCompleteWith: .success("Success: 13")) {
+        expect(sut, toCompleteWith: .success(13)) {
             
             originalLoader.complete(with: .success(13))
         }
@@ -48,7 +48,7 @@ final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
     // MARK: - Helpers
     
     private typealias OriginalLoader = Spy<String, Int, OriginalError>
-    private typealias SUT = LoaderAdapter<OriginalLoader, String, String, OriginalError>
+    private typealias SUT = LoaderAdapter<OriginalLoader, String, Int, TestError>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -60,7 +60,7 @@ final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
         let originalLoader = OriginalLoader()
         let sut = SUT(
             originalLoader: originalLoader,
-            mapSuccess: { return "Success: \($0)" }
+            mapFailure: { return .init(message: $0.message) }
         )
         
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -70,6 +70,11 @@ final class LoaderAdapterSamePayloadSameFailureTests: XCTestCase {
     }
     
     private struct OriginalError: Error, Equatable {
+        
+        let message: String
+    }
+    
+    private struct TestError: Error, Equatable {
         
         let message: String
     }

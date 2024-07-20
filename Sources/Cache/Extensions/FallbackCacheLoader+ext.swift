@@ -5,8 +5,6 @@
 //  Created by Igor Malyarov on 20.07.2024.
 //
 
-import Tools
-
 public extension FallbackCacheLoader {
     
     convenience init(

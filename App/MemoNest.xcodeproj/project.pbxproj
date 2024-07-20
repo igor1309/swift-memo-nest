@@ -13,7 +13,6 @@
 		2A1E993E2C4B765100599C74 /* EntryFilterFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993D2C4B765100599C74 /* EntryFilterFeature */; };
 		2A1E99402C4B765100599C74 /* EntryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E993F2C4B765100599C74 /* EntryListFeature */; };
 		2A1E99422C4B765100599C74 /* SortBuilderFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99412C4B765100599C74 /* SortBuilderFeature */; };
-		2A1E99442C4B765100599C74 /* Tools in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99432C4B765100599C74 /* Tools */; };
 		2A1E99462C4B765100599C74 /* UIPrimitives in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1E99452C4B765100599C74 /* UIPrimitives */; };
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
 		2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D942C464B7E008E7EB6 /* IMTools */; };
@@ -103,7 +102,6 @@
 		2AA86A242C4A74BC009BC197 /* iOS-CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "iOS-CI.xctestplan"; path = "TestPlans/iOS-CI.xctestplan"; sourceTree = "<group>"; };
 		2AA86A252C4AB575009BC197 /* anyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyError.swift; sourceTree = "<group>"; };
 		2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTAssertNoDiff.swift; sourceTree = "<group>"; };
-		2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Tools.xctestplan; path = TestPlans/Tools.xctestplan; sourceTree = "<group>"; };
 		2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MemoNest.xctestplan; path = TestPlans/MemoNest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,7 +118,6 @@
 				2A1E99462C4B765100599C74 /* UIPrimitives in Frameworks */,
 				2A1E993A2C4B765100599C74 /* CacheInfra in Frameworks */,
 				2A1E99422C4B765100599C74 /* SortBuilderFeature in Frameworks */,
-				2A1E99442C4B765100599C74 /* Tools in Frameworks */,
 				2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */,
 				2A1E99402C4B765100599C74 /* EntryListFeature in Frameworks */,
 			);
@@ -176,7 +173,6 @@
 				2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */,
 				2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */,
 				2A0468692C494C0800C90DA7 /* SortBuilderFeature.xctestplan */,
-				2ABB5CD52C46BA8C00D6822C /* Tools.xctestplan */,
 			);
 			name = TestPlans;
 			sourceTree = "<group>";
@@ -363,7 +359,6 @@
 				2A1E993D2C4B765100599C74 /* EntryFilterFeature */,
 				2A1E993F2C4B765100599C74 /* EntryListFeature */,
 				2A1E99412C4B765100599C74 /* SortBuilderFeature */,
-				2A1E99432C4B765100599C74 /* Tools */,
 				2A1E99452C4B765100599C74 /* UIPrimitives */,
 				2A0C033D2C4BA3DE00DC8179 /* Cache */,
 			);
@@ -812,10 +807,6 @@
 		2A1E99412C4B765100599C74 /* SortBuilderFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SortBuilderFeature;
-		};
-		2A1E99432C4B765100599C74 /* Tools */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Tools;
 		};
 		2A1E99452C4B765100599C74 /* UIPrimitives */ = {
 			isa = XCSwiftPackageProductDependency;

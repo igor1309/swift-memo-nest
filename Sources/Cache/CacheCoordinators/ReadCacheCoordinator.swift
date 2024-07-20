@@ -6,7 +6,6 @@
 //
 
 import CacheInfra
-import Tools
 
 /// A coordinator that manages read operations from a cache and falls back to a retrieval function if necessary.
 /// It leverages a `Payload` for filtering and sorting entries and an `Entry` that must be identifiable.

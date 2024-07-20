@@ -1,21 +1,21 @@
 //
-//  LoaderAdapterSamePayloadSameSuccessTests.swift
+//  LoaderAdapterTests.swift
 //
 //
 //  Created by Igor Malyarov on 20.07.2024.
 //
 
-import Tools
+import Cache
 import XCTest
 
-final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
+final class LoaderAdapterTests: XCTestCase {
     
     func test_load_shouldDeliverFailureOnOriginalFailure() {
         
         let message = anyMessage()
         let (sut, originalLoader) = makeSUT()
         
-        expect(sut, toCompleteWith: .failure(.init(message: message))) {
+        expect(sut, with: 0, toCompleteWith: .failure(.init(message: message))) {
             
             originalLoader.complete(with: .failure(.init(message: message)))
         }
@@ -25,7 +25,7 @@ final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
         
         let (sut, originalLoader) = makeSUT()
         
-        expect(sut, toCompleteWith: .success(13)) {
+        expect(sut, with: 42, toCompleteWith: .success("Success: 13")) {
             
             originalLoader.complete(with: .success(13))
         }
@@ -38,7 +38,7 @@ final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
         (sut, originalLoader) = makeSUT()
         var result: SUT.LoadResult?
         
-        sut?.load("42") { result = $0 }
+        sut?.load(42) { result = $0 }
         sut = nil
         originalLoader.complete(with: .failure(.init(message: anyMessage())))
         
@@ -48,7 +48,7 @@ final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
     // MARK: - Helpers
     
     private typealias OriginalLoader = Spy<String, Int, OriginalError>
-    private typealias SUT = LoaderAdapter<OriginalLoader, String, Int, TestError>
+    private typealias SUT = LoaderAdapter<OriginalLoader, Int, String, TestError>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -60,7 +60,18 @@ final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
         let originalLoader = OriginalLoader()
         let sut = SUT(
             originalLoader: originalLoader,
-            mapFailure: { return .init(message: $0.message) }
+            mapPayload: { (newPayload: Int) -> String in
+                
+                return "Payload: \(newPayload)"
+            },
+            mapSuccess: { (originalSuccess: Int) -> String in
+                
+                return "Success: \(originalSuccess)"
+            },
+            mapFailure: { (originalFailure: OriginalError) -> TestError in
+                
+                return TestError(message: originalFailure.message)
+            }
         )
         
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -81,7 +92,7 @@ final class LoaderAdapterSamePayloadSameSuccessTests: XCTestCase {
     
     private func expect(
         _ sut: SUT,
-        with payload: String = anyMessage(),
+        with payload: Int,
         toCompleteWith expectedResult: SUT.LoadResult,
         on action: @escaping () -> Void,
         file: StaticString = #file,
