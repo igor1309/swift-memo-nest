@@ -21,14 +21,6 @@ where Item: Identifiable {
 
 public extension InMemoryCache {
     
-    func retrieveAll() async throws -> [Item] {
-        
-        #warning("add tests")
-        guard let items else { throw UninitialisedCacheFailure() }
-
-        return items
-    }
-    
     /// Retrieves items from the cache that match the given predicate.
     /// - Parameters:
     ///   - predicate: A closure that takes an item as its argument and returns a Boolean value indicating whether the item should be included in the returned array.
@@ -36,18 +28,27 @@ public extension InMemoryCache {
     /// - Throws: `UninitialisedCacheFailure` if the cache is uninitialised.
     /// - Returns: An array of items that match the predicate, optionally sorted by the given closure.
     func retrieve(
-        predicate: (Item) -> Bool,
+        predicate: ((Item) -> Bool)?,
         areInIncreasingOrder: ((Item, Item) -> Bool)?
     ) throws -> [Item] {
         
         guard let items else { throw UninitialisedCacheFailure() }
         
-        let filtered = items.filter(predicate)
-        
-        if let areInIncreasingOrder {
-            return filtered.sorted(by: areInIncreasingOrder)
-        } else {
-            return filtered
+        #warning("improve tests to cover all cases")
+        switch (predicate, areInIncreasingOrder) {
+        case (.none, .none):
+            return items
+            
+        case let (.some(predicate), .none):
+            return items.filter(predicate)
+            
+        case let (.none, .some(areInIncreasingOrder)):
+            return items.sorted(by: areInIncreasingOrder)
+            
+        case let (.some(predicate), .some(areInIncreasingOrder)):
+            return items
+                .filter(predicate)
+                .sorted(by: areInIncreasingOrder)
         }
     }
     

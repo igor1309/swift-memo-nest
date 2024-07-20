@@ -263,7 +263,7 @@ final class InMemoryCacheTests: XCTestCase {
     
     private func retrieve(
         _ sut: SUT? = nil,
-        filter predicate: (Item) -> Bool = { _ in true },
+        filter predicate: ((Item) -> Bool)? = { _ in true },
         areInIncreasingOrder: ((Item, Item) -> Bool)? = nil
     ) async throws -> [Item] {
         

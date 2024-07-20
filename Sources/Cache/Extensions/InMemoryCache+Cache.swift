@@ -9,6 +9,11 @@ import CacheInfra
 
 extension InMemoryCache: Cache {
     
+    public func retrieveAll() async throws -> [Item] {
+        
+        try retrieve(predicate: nil, areInIncreasingOrder: nil)
+    }
+    
     public func remove(_ item : Item) async throws {
         
         try remove(byID: item.id)
