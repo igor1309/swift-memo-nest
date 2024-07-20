@@ -94,55 +94,6 @@ final class ReadCacheCoordinatorTests: XCTestCase {
         return (sut, entryCache, retrieveSpy)
     }
     
-    private func anyPayload(
-        value: String = anyMessage()
-    ) -> Payload {
-        
-        return .init(value: value)
-    }
-    
-    private func makeEntry(
-        id: UUID = .init(),
-        value: String = anyMessage()
-    ) -> Entry {
-        
-        return .init(id: id, value: value)
-    }
-    
-    private func makeEntries(
-        count: Int = .random(in: 0..<13)
-    ) -> [Entry] {
-        
-        let entries = (0..<count).map { _ in makeEntry() }
-        precondition(entries.count == count)
-        
-        return entries
-    }
-    
-    private struct Payload: Filtering & Sorting {
-        
-        let value: String
-        
-        func predicate(_ entry: Entry) -> Bool {
-            
-            return true
-        }
-        
-        func areInIncreasingOrder(
-            _ lhs: Entry,
-            _ rhs: Entry
-        ) -> Bool {
-            
-            return true
-        }
-    }
-    
-    private struct Entry: Equatable, Identifiable {
-        
-        let id: UUID
-        let value: String
-    }
-    
     private func expect(
         sut: SUT? = nil,
         with payload: Payload? = nil,

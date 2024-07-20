@@ -21,6 +21,14 @@ where Item: Identifiable {
 
 public extension InMemoryCache {
     
+    func retrieveAll() async throws -> [Item] {
+        
+        #warning("add tests")
+        guard let items else { throw UninitialisedCacheFailure() }
+
+        return items
+    }
+    
     /// Retrieves items from the cache that match the given predicate.
     /// - Parameters:
     ///   - predicate: A closure that takes an item as its argument and returns a Boolean value indicating whether the item should be included in the returned array.
