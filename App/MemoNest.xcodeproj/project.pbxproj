@@ -93,6 +93,7 @@
 		2AA27D022C48198B0032FA1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AA27D032C48198B0032FA1F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2AA27D042C48198B0032FA1F /* NoteNestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteNestApp.swift; sourceTree = "<group>"; };
+		2AA784452C4B7B30007A127D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2AA86A062C4A5135009BC197 /* CacheInfra.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CacheInfra.xctestplan; path = TestPlans/CacheInfra.xctestplan; sourceTree = "<group>"; };
 		2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoNestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AA86A142C4A70F1009BC197 /* EntryLoaderIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoaderIntegrationTests.swift; sourceTree = "<group>"; };
@@ -256,6 +257,7 @@
 		2AA27D052C48198B0032FA1F /* MemoNest */ = {
 			isa = PBXGroup;
 			children = (
+				2AA784452C4B7B30007A127D /* Info.plist */,
 				2AA27D042C48198B0032FA1F /* NoteNestApp.swift */,
 				2AA27D032C48198B0032FA1F /* ContentView.swift */,
 				2AA27CE62C48198B0032FA1F /* CompositionRoot */,
@@ -632,6 +634,7 @@
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MemoNest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MemoNest;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -662,6 +665,7 @@
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MemoNest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MemoNest;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
