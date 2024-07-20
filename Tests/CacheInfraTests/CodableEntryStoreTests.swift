@@ -63,44 +63,40 @@ final class CodableEntryStoreTests: XCTestCase {
         expect(sut, toRetrieve: .success(entries))
     }
     
-    func test_retrieve_shouldDeliverErrorOnRetrievalFailure() {
+    func test_retrieve_shouldDeliverErrorOnRetrievalFailure() throws {
         
         let storeURL = testStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
-        XCTAssertNoThrow {
-            try "invalid data".write(to: storeURL, atomically: true, encoding: .utf8)
-            
-            XCTAssertThrowsError(_ = try sut.retrieve())
-        }
+        try "invalid data".write(to: storeURL, atomically: true, encoding: .utf8)
+        
+        XCTAssertThrowsError(_ = try sut.retrieve())
     }
     
-    func test_retrieve_shouldHaveNoSideEffectsOnRetrievalFailure() {
+    func test_retrieve_shouldHaveNoSideEffectsOnRetrievalFailure() throws {
         
         let storeURL = testStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
-        XCTAssertNoThrow {
-            try "invalid data".write(to: storeURL, atomically: true, encoding: .utf8)
-            
-            XCTAssertThrowsError(_ = try sut.retrieve())
-            XCTAssertThrowsError(_ = try sut.retrieve())
-        }
+        try "invalid data".write(to: storeURL, atomically: true, encoding: .utf8)
+        
+        XCTAssertThrowsError(_ = try sut.retrieve())
+        XCTAssertThrowsError(_ = try sut.retrieve())
     }
     
     func test_insert_shouldDeliverNoErrorOnEmptyCache() throws {
         
         let sut = makeSUT()
         
-        XCTAssertNoThrow(try sut.insert(makeEntries()))
+        try sut.insert(makeEntries())
     }
     
     func test_insert_shouldDeliverNoErrorOnNonEmptyCache() throws {
         
         let sut = makeSUT()
         
-        XCTAssertNoThrow(try sut.insert(makeEntries()))
-        XCTAssertNoThrow(try sut.insert(makeEntries()))
+        try sut.insert(makeEntries())
+        try sut.insert(makeEntries())
     }
     
     func test_insert_shouldOverridePreviouslyInsertedCache() throws {
@@ -153,7 +149,7 @@ final class CodableEntryStoreTests: XCTestCase {
         try sut.insert(entries)
         expect(sut, toRetrieve: .success(entries))
         
-        XCTAssertNoThrow(try sut.delete())
+        try sut.delete()
     }
     
     func test_delete_shouldEmptyPreviouslyInsertedCache() throws {
