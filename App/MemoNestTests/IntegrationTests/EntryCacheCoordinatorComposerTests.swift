@@ -55,29 +55,18 @@ extension InMemoryCache {
             // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
         )
     }
-//    func retrieve<Payload>(
-//        payload: Payload
-//    ) throws -> [Item] where Payload: Filtering<Item> & Sorting<Item> {
-//        
-//#warning("restore `areInIncreasingOrder` line")
-//        return try retrieve(
-//            predicate: payload.predicate(_:),
-//            areInIncreasingOrder: nil
-//            // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
-//        )
-//    }
+    //    func retrieve<Payload>(
+    //        payload: Payload
+    //    ) throws -> [Item] where Payload: Filtering<Item> & Sorting<Item> {
+    //
+    //#warning("restore `areInIncreasingOrder` line")
+    //        return try retrieve(
+    //            predicate: payload.predicate(_:),
+    //            areInIncreasingOrder: nil
+    //            // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
+    //        )
+    //    }
 }
-
-protocol Store<Item> {
-    
-    associatedtype Item
-    
-    func retrieve() throws -> [Item]
-    func insert(_: [Item]) throws
-    func delete() throws
-}
-
-extension CodableEntryStore: Store {}
 
 import Foundation
 
@@ -99,14 +88,22 @@ final class EntryCacheCoordinatorComposer<Entry: Identifiable> {
 
 extension EntryCacheCoordinatorComposer {
     
+    func composeLoad() -> Load {
+        
+        return composeLoader().load(_:_:)
+    }
+    
     typealias LoadPayload = Payload<Entry>
     typealias LoadResult = Result<[Entry], Error>
     typealias LoadCompletion = (LoadResult) -> Void
     typealias Load = (LoadPayload, @escaping LoadCompletion) -> Void
+}
+
+private extension EntryCacheCoordinatorComposer {
     
-    func composeLoad() -> Load {
+    func composeLoader() -> any Loader<LoadPayload, [Entry], Error> {
         
-        let loader = FallbackCacheLoader<Payload, [Entry], Error>(
+        return FallbackCacheLoader<Payload, [Entry], Error>(
             primaryLoad: { payload, completion in
                 
                 Task {
@@ -134,8 +131,6 @@ extension EntryCacheCoordinatorComposer {
                 }
             }
         )
-        
-        return loader.load(_:_:)
     }
 }
 
@@ -175,19 +170,19 @@ final class EntryCacheCoordinatorComposerTests: XCTestCase {
         
         let load = makeSUT().load
         
-        assert(load, with: anyPayload(), toDeliver: .failure(anyError()))
+        assert(load, toDeliver: .failure(anyError()))
     }
     
     // MARK: - Helpers
-
+    
     private typealias Entry = MemoNest.Entry
-
+    
     private typealias Composer = EntryCacheCoordinatorComposer<Entry>
     private typealias Load = Composer.Load
     
     private typealias EntryCache = InMemoryCache<Entry>
     private typealias PersistentStore = CodableEntryStore
-
+    
     private func makeSUT(
         storeURL: URL? = nil,
         file: StaticString = #file,
@@ -249,14 +244,14 @@ final class EntryCacheCoordinatorComposerTests: XCTestCase {
     
     private func assert(
         _ load: Load,
-        with payload: Payload<Entry>,
+        with payload: Payload<Entry>? = nil,
         toDeliver expectedResult: Composer.LoadResult,
         file: StaticString = #file,
         line: UInt = #line
     ) {
         let exp = expectation(description: "wait for completion")
         
-        load(.init(lastID: nil)) {
+        load(payload ?? anyPayload()) {
             
             switch ($0, expectedResult) {
             case (.failure, .failure):
