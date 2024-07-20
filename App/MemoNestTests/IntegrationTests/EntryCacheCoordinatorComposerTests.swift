@@ -6,26 +6,10 @@
 //
 
 import CacheInfra
+@testable import MemoNest
 import Tools
 
-extension Entry: Identifiable {}
-
-extension FallbackCacheLoader {
-    
-    convenience init(
-        primaryLoad: @escaping (Payload, @escaping (Result<Success, Error>) -> Void) -> Void,
-        secondaryLoad: @escaping (Payload, @escaping (LoadResult) -> Void) -> Void,
-        cache: @escaping (Payload, Success) -> Void
-    ) {
-        self.init(
-            primaryLoader: AnyLoader(load: primaryLoad),
-            secondaryLoader: AnyLoader(load: secondaryLoad),
-            cache: cache
-        )
-    }
-}
-
-struct Payload: Equatable, Filtering, Sorting{
+struct Payload<Entry: Identifiable>: Filtering, Sorting {
     
     let lastID: Entry.ID?
     
@@ -41,6 +25,8 @@ struct Payload: Equatable, Filtering, Sorting{
         return true
     }
 }
+
+extension Payload: Equatable where Entry: Equatable {}
 
 protocol Filtering<Item> {
     
@@ -59,7 +45,7 @@ protocol Sorting<Item> {
 extension InMemoryCache {
     
     func retrieve<Payload>(
-        payload: Payload
+        for payload: Payload
     ) throws -> [Item] where Payload: Filtering<Item> & Sorting<Item> {
         
 #warning("restore `areInIncreasingOrder` line")
@@ -69,6 +55,17 @@ extension InMemoryCache {
             // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
         )
     }
+//    func retrieve<Payload>(
+//        payload: Payload
+//    ) throws -> [Item] where Payload: Filtering<Item> & Sorting<Item> {
+//        
+//#warning("restore `areInIncreasingOrder` line")
+//        return try retrieve(
+//            predicate: payload.predicate(_:),
+//            areInIncreasingOrder: nil
+//            // areInIncreasingOrder: payload.areInIncreasingOrder(_:_:)
+//        )
+//    }
 }
 
 protocol Store<Item> {
@@ -84,25 +81,28 @@ extension CodableEntryStore: Store {}
 
 import Foundation
 
-final class EntryLoaderComposer {
+final class EntryCacheCoordinatorComposer<Entry: Identifiable> {
     
     private let entryCache: InMemoryCache<Entry>
-    private let persistent: any Store<Entry>
+    private let retrieve: Retrieve
     
     init(
         entryCache: InMemoryCache<Entry>,
-        persistent: any Store<Entry>
+        retrieve: @escaping Retrieve
     ) {
         self.entryCache = entryCache
-        self.persistent = persistent
+        self.retrieve = retrieve
     }
+    
+    typealias Retrieve = () throws -> [Entry]
 }
 
-extension EntryLoaderComposer {
+extension EntryCacheCoordinatorComposer {
     
+    typealias LoadPayload = Payload<Entry>
     typealias LoadResult = Result<[Entry], Error>
     typealias LoadCompletion = (LoadResult) -> Void
-    typealias Load = (Payload, @escaping LoadCompletion) -> Void
+    typealias Load = (LoadPayload, @escaping LoadCompletion) -> Void
     
     func composeLoad() -> Load {
         
@@ -112,7 +112,7 @@ extension EntryLoaderComposer {
                 Task {
                     
                     do {
-                        let items = try await self.entryCache.retrieve(payload: payload)
+                        let items = try await self.entryCache.retrieve(for: payload)
                         completion(.success(items))
                     } catch {
                         completion(.failure(error))
@@ -123,7 +123,7 @@ extension EntryLoaderComposer {
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     
-                    completion(.init { try self.persistent.retrieve() })
+                    completion(.init { try self.retrieve() })
                 }
             },
             cache: { _, entries in
@@ -139,24 +139,36 @@ extension EntryLoaderComposer {
     }
 }
 
+extension FallbackCacheLoader {
+    
+    convenience init(
+        primaryLoad: @escaping (Payload, @escaping (Result<Success, Error>) -> Void) -> Void,
+        secondaryLoad: @escaping (Payload, @escaping (LoadResult) -> Void) -> Void,
+        cache: @escaping (Payload, Success) -> Void
+    ) {
+        self.init(
+            primaryLoader: AnyLoader(load: primaryLoad),
+            secondaryLoader: AnyLoader(load: secondaryLoad),
+            cache: cache
+        )
+    }
+}
+
 import MemoNest
 import XCTest
 
-final class EntryLoaderComposerTests: XCTestCase {
+final class EntryCacheCoordinatorComposerTests: XCTestCase {
     
     override func setUp() {
+        
         super.setUp()
         setupEmptyStoreState()
     }
     
     override func tearDown() {
+        
         super.tearDown()
         undoStoreSideEffects()
-    }
-    
-    func test_init() {
-        
-        _ = makeSUT()
     }
     
     func test_load_shouldDeliverFailureOnUnloadedStore() {
@@ -167,8 +179,10 @@ final class EntryLoaderComposerTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    
-    private typealias Composer = EntryLoaderComposer
+
+    private typealias Entry = MemoNest.Entry
+
+    private typealias Composer = EntryCacheCoordinatorComposer<Entry>
     private typealias Load = Composer.Load
     
     private typealias EntryCache = InMemoryCache<Entry>
@@ -188,7 +202,7 @@ final class EntryLoaderComposerTests: XCTestCase {
         
         let composer = Composer(
             entryCache: entryCache,
-            persistent: persistent
+            retrieve: { try persistent.retrieve().map(Entry.init) }
         )
         
         trackForMemoryLeaks(composer, file: file, line: line)
@@ -200,7 +214,7 @@ final class EntryLoaderComposerTests: XCTestCase {
     
     private func anyPayload(
         lastID: Entry.ID? = nil
-    ) -> Payload {
+    ) -> Payload<Entry> {
         
         return .init(lastID: lastID)
     }
@@ -235,7 +249,7 @@ final class EntryLoaderComposerTests: XCTestCase {
     
     private func assert(
         _ load: Load,
-        with payload: Payload,
+        with payload: Payload<Entry>,
         toDeliver expectedResult: Composer.LoadResult,
         file: StaticString = #file,
         line: UInt = #line
@@ -259,5 +273,21 @@ final class EntryLoaderComposerTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 0.1)
+    }
+}
+
+private extension MemoNest.Entry {
+    
+    init(entry: CacheInfra.Entry) {
+        
+        self.init(
+            id: entry.id,
+            creationDate: entry.creationDate,
+            modificationDate: entry.modificationDate,
+            title: entry.title,
+            url: entry.url,
+            note: entry.note,
+            tags: entry.tags
+        )
     }
 }
