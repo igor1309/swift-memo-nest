@@ -161,7 +161,9 @@ final class EntryLoaderComposerTests: XCTestCase {
     
     func test_load_shouldDeliverFailureOnUnloadedStore() {
         
-        assert(with: anyPayload(), toDeliver: .failure(anyError()))
+        let load = makeSUT().load
+        
+        assert(load, with: anyPayload(), toDeliver: .failure(anyError()))
     }
     
     // MARK: - Helpers
@@ -232,14 +234,12 @@ final class EntryLoaderComposerTests: XCTestCase {
     }
     
     private func assert(
-        load: Load? = nil,
+        _ load: Load,
         with payload: Payload,
         toDeliver expectedResult: Composer.LoadResult,
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let load = load ?? makeSUT(file: file, line: line).load
-        
         let exp = expectation(description: "wait for completion")
         
         load(.init(lastID: nil)) {
