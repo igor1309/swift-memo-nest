@@ -1,6 +1,6 @@
 //
 //  EntryRowLabel.swift
-//  NoteNest
+//  MemoNest
 //
 //  Created by Igor Malyarov on 17.07.2024.
 //

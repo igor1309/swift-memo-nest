@@ -1,6 +1,6 @@
 //
 //  EntryListEffectHandlerMicroServices.swift
-//  NoteNest
+//
 //
 //  Created by Igor Malyarov on 16.07.2024.
 //
@@ -13,7 +13,7 @@ public struct EntryListEffectHandlerMicroServices<Entry: Identifiable> {
     public let loadMoreAfter: LoadMoreAfter
     
     public init(
-        load: @escaping Load, 
+        load: @escaping Load,
         loadMoreAfter: @escaping LoadMoreAfter
     ) {
         self.load = load
