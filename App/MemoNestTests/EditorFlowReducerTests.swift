@@ -5,6 +5,7 @@
 //  Created by Igor Malyarov on 21.07.2024.
 //
 
+/// Represents the possible states of the editor flow.
 enum EditorFlowState<Item> {
     
     case none
@@ -13,6 +14,7 @@ enum EditorFlowState<Item> {
 
 extension EditorFlowState: Equatable where Item: Equatable {}
 
+/// Represents the possible events that can occur in the editor flow.
 enum EditorFlowEvent<Item> {
     
     case complete
@@ -22,6 +24,7 @@ enum EditorFlowEvent<Item> {
 
 extension EditorFlowEvent: Equatable where Item: Equatable {}
 
+/// Represents the possible effects that can result from the editor flow.
 enum EditorFlowEffect<Item> {
     
     case edited(Item)
@@ -29,10 +32,17 @@ enum EditorFlowEffect<Item> {
 
 extension EditorFlowEffect: Equatable where Item: Equatable {}
 
+/// A reducer that handles the state transitions and effects for the editor flow.
 final class EditorFlowReducer<Item> {}
 
 extension EditorFlowReducer {
     
+    /// Reduces the state based on the given event and returns the new state and optional effect.
+    ///
+    /// - Parameters:
+    ///   - state: The current state of the editor flow.
+    ///   - event: The event that triggers a state transition.
+    /// - Returns: A tuple containing the new state and an optional effect.
     func reduce(
         _ state: State,
         _ event: Event
