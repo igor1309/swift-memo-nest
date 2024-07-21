@@ -46,7 +46,6 @@
 		2AA27D1D2C48198B0032FA1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AA27D022C48198B0032FA1F /* Assets.xcassets */; };
 		2AA27D1E2C48198B0032FA1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27D032C48198B0032FA1F /* ContentView.swift */; };
 		2AA27D1F2C48198B0032FA1F /* NoteNestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27D042C48198B0032FA1F /* NoteNestApp.swift */; };
-		2AA86A152C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A142C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift */; };
 		2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */; };
 		2AA86A262C4AB575009BC197 /* anyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A252C4AB575009BC197 /* anyError.swift */; };
 		2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */; };
@@ -103,7 +102,6 @@
 		2AA784452C4B7B30007A127D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2AA86A062C4A5135009BC197 /* CacheInfra.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CacheInfra.xctestplan; path = TestPlans/CacheInfra.xctestplan; sourceTree = "<group>"; };
 		2AA86A0B2C4A709E009BC197 /* MemoNestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoNestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AA86A142C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCacheCoordinatorComposerTests.swift; sourceTree = "<group>"; };
 		2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		2AA86A242C4A74BC009BC197 /* iOS-CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "iOS-CI.xctestplan"; path = "TestPlans/iOS-CI.xctestplan"; sourceTree = "<group>"; };
 		2AA86A252C4AB575009BC197 /* anyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyError.swift; sourceTree = "<group>"; };
@@ -300,7 +298,6 @@
 		2AA86A232C4A7299009BC197 /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				2AA86A142C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift */,
 				2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */,
 			);
 			path = IntegrationTests;
@@ -495,7 +492,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AA86A152C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift in Sources */,
 				2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */,
 				2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */,
 				2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */,

@@ -8,6 +8,25 @@
 import Cache
 import CacheInfra
 
+struct EntryPayload<Entry: Identifiable>: Filtering, Sorting {
+    
+    let lastID: Entry.ID?
+    
+    func predicate(_ entry: Entry) -> Bool {
+        
+#warning("use Predicate/Filter from module")
+        return true
+    }
+    
+    func areInIncreasingOrder(_ lhs: Entry, _ rhs: Entry) -> Bool {
+        
+#warning("use Sort from module")
+        return true
+    }
+}
+
+extension EntryPayload: Equatable where Entry: Equatable {}
+
 extension Entry: Identifiable {}
 
 final class CacheCoordinatorsComposer {
