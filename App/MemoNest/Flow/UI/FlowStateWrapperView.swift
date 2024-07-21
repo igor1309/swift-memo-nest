@@ -33,7 +33,6 @@ struct FlowStateWrapperView: View {
     }
 }
 
-
 extension EntryEditorFeature.Entry {
     
     static let stub: Self = .init(title: UUID().uuidString)

@@ -42,7 +42,7 @@ struct FlowComposerView: View {
     
     var body: some View {
         
-        NavigationStack {
+        NavigationView {
             
             FlowStateWrapperView(model: model)
         }
