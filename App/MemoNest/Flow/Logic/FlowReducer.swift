@@ -42,8 +42,8 @@ extension FlowReducer {
         var effect: Effect?
         
         switch event {
-        case .dismissDestination:
-            state.destination = nil
+        case .dismissModal:
+            state.modal = nil
             
         case let .editor(event):
             reduce(&state, &effect, with: event)
@@ -71,10 +71,10 @@ private extension FlowReducer {
         
         switch editorFlowState {
         case .none:
-            state.destination = .none
+            state.modal = .none
             
         case let .editor(entry):
-            state.destination = .editor(entry)
+            state.modal = .editor(entry)
         }
         
         effect = editorFlowEffect.map(Effect.editor)
@@ -85,7 +85,7 @@ private extension FlowState {
     
     var editorFlowState: EditorFlowState<EntryEditorFeature.Entry> {
         
-        switch destination {
+        switch modal {
         case let .editor(entry):
             return .editor(entry)
             

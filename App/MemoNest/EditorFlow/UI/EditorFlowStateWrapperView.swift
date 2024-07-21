@@ -28,13 +28,14 @@ struct EditorFlowStateWrapperView: View {
             .navigationTitle("EntryEditor")
             .toolbar {
                 
-                ToolbarItem {
+                ToolbarItem(placement: .cancellationAction) {
                     
-                    HStack {
-                        
-                        Button("Cancel") { event(nil) }
-                        Button("Save") { event(entry) }
-                    }
+                    Button("Cancel") { event(nil) }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    
+                    Button("Save") { event(entry) }
                 }
             }
     }

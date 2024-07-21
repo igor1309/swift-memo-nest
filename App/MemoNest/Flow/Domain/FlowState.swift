@@ -10,13 +10,13 @@ import EntryEditorFeature
 /// Represents the state of the flow, including the current destination.
 struct FlowState: Equatable {
     
-    var destination: Destination? = nil
+    var modal: Modal? = nil
 }
 
 extension FlowState {
     
     /// Represents possible destinations within the flow.
-    enum Destination: Equatable {
+    enum Modal: Equatable {
         
         case editor(EntryEditorFeature.Entry?)
     }

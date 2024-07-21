@@ -25,9 +25,9 @@ struct FlowStateWrapperView: View {
             Button("add") { model.event(.editor(.edit(nil))) }
             Button("edit") { model.event(.editor(.edit(.stub))) }
         }
-        .navigationDestination(
-            destination: model.state.destination,
-            dismissDestination: { model.event(.dismissDestination) },
+        .sheet(
+            modal: model.state.modal,
+            dismissModal: { model.event(.dismissModal) },
             content: destinationContent
         )
     }
@@ -38,7 +38,7 @@ extension EntryEditorFeature.Entry {
     static let stub: Self = .init(title: UUID().uuidString)
 }
 
-extension FlowState.Destination: Identifiable {
+extension FlowState.Modal: Identifiable {
     
     var id: ID {
         
@@ -61,15 +61,19 @@ extension FlowStateWrapperView {
 private extension FlowStateWrapperView {
     
     func destinationContent(
-        destination: FlowState.Destination
+        destination: FlowState.Modal
     ) -> some View {
         
         switch destination {
         case let .editor(entry):
-            EditorFlowStateWrapperView(
-                entry: entry,
-                event: { model.event(.editor(.doneEditing($0))) }
-            )
+            NavigationView {
+                
+                EditorFlowStateWrapperView(
+                    entry: entry,
+                    event: { model.event(.editor(.doneEditing($0))) }
+                )
+                .navigationBarTitleDisplayMode(.inline)
+            }
         }
     }
 }

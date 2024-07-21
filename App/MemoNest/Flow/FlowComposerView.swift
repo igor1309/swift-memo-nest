@@ -13,7 +13,7 @@ struct FlowComposerView: View {
     
     private let model: FlowModel
     
-    init(destination: FlowState.Destination? = nil) {
+    init(modal: FlowState.Modal? = nil) {
         
         typealias Entry = EntryEditorFeature.Entry
         
@@ -34,7 +34,7 @@ struct FlowComposerView: View {
         )
         
         self.model = .init(
-            initialState: .init(destination: destination),
+            initialState: .init(modal: modal),
             reduce: reducer.reduce(_:_:),
             handleEffect: effectHandler.handleEffect(_:_:)
         )

@@ -11,29 +11,29 @@ import XCTest
 
 final class FlowReducerTests: XCTestCase {
     
-    // MARK: - dismissDestination
+    // MARK: - dismissModal
     
-    func test_dismissDestination_shouldResetDestination() {
+    func test_dismissModal_shouldResetModal() {
         
         let (sut, _) = makeSUT()
 
-        let (state, _) = sut.reduce(.init(destination: .editor(makeEntry())), .dismissDestination)
+        let (state, _) = sut.reduce(.init(modal: .editor(makeEntry())), .dismissModal)
         
-        XCTAssertNil(state.destination)
+        XCTAssertNil(state.modal)
     }
     
-    func test_dismissDestination_shouldNotDeliverEffect() {
+    func test_dismissModal_shouldNotDeliverEffect() {
         
         let (sut, _) = makeSUT()
 
-        let (_, effect) = sut.reduce(.init(destination: .editor(makeEntry())), .dismissDestination)
+        let (_, effect) = sut.reduce(.init(modal: .editor(makeEntry())), .dismissModal)
         
         XCTAssertNil(effect)
     }
     
     // MARK: - editor event
     
-    func test_editor_complete_shouldCallEditorReduceOnNilDestination() {
+    func test_editor_complete_shouldCallEditorReduceOnNilModal() {
         
         let (sut, spy) = makeSUT()
         
@@ -43,7 +43,7 @@ final class FlowReducerTests: XCTestCase {
         XCTAssertNoDiff(spy.messages.map(\.event), [.complete])
     }
     
-    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnNilDestination() {
+    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnNilModal() {
         
         let (sut, spy) = makeSUT()
         
@@ -53,7 +53,7 @@ final class FlowReducerTests: XCTestCase {
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(nil)])
     }
     
-    func test_editor_doneEditing_shouldCallEditorReduceOnNilDestination() {
+    func test_editor_doneEditing_shouldCallEditorReduceOnNilModal() {
         
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
@@ -64,7 +64,7 @@ final class FlowReducerTests: XCTestCase {
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(entry)])
     }
     
-    func test_editor_editWithNil_shouldCallEditorReduceOnNilDestination() {
+    func test_editor_editWithNil_shouldCallEditorReduceOnNilModal() {
         
         let (sut, spy) = makeSUT()
         
@@ -74,7 +74,7 @@ final class FlowReducerTests: XCTestCase {
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(nil)])
     }
     
-    func test_editor_edit_shouldCallEditorReduceOnNilDestination() {
+    func test_editor_edit_shouldCallEditorReduceOnNilModal() {
         
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
@@ -85,141 +85,141 @@ final class FlowReducerTests: XCTestCase {
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(entry)])
     }
     
-    func test_editor_complete_shouldCallEditorReduceOnNilEditorDestination() {
+    func test_editor_complete_shouldCallEditorReduceOnNilEditorModal() {
         
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(nil)), .editor(.complete))
+        _ = sut.reduce(.init(modal: .editor(nil)), .editor(.complete))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(nil)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.complete])
     }
     
-    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnNilEditorDestination() {
+    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnNilEditorModal() {
         
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(nil)), .editor(.doneEditing(nil)))
+        _ = sut.reduce(.init(modal: .editor(nil)), .editor(.doneEditing(nil)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(nil)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(nil)])
     }
     
-    func test_editor_doneEditing_shouldCallEditorReduceOnNilEditorDestination() {
+    func test_editor_doneEditing_shouldCallEditorReduceOnNilEditorModal() {
         
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(nil)), .editor(.doneEditing(entry)))
+        _ = sut.reduce(.init(modal: .editor(nil)), .editor(.doneEditing(entry)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(nil)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(entry)])
     }
     
-    func test_editor_editWithNil_shouldCallEditorReduceOnNilEditorDestination() {
+    func test_editor_editWithNil_shouldCallEditorReduceOnNilEditorModal() {
         
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(nil)), .editor(.edit(nil)))
+        _ = sut.reduce(.init(modal: .editor(nil)), .editor(.edit(nil)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(nil)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(nil)])
     }
     
-    func test_editor_edit_shouldCallEditorReduceOnNilEditorDestination() {
+    func test_editor_edit_shouldCallEditorReduceOnNilEditorModal() {
         
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(nil)), .editor(.edit(entry)))
+        _ = sut.reduce(.init(modal: .editor(nil)), .editor(.edit(entry)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(nil)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(entry)])
     }
     
-    func test_editor_complete_shouldCallEditorReduceOnEditorDestination() {
+    func test_editor_complete_shouldCallEditorReduceOnEditorModal() {
         
         let entry0 = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(entry0)), .editor(.complete))
+        _ = sut.reduce(.init(modal: .editor(entry0)), .editor(.complete))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(entry0)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.complete])
     }
     
-    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnEditorDestination() {
+    func test_editor_doneEditingWithNil_shouldCallEditorReduceOnEditorModal() {
         
         let entry0 = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(entry0)), .editor(.doneEditing(nil)))
+        _ = sut.reduce(.init(modal: .editor(entry0)), .editor(.doneEditing(nil)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(entry0)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(nil)])
     }
     
-    func test_editor_doneEditing_shouldCallEditorReduceOnEditorDestination() {
+    func test_editor_doneEditing_shouldCallEditorReduceOnEditorModal() {
         
         let entry0 = makeEntry()
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(entry0)), .editor(.doneEditing(entry)))
+        _ = sut.reduce(.init(modal: .editor(entry0)), .editor(.doneEditing(entry)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(entry0)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.doneEditing(entry)])
     }
     
-    func test_editor_editWithNil_shouldCallEditorReduceOnEditorDestination() {
+    func test_editor_editWithNil_shouldCallEditorReduceOnEditorModal() {
         
         let entry0 = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(entry0)), .editor(.edit(nil)))
+        _ = sut.reduce(.init(modal: .editor(entry0)), .editor(.edit(nil)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(entry0)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(nil)])
     }
     
-    func test_editor_edit_shouldCallEditorReduceOnEditorDestination() {
+    func test_editor_edit_shouldCallEditorReduceOnEditorModal() {
         
         let entry0 = makeEntry()
         let entry = makeEntry()
         let (sut, spy) = makeSUT()
         
-        _ = sut.reduce(.init(destination: .editor(entry0)), .editor(.edit(entry)))
+        _ = sut.reduce(.init(modal: .editor(entry0)), .editor(.edit(entry)))
         
         XCTAssertNoDiff(spy.messages.map(\.state), [.editor(entry0)])
         XCTAssertNoDiff(spy.messages.map(\.event), [.edit(entry)])
     }
     
-    func test_editor_shouldResetDestinationOnEditorReduceStateNone() {
+    func test_editor_shouldResetModalOnEditorReduceStateNone() {
         
         let (sut, _) = makeSUT(stubs: [(.none, nil)])
         
-        let (state, _) = sut.reduce(.init(destination: .editor(nil)), .editor(.complete))
+        let (state, _) = sut.reduce(.init(modal: .editor(nil)), .editor(.complete))
         
-        XCTAssertNil(state.destination)
+        XCTAssertNil(state.modal)
     }
     
-    func test_editor_shouldSetDestinationTiEditorReduceStateEditorNil() {
+    func test_editor_shouldSetModalTiEditorReduceStateEditorNil() {
         
         let (sut, _) = makeSUT(stubs: [(.editor(nil), nil)])
         
         let (state, _) = sut.reduce(.init(), .editor(.complete))
         
-        XCTAssertNoDiff(state.destination, .editor(nil))
+        XCTAssertNoDiff(state.modal, .editor(nil))
     }
     
-    func test_editor_shouldSetDestinationTiEditorReduceStateEditor() {
+    func test_editor_shouldSetModalTiEditorReduceStateEditor() {
         
         let entry = makeEntry()
         let (sut, _) = makeSUT(stubs: [(.editor(entry), nil)])
         
         let (state, _) = sut.reduce(.init(), .editor(.complete))
         
-        XCTAssertNoDiff(state.destination, .editor(entry))
+        XCTAssertNoDiff(state.modal, .editor(entry))
     }
     
     func test_editor_shouldSetEffectToEditorReduceEffect() {
