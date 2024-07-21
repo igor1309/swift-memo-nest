@@ -100,7 +100,7 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_complete_shouldChangeEditorStateToNone() {
         
-        assert(.editor(anyMessage()), event: .complete) {
+        assert(.editor(makeItem()), event: .complete) {
             
             $0 = .none
         }
@@ -108,7 +108,7 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_complete_shouldNotDeliverEffectOnEditorState() {
         
-        assert(.editor(anyMessage()), event: .complete, delivers: nil)
+        assert(.editor(makeItem()), event: .complete, delivers: nil)
     }
     
     // MARK: - doneEditing
@@ -125,7 +125,7 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_doneEditingWithItem_shouldNotChangeNoneState() {
         
-        assert(.none, event: .doneEditing(anyMessage()))
+        assert(.none, event: .doneEditing(makeItem()))
     }
     
     func test_doneEditingWithItem_shouldNotDeliverEffectOnNoneState() {
@@ -145,36 +145,36 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_doneEditingWithItem_shouldNotChangeNilEditorState() {
         
-        assert(.editor(nil), event: .doneEditing(anyMessage()))
+        assert(.editor(nil), event: .doneEditing(makeItem()))
     }
     
     func test_doneEditingWithItem_shouldDeliverEffectOnNilEditorState() {
         
-        let item = anyMessage()
+        let item = makeItem()
         
         assert(.editor(nil), event: .doneEditing(item), delivers: .edited(item))
     }
     
     func test_doneEditingWithoutItem_shouldNotChangeEditorState() {
         
-        assert(.editor(anyMessage()), event: .doneEditing(nil))
+        assert(.editor(makeItem()), event: .doneEditing(nil))
     }
     
     func test_doneEditingWithoutItem_shouldNotDeliverEffectEditorState() {
         
-        assert(.editor(anyMessage()), event: .doneEditing(nil), delivers: nil)
+        assert(.editor(makeItem()), event: .doneEditing(nil), delivers: nil)
     }
     
     func test_doneEditingWithItem_shouldNotChangeEditorState() {
         
-        assert(.editor(anyMessage()), event: .doneEditing(anyMessage()))
+        assert(.editor(makeItem()), event: .doneEditing(makeItem()))
     }
     
     func test_doneEditingWithItem_shouldDeliverEffectOnEditorState() {
         
-        let item = anyMessage()
+        let item = makeItem()
         
-        assert(.editor(anyMessage()), event: .doneEditing(item), delivers: .edited(item))
+        assert(.editor(makeItem()), event: .doneEditing(item), delivers: .edited(item))
     }
     
     // MARK: - edit
@@ -194,7 +194,7 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_editWithItem_shouldChangeNoneStateToEditingWithItem() {
         
-        let item = anyMessage()
+        let item = makeItem()
         
         assert(.none, event: .edit(item)) {
             
@@ -204,32 +204,33 @@ final class EditorFlowReducerTests: XCTestCase {
     
     func test_editWithItem_shouldNotDeliverEffectOnNoneState() {
         
-        assert(.none, event: .edit(anyMessage()), delivers: nil)
+        assert(.none, event: .edit(makeItem()), delivers: nil)
     }
     
     func test_editWithoutItem_shouldNotChangeEditorState() {
         
-        assert(.editor(nil), event: .edit(anyMessage()))
+        assert(.editor(nil), event: .edit(makeItem()))
     }
     
     func test_editWithoutItem_shouldNotDeliverEffectOnEditorState() {
         
-        assert(.editor(nil), event: .edit(anyMessage()), delivers: nil)
+        assert(.editor(nil), event: .edit(makeItem()), delivers: nil)
     }
     
     func test_editWithItem_shouldNotChangeEditorState() {
         
-        assert(.editor(anyMessage()), event: .edit(anyMessage()))
+        assert(.editor(makeItem()), event: .edit(makeItem()))
     }
     
     func test_editWithItem_shouldNotDeliverEffectOnEditorState() {
         
-        assert(.editor(anyMessage()), event: .edit(anyMessage()), delivers: nil)
+        assert(.editor(makeItem()), event: .edit(makeItem()), delivers: nil)
     }
     
     // MARK: - Helpers
     
-    private typealias SUT = EditorFlowReducer<String>
+    private typealias Item = String
+    private typealias SUT = EditorFlowReducer<Item>
     
     private func makeSUT(
         file: StaticString = #file,
@@ -241,6 +242,13 @@ final class EditorFlowReducerTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return sut
+    }
+    
+    private func makeItem(
+        _ value: String = UUID().uuidString
+    ) -> Item {
+        
+        return value
     }
     
     @discardableResult
