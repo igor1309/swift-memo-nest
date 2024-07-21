@@ -15,12 +15,15 @@ extension EditorFlowState: Equatable where Item: Equatable {}
 
 enum EditorFlowEvent<Item> {
     
+    case complete
     case edit(Item?)
 }
 
 extension EditorFlowEvent: Equatable where Item: Equatable {}
 
-enum EditorFlowEffect<Item> {}
+enum EditorFlowEffect<Item> {
+    
+}
 
 extension EditorFlowEffect: Equatable where Item: Equatable {}
 
@@ -37,6 +40,11 @@ extension EditorFlowReducer {
         var effect: Effect?
         
         switch event {
+        case .complete:
+            guard case .editor = state else { break }
+            
+            state = .none
+            
         case let .edit(item):
             guard case .none = state else { break }
 
@@ -58,6 +66,33 @@ extension EditorFlowReducer {
 import XCTest
 
 final class EditorFlowReducerTests: XCTestCase {
+    
+    // MARK: - complete
+    
+    func test_complete_shouldNotChangeNoneState() {
+     
+        assert(.none, event: .complete)
+    }
+    
+    func test_complete_shouldNotDeliverEffectOnNoneState() {
+        
+        assert(.none, event: .complete, delivers: nil)
+    }
+    
+    func test_complete_shouldChangeEditorStateToNone() {
+     
+        assert(.editor(anyMessage()), event: .complete) {
+            
+            $0 = .none
+        }
+    }
+    
+    func test_complete_shouldNotDeliverEffectOnEditorState() {
+        
+        assert(.editor(anyMessage()), event: .complete, delivers: nil)
+    }
+    
+    // MARK: - edit
     
     func test_editWithoutItem_shouldChangeNoneStateToEditingWithoutItem() {
         
