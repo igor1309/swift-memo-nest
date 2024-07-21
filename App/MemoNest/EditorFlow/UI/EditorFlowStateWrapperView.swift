@@ -10,24 +10,38 @@ import SwiftUI
 
 struct EditorFlowStateWrapperView: View {
     
-    @StateObject private var model: Model
+    @State private var entry: Entry
     
-    init(model: Model) {
-        
-        self._model = .init(wrappedValue: model)
+    private let event: (Entry?) -> Void
+    
+    init(
+        entry: Entry?,
+        event: @escaping (Entry?) -> Void
+    ) {
+        self._entry = .init(initialValue: entry ?? .init())
+        self.event = event
     }
     
     var body: some View {
         
-        HStack {
-            
-            Button("add") { model.event(.editor(.edit(nil))) }
-            Button("edit") { model.event(.editor(.edit(.init()))) }
-        }
+        EntryEditor(entry: $entry)
+            .navigationTitle("EntryEditor")
+            .toolbar {
+                
+                ToolbarItem {
+                    
+                    HStack {
+                        
+                        Button("Cancel") { event(nil) }
+                        Button("Save") { event(entry) }
+                    }
+                }
+            }
     }
 }
 
 extension EditorFlowStateWrapperView {
     
+    typealias Entry = EntryEditorFeature.Entry
     typealias Model = FlowModel
 }

@@ -62,7 +62,7 @@
 		2AF8842F2C4D628B00EF8A8C /* EditorFlowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */; };
 		2AF884332C4D62C700EF8A8C /* EditorFlowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884322C4D62C700EF8A8C /* EditorFlowReducer.swift */; };
 		2AF884352C4D62F700EF8A8C /* EditorFlowEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884342C4D62F700EF8A8C /* EditorFlowEffectHandler.swift */; };
-		2AF884382C4D666A00EF8A8C /* FlowReducerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884372C4D666A00EF8A8C /* FlowReducerTest.swift */; };
+		2AF884382C4D666A00EF8A8C /* FlowReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884372C4D666A00EF8A8C /* FlowReducerTests.swift */; };
 		2AF8843A2C4D69CB00EF8A8C /* ReducerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884392C4D69CB00EF8A8C /* ReducerSpy.swift */; };
 		2AF8843D2C4D716300EF8A8C /* FlowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8843C2C4D716300EF8A8C /* FlowState.swift */; };
 		2AF8843F2C4D718100EF8A8C /* FlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8843E2C4D718100EF8A8C /* FlowEvent.swift */; };
@@ -141,7 +141,7 @@
 		2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffect.swift; sourceTree = "<group>"; };
 		2AF884322C4D62C700EF8A8C /* EditorFlowReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowReducer.swift; sourceTree = "<group>"; };
 		2AF884342C4D62F700EF8A8C /* EditorFlowEffectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffectHandler.swift; sourceTree = "<group>"; };
-		2AF884372C4D666A00EF8A8C /* FlowReducerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowReducerTest.swift; sourceTree = "<group>"; };
+		2AF884372C4D666A00EF8A8C /* FlowReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowReducerTests.swift; sourceTree = "<group>"; };
 		2AF884392C4D69CB00EF8A8C /* ReducerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducerSpy.swift; sourceTree = "<group>"; };
 		2AF8843C2C4D716300EF8A8C /* FlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowState.swift; sourceTree = "<group>"; };
 		2AF8843E2C4D718100EF8A8C /* FlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowEvent.swift; sourceTree = "<group>"; };
@@ -470,7 +470,7 @@
 		2AF884482C4D897700EF8A8C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				2AF884372C4D666A00EF8A8C /* FlowReducerTest.swift */,
+				2AF884372C4D666A00EF8A8C /* FlowReducerTests.swift */,
 				2AF8844A2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift */,
 			);
 			path = Flow;
@@ -666,7 +666,7 @@
 				2AF8844B2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift in Sources */,
 				2AF8843A2C4D69CB00EF8A8C /* ReducerSpy.swift in Sources */,
 				2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */,
-				2AF884382C4D666A00EF8A8C /* FlowReducerTest.swift in Sources */,
+				2AF884382C4D666A00EF8A8C /* FlowReducerTests.swift in Sources */,
 				2AF884202C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift in Sources */,
 				2AF8841E2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift in Sources */,
 				2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */,

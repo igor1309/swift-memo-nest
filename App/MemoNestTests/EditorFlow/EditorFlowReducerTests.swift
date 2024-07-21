@@ -70,9 +70,12 @@ final class EditorFlowReducerTests: XCTestCase {
         assert(.none, event: .doneEditing(nil), delivers: nil)
     }
     
-    func test_doneEditingWithoutItem_shouldNotChangeNilEditorState() {
+    func test_doneEditingWithoutItem_shouldChangeNilEditorState() {
         
-        assert(.editor(nil), event: .doneEditing(nil))
+        assert(.editor(nil), event: .doneEditing(nil)) {
+            
+            $0 = .none
+        }
     }
     
     func test_doneEditingWithoutItem_shouldNotDeliverEffectNilEditorState() {
@@ -92,9 +95,12 @@ final class EditorFlowReducerTests: XCTestCase {
         assert(.editor(nil), event: .doneEditing(item), delivers: .edited(item))
     }
     
-    func test_doneEditingWithoutItem_shouldNotChangeEditorState() {
+    func test_doneEditingWithoutItem_shouldChangeEditorState() {
         
-        assert(.editor(makeItem()), event: .doneEditing(nil))
+        assert(.editor(makeItem()), event: .doneEditing(nil)) {
+            
+            $0 = .none
+        }
     }
     
     func test_doneEditingWithoutItem_shouldNotDeliverEffectEditorState() {

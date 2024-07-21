@@ -1,5 +1,5 @@
 //
-//  FlowReducerTest.swift
+//  FlowReducerTests.swift
 //  MemoNestTests
 //
 //  Created by Igor Malyarov on 21.07.2024.
@@ -9,7 +9,27 @@ import EntryEditorFeature
 @testable import MemoNest
 import XCTest
 
-final class FlowReducerTest: XCTestCase {
+final class FlowReducerTests: XCTestCase {
+    
+    // MARK: - dismissDestination
+    
+    func test_dismissDestination_shouldResetDestination() {
+        
+        let (sut, _) = makeSUT()
+
+        let (state, _) = sut.reduce(.init(destination: .editor(makeEntry())), .dismissDestination)
+        
+        XCTAssertNil(state.destination)
+    }
+    
+    func test_dismissDestination_shouldNotDeliverEffect() {
+        
+        let (sut, _) = makeSUT()
+
+        let (_, effect) = sut.reduce(.init(destination: .editor(makeEntry())), .dismissDestination)
+        
+        XCTAssertNil(effect)
+    }
     
     // MARK: - editor event
     

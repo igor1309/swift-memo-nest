@@ -42,6 +42,9 @@ extension FlowReducer {
         var effect: Effect?
         
         switch event {
+        case .dismissDestination:
+            state.destination = nil
+            
         case let .editor(event):
             reduce(&state, &effect, with: event)
         }

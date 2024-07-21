@@ -10,6 +10,7 @@ import EntryEditorFeature
 /// Represents events that can occur within the flow.
 enum FlowEvent: Equatable {
     
+    case dismissDestination
     case editor(EditorEvent)
     
     /// Type alias for events specific to the editor flow.

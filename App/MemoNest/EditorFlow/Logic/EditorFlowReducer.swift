@@ -33,7 +33,11 @@ extension EditorFlowReducer {
         case let .doneEditing(item):
             guard case .editor = state else { break }
             
-            effect = item.map(Effect.edited)
+            if let item {
+                effect = .edited(item)
+            } else {
+                state = .none
+            }
             
         case let .edit(item):
             guard case .none = state else { break }
