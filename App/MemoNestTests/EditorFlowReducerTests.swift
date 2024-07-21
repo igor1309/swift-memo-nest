@@ -16,6 +16,7 @@ extension EditorFlowState: Equatable where Item: Equatable {}
 enum EditorFlowEvent<Item> {
     
     case complete
+    case doneEditing(Item?)
     case edit(Item?)
 }
 
@@ -23,6 +24,7 @@ extension EditorFlowEvent: Equatable where Item: Equatable {}
 
 enum EditorFlowEffect<Item> {
     
+    case edited(Item)
 }
 
 extension EditorFlowEffect: Equatable where Item: Equatable {}
@@ -45,9 +47,14 @@ extension EditorFlowReducer {
             
             state = .none
             
+        case let .doneEditing(item):
+            guard case .editor = state else { break }
+
+            effect = item.map(Effect.edited)
+            
         case let .edit(item):
             guard case .none = state else { break }
-
+            
             state = .editor(item)
         }
         
@@ -70,7 +77,7 @@ final class EditorFlowReducerTests: XCTestCase {
     // MARK: - complete
     
     func test_complete_shouldNotChangeNoneState() {
-     
+        
         assert(.none, event: .complete)
     }
     
@@ -80,7 +87,7 @@ final class EditorFlowReducerTests: XCTestCase {
     }
     
     func test_complete_shouldChangeEditorStateToNone() {
-     
+        
         assert(.editor(anyMessage()), event: .complete) {
             
             $0 = .none
@@ -90,6 +97,50 @@ final class EditorFlowReducerTests: XCTestCase {
     func test_complete_shouldNotDeliverEffectOnEditorState() {
         
         assert(.editor(anyMessage()), event: .complete, delivers: nil)
+    }
+    
+    // MARK: - doneEditing
+    
+    func test_doneEditingWithoutItem_shouldNotChangeNoneState() {
+        
+        assert(.none, event: .doneEditing(nil))
+    }
+    
+    func test_doneEditingWithoutItem_shouldNotDeliverEffectOnNoneState() {
+        
+        assert(.none, event: .doneEditing(nil), delivers: nil)
+    }
+    
+    func test_doneEditingWithItem_shouldNotChangeNoneState() {
+        
+        assert(.none, event: .doneEditing(anyMessage()))
+    }
+    
+    func test_doneEditingWithItem_shouldNotDeliverEffectOnNoneState() {
+        
+        assert(.none, event: .doneEditing(nil), delivers: nil)
+    }
+    
+    func test_doneEditingWithoutItem_shouldNotChangeEditorState() {
+        
+        assert(.editor(anyMessage()), event: .doneEditing(nil))
+    }
+    
+    func test_doneEditingWithoutItem_shouldNotDeliverEffectEditorState() {
+        
+        assert(.editor(anyMessage()), event: .doneEditing(nil), delivers: nil)
+    }
+    
+    func test_doneEditingWithItem_shouldNotChangeEditorState() {
+        
+        assert(.editor(anyMessage()), event: .doneEditing(anyMessage()))
+    }
+    
+    func test_doneEditingWithItem_shouldDeliverEffectOnEditorState() {
+        
+        let item = anyMessage()
+        
+        assert(.editor(anyMessage()), event: .doneEditing(item), delivers: .edited(item))
     }
     
     // MARK: - edit
