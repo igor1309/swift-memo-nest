@@ -17,6 +17,9 @@
 		2A324D932C464B7E008E7EB6 /* IMRx in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D922C464B7E008E7EB6 /* IMRx */; };
 		2A324D952C464B7E008E7EB6 /* IMTools in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324D942C464B7E008E7EB6 /* IMTools */; };
 		2A324DB52C465EFF008E7EB6 /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = 2A324DB42C465EFF008E7EB6 /* CombineSchedulers */; };
+		2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */; };
+		2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E08672C4CD12500E72AA3 /* assertThrowsAsyncError.swift */; };
+		2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E086B2C4CD91800E72AA3 /* anyMessage.swift */; };
 		2AA27D062C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */; };
 		2AA27D072C48198B0032FA1F /* EntryListModelComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */; };
 		2AA27D082C48198B0032FA1F /* ListFlowViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE52C48198B0032FA1F /* ListFlowViewComposer.swift */; };
@@ -67,6 +70,9 @@
 		2A2415CA2C4782870099B836 /* swift-note-nest-Package.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "swift-note-nest-Package.xctestplan"; path = "TestPlans/swift-note-nest-Package.xctestplan"; sourceTree = "<group>"; };
 		2A33A3D32C4642C700CE3C96 /* MemoNest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoNest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A36E5AE2C468E5D0015BA96 /* EntryListFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryListFeature.xctestplan; path = TestPlans/EntryListFeature.xctestplan; sourceTree = "<group>"; };
+		2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCoordinatorsComposerAcceptanceTests.swift; sourceTree = "<group>"; };
+		2A6E08672C4CD12500E72AA3 /* assertThrowsAsyncError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assertThrowsAsyncError.swift; sourceTree = "<group>"; };
+		2A6E086B2C4CD91800E72AA3 /* anyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyMessage.swift; sourceTree = "<group>"; };
 		2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryFilterFeature.xctestplan; path = TestPlans/EntryFilterFeature.xctestplan; sourceTree = "<group>"; };
 		2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListModelComposer.swift; sourceTree = "<group>"; };
@@ -283,8 +289,10 @@
 		2AA86A162C4A712C009BC197 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */,
 				2AA86A252C4AB575009BC197 /* anyError.swift */,
+				2A6E086B2C4CD91800E72AA3 /* anyMessage.swift */,
+				2A6E08672C4CD12500E72AA3 /* assertThrowsAsyncError.swift */,
+				2AA86A192C4A7198009BC197 /* XCTestCase+MemoryLeakTracking.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				2AA86A142C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift */,
+				2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -487,6 +496,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AA86A152C4A70F1009BC197 /* EntryCacheCoordinatorComposerTests.swift in Sources */,
+				2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */,
+				2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */,
+				2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */,
 				2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				2AA86A262C4AB575009BC197 /* anyError.swift in Sources */,
 				2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */,
