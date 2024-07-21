@@ -12,7 +12,7 @@ struct NoteNestApp: App {
     var body: some Scene {
         WindowGroup {
             // ContentView()
-            EditorFlowComposerView()
+            FlowComposerView()
         }
     }
 }

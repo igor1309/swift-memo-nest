@@ -38,6 +38,24 @@ extension Spy where Payload == Void {
     }
 }
 
+extension Spy where Failure == Never {
+    
+    func process(
+        _ payload: Payload,
+        _ completion: @escaping (Success) -> Void
+    ) {
+        process(payload, completion: { try? completion($0.get()) })
+    }
+    
+    func complete(
+        with success: Success,
+        at index: Int = 0
+    ) {
+        
+        complete(with: .success(success), at: index)
+    }
+}
+
 extension Spy where Success == Void, Failure == Never {
     
     func process(

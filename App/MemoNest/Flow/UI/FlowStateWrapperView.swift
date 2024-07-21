@@ -1,14 +1,13 @@
 //
-//  EditorFlowStateWrapperView.swift
+//  FlowStateWrapperView.swift
 //  MemoNest
 //
 //  Created by Igor Malyarov on 21.07.2024.
 //
 
-import EntryEditorFeature
 import SwiftUI
 
-struct EditorFlowStateWrapperView: View {
+struct FlowStateWrapperView: View {
     
     @StateObject private var model: Model
     
@@ -27,7 +26,7 @@ struct EditorFlowStateWrapperView: View {
     }
 }
 
-extension EditorFlowStateWrapperView {
+extension FlowStateWrapperView {
     
     typealias Model = FlowModel
 }

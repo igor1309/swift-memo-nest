@@ -56,8 +56,7 @@
 		2AF884202C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */; };
 		2AF884222C4D5A0A00EF8A8C /* Spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884212C4D5A0A00EF8A8C /* Spy.swift */; };
 		2AF884252C4D616400EF8A8C /* EditorFlowStateWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */; };
-		2AF884272C4D616E00EF8A8C /* EditorFlowComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */; };
-		2AF884292C4D61E200EF8A8C /* EditorFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */; };
+		2AF884272C4D616E00EF8A8C /* FlowComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884262C4D616E00EF8A8C /* FlowComposerView.swift */; };
 		2AF8842B2C4D624300EF8A8C /* EditorFlowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842A2C4D624300EF8A8C /* EditorFlowState.swift */; };
 		2AF8842D2C4D626B00EF8A8C /* EditorFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842C2C4D626B00EF8A8C /* EditorFlowEvent.swift */; };
 		2AF8842F2C4D628B00EF8A8C /* EditorFlowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */; };
@@ -69,6 +68,10 @@
 		2AF8843F2C4D718100EF8A8C /* FlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8843E2C4D718100EF8A8C /* FlowEvent.swift */; };
 		2AF884412C4D719800EF8A8C /* FlowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884402C4D719800EF8A8C /* FlowEffect.swift */; };
 		2AF884432C4D71AA00EF8A8C /* FlowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884422C4D71AA00EF8A8C /* FlowReducer.swift */; };
+		2AF884462C4D887300EF8A8C /* FlowEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884452C4D887300EF8A8C /* FlowEffectHandler.swift */; };
+		2AF8844B2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8844A2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift */; };
+		2AF8844D2C4D8B8900EF8A8C /* FlowStateWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8844C2C4D8B8900EF8A8C /* FlowStateWrapperView.swift */; };
+		2AF884502C4D8BCC00EF8A8C /* FlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8844F2C4D8BCC00EF8A8C /* FlowModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,8 +135,7 @@
 		2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffectHandlerTests.swift; sourceTree = "<group>"; };
 		2AF884212C4D5A0A00EF8A8C /* Spy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spy.swift; sourceTree = "<group>"; };
 		2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowStateWrapperView.swift; sourceTree = "<group>"; };
-		2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowComposerView.swift; sourceTree = "<group>"; };
-		2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowModel.swift; sourceTree = "<group>"; };
+		2AF884262C4D616E00EF8A8C /* FlowComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowComposerView.swift; sourceTree = "<group>"; };
 		2AF8842A2C4D624300EF8A8C /* EditorFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowState.swift; sourceTree = "<group>"; };
 		2AF8842C2C4D626B00EF8A8C /* EditorFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEvent.swift; sourceTree = "<group>"; };
 		2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffect.swift; sourceTree = "<group>"; };
@@ -145,6 +147,10 @@
 		2AF8843E2C4D718100EF8A8C /* FlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowEvent.swift; sourceTree = "<group>"; };
 		2AF884402C4D719800EF8A8C /* FlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowEffect.swift; sourceTree = "<group>"; };
 		2AF884422C4D71AA00EF8A8C /* FlowReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowReducer.swift; sourceTree = "<group>"; };
+		2AF884452C4D887300EF8A8C /* FlowEffectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowEffectHandler.swift; sourceTree = "<group>"; };
+		2AF8844A2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowEffectHandlerTests.swift; sourceTree = "<group>"; };
+		2AF8844C2C4D8B8900EF8A8C /* FlowStateWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStateWrapperView.swift; sourceTree = "<group>"; };
+		2AF8844F2C4D8BCC00EF8A8C /* FlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,9 +336,8 @@
 				2AA86A272C4AB62B009BC197 /* ThirdPartyDependencies */,
 				2AA86A232C4A7299009BC197 /* IntegrationTests */,
 				2AA86A162C4A712C009BC197 /* Helpers */,
-				2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */,
-				2AF884372C4D666A00EF8A8C /* FlowReducerTest.swift */,
-				2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */,
+				2AF884482C4D897700EF8A8C /* Flow */,
+				2AF884492C4D898D00EF8A8C /* EditorFlow */,
 			);
 			path = MemoNestTests;
 			sourceTree = "<group>";
@@ -398,7 +403,6 @@
 		2AF884232C4D614200EF8A8C /* EditorFlow */ = {
 			isa = PBXGroup;
 			children = (
-				2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */,
 				2AF884302C4D62A900EF8A8C /* Domain */,
 				2AF884362C4D630C00EF8A8C /* Logic */,
 				2AF884312C4D62B600EF8A8C /* UI */,
@@ -419,7 +423,6 @@
 		2AF884312C4D62B600EF8A8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */,
 				2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */,
 			);
 			path = UI;
@@ -437,12 +440,58 @@
 		2AF8843B2C4D715900EF8A8C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				2AF884262C4D616E00EF8A8C /* FlowComposerView.swift */,
+				2AF884442C4D881A00EF8A8C /* Domain */,
+				2AF884472C4D889A00EF8A8C /* Logic */,
+				2AF8844E2C4D8B9500EF8A8C /* UI */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		2AF884442C4D881A00EF8A8C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
 				2AF8843C2C4D716300EF8A8C /* FlowState.swift */,
 				2AF8843E2C4D718100EF8A8C /* FlowEvent.swift */,
 				2AF884402C4D719800EF8A8C /* FlowEffect.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2AF884472C4D889A00EF8A8C /* Logic */ = {
+			isa = PBXGroup;
+			children = (
 				2AF884422C4D71AA00EF8A8C /* FlowReducer.swift */,
+				2AF884452C4D887300EF8A8C /* FlowEffectHandler.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		2AF884482C4D897700EF8A8C /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				2AF884372C4D666A00EF8A8C /* FlowReducerTest.swift */,
+				2AF8844A2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift */,
 			);
 			path = Flow;
+			sourceTree = "<group>";
+		};
+		2AF884492C4D898D00EF8A8C /* EditorFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */,
+				2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */,
+			);
+			path = EditorFlow;
+			sourceTree = "<group>";
+		};
+		2AF8844E2C4D8B9500EF8A8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8844F2C4D8BCC00EF8A8C /* FlowModel.swift */,
+				2AF8844C2C4D8B8900EF8A8C /* FlowStateWrapperView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,21 +621,23 @@
 				2AA27D0B2C48198B0032FA1F /* EntryDetailView.swift in Sources */,
 				2AF884252C4D616400EF8A8C /* EditorFlowStateWrapperView.swift in Sources */,
 				2AF8842B2C4D624300EF8A8C /* EditorFlowState.swift in Sources */,
-				2AF884292C4D61E200EF8A8C /* EditorFlowModel.swift in Sources */,
 				2AA27D1A2C48198B0032FA1F /* ListFlowFactory+preview.swift in Sources */,
 				2AA27D0E2C48198B0032FA1F /* EntryRowLabel.swift in Sources */,
 				2A6E08702C4CE8F600E72AA3 /* EntryPayload.swift in Sources */,
 				2AF8842D2C4D626B00EF8A8C /* EditorFlowEvent.swift in Sources */,
 				2AA27D0F2C48198B0032FA1F /* ListFlowEffect.swift in Sources */,
+				2AF884502C4D8BCC00EF8A8C /* FlowModel.swift in Sources */,
+				2AF884462C4D887300EF8A8C /* FlowEffectHandler.swift in Sources */,
 				2AA27D192C48198B0032FA1F /* EntryListModel+preview.swift in Sources */,
 				2A6E086E2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift in Sources */,
+				2AF8844D2C4D8B8900EF8A8C /* FlowStateWrapperView.swift in Sources */,
 				2AF884432C4D71AA00EF8A8C /* FlowReducer.swift in Sources */,
 				2AF8843D2C4D716300EF8A8C /* FlowState.swift in Sources */,
 				2AF884332C4D62C700EF8A8C /* EditorFlowReducer.swift in Sources */,
 				2AA27D112C48198B0032FA1F /* ListFlowEvent.swift in Sources */,
 				2AA27D072C48198B0032FA1F /* EntryListModelComposer.swift in Sources */,
 				2AA27D0C2C48198B0032FA1F /* EntryEditorWrapperView.swift in Sources */,
-				2AF884272C4D616E00EF8A8C /* EditorFlowComposerView.swift in Sources */,
+				2AF884272C4D616E00EF8A8C /* FlowComposerView.swift in Sources */,
 				2AA27D152C48198B0032FA1F /* ListFlowState.swift in Sources */,
 				2AA27D1B2C48198B0032FA1F /* ListFlowModel+preview.swift in Sources */,
 				2AA27D1E2C48198B0032FA1F /* ContentView.swift in Sources */,
@@ -612,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */,
+				2AF8844B2C4D89A700EF8A8C /* FlowEffectHandlerTests.swift in Sources */,
 				2AF8843A2C4D69CB00EF8A8C /* ReducerSpy.swift in Sources */,
 				2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */,
 				2AF884382C4D666A00EF8A8C /* FlowReducerTest.swift in Sources */,
