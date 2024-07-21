@@ -39,56 +39,25 @@ where Payload: Filtering<Entry> & Sorting<Entry>,
     public typealias Retrieve = () async throws -> [Entry]
 }
 
-extension ReadCacheCoordinator: Loader {
-    
-    /// Loads entries based on the given payload. It attempts to retrieve entries from the cache first,
-    /// and falls back to the retrieval function if necessary.
-    ///
-    /// - Parameters:
-    ///   - payload: The payload used for filtering and sorting entries.
-    ///   - completion: A completion handler that receives the result of the load operation.
-    public func load(
-        _ payload: Payload,
-        _ completion: @escaping LoadCompletion
-    ) {
-        Task { [weak self] in
-            
-            guard let self else { return }
-            
-            completion(await self.loadWithFallback(payload))
-        }
-    }
-    
-    /// Typealias for the successful result containing an array of entries.
-    public typealias Success = [Entry]
-    
-    /// Typealias for the failure result containing an error.
-    public typealias Failure = Error
-}
-
-private extension ReadCacheCoordinator {
+public extension ReadCacheCoordinator {
     
     /// Attempts to load entries from the cache. If the cache retrieval fails, it falls back to the retrieval function
     /// and caches the results.
     ///
     /// - Parameter payload: The payload used for filtering and sorting entries.
-    /// - Returns: A result containing either an array of entries or an error.
-    func loadWithFallback(
+    /// - Returns: An array of entries.
+    /// - Throws: An error if the retrieval function fails.
+    func load(
         _ payload: Payload
-    ) async -> Result<[Entry], Error> {
+    ) async throws -> [Entry] {
         
         do {
-            let entries = try await self.entryCache.retrieve(payload)
-            return .success(entries)
+            return try await self.entryCache.retrieve(payload)
         } catch {
             
-            do {
-                let entries = try await self.retrieve()
-                await self.entryCache.cache(entries)
-                return .success(entries)
-            } catch {
-                return .failure(error)
-            }
+            let entries = try await self.retrieve()
+            await self.entryCache.cache(entries)
+            return entries
         }
     }
 }
