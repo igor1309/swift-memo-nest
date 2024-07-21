@@ -5,6 +5,7 @@
 //  Created by Igor Malyarov on 17.07.2024.
 //
 
+/// Represents the state of an entry list with filter and sorting options.
 struct EntryListState<Entry, Filter, Sort> {
     
     var entries: [Entry]
@@ -15,6 +16,7 @@ struct EntryListState<Entry, Filter, Sort> {
 
 extension EntryListState: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
+/// Enum representing various events that can occur in the entry list.
 enum EntryListEvent<Entry, Filter, Sort> {
     
     case load
@@ -25,12 +27,16 @@ enum EntryListEvent<Entry, Filter, Sort> {
 
 extension EntryListEvent {
     
+    /// Struct representing a load failure error.
     struct LoadFailure: Error, Equatable {}
+    
+    /// Type alias for the result of a load operation.
     typealias LoadResult = Result<[Entry], LoadFailure>
 }
 
 extension EntryListEvent: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
+/// Enum representing the side effects that can be triggered in response to events.
 enum EntryListEffect<Entry, Filter, Sort> {
     
     case load(LoadPayload)
@@ -38,6 +44,7 @@ enum EntryListEffect<Entry, Filter, Sort> {
 
 extension EntryListEffect {
     
+    /// Struct representing the payload for a load effect.
     struct LoadPayload {
         
         let lastEntry: Entry?
@@ -59,6 +66,7 @@ extension EntryListEffect {
 extension EntryListEffect.LoadPayload: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 extension EntryListEffect: Equatable where Entry: Equatable, Filter: Equatable, Sort: Equatable {}
 
+/// Reducer class to handle state changes based on events.
 final class EntryListReducer<Entry, Filter, Sort>
 where Filter: Equatable,
       Sort: Equatable {}
