@@ -49,7 +49,7 @@ extension EditorFlowReducer {
             
         case let .doneEditing(item):
             guard case .editor = state else { break }
-
+            
             effect = item.map(Effect.edited)
             
         case let .edit(item):
@@ -69,7 +69,6 @@ extension EditorFlowReducer {
     typealias Effect = EditorFlowEffect<Item>
 }
 
-
 import XCTest
 
 final class EditorFlowReducerTests: XCTestCase {
@@ -84,6 +83,19 @@ final class EditorFlowReducerTests: XCTestCase {
     func test_complete_shouldNotDeliverEffectOnNoneState() {
         
         assert(.none, event: .complete, delivers: nil)
+    }
+    
+    func test_complete_shouldChangeNilEditorStateToNone() {
+        
+        assert(.editor(nil), event: .complete) {
+            
+            $0 = .none
+        }
+    }
+    
+    func test_complete_shouldNotDeliverEffectOnNilEditorState() {
+        
+        assert(.editor(nil), event: .complete, delivers: nil)
     }
     
     func test_complete_shouldChangeEditorStateToNone() {
@@ -119,6 +131,28 @@ final class EditorFlowReducerTests: XCTestCase {
     func test_doneEditingWithItem_shouldNotDeliverEffectOnNoneState() {
         
         assert(.none, event: .doneEditing(nil), delivers: nil)
+    }
+    
+    func test_doneEditingWithoutItem_shouldNotChangeNilEditorState() {
+        
+        assert(.editor(nil), event: .doneEditing(nil))
+    }
+    
+    func test_doneEditingWithoutItem_shouldNotDeliverEffectNilEditorState() {
+        
+        assert(.editor(nil), event: .doneEditing(nil), delivers: nil)
+    }
+    
+    func test_doneEditingWithItem_shouldNotChangeNilEditorState() {
+        
+        assert(.editor(nil), event: .doneEditing(anyMessage()))
+    }
+    
+    func test_doneEditingWithItem_shouldDeliverEffectOnNilEditorState() {
+        
+        let item = anyMessage()
+        
+        assert(.editor(nil), event: .doneEditing(item), delivers: .edited(item))
     }
     
     func test_doneEditingWithoutItem_shouldNotChangeEditorState() {
