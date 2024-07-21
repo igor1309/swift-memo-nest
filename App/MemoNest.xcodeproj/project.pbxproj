@@ -55,6 +55,14 @@
 		2AF8841E2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */; };
 		2AF884202C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */; };
 		2AF884222C4D5A0A00EF8A8C /* Spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884212C4D5A0A00EF8A8C /* Spy.swift */; };
+		2AF884252C4D616400EF8A8C /* EditorFlowStateWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */; };
+		2AF884272C4D616E00EF8A8C /* EditorFlowComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */; };
+		2AF884292C4D61E200EF8A8C /* EditorFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */; };
+		2AF8842B2C4D624300EF8A8C /* EditorFlowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842A2C4D624300EF8A8C /* EditorFlowState.swift */; };
+		2AF8842D2C4D626B00EF8A8C /* EditorFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842C2C4D626B00EF8A8C /* EditorFlowEvent.swift */; };
+		2AF8842F2C4D628B00EF8A8C /* EditorFlowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */; };
+		2AF884332C4D62C700EF8A8C /* EditorFlowReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884322C4D62C700EF8A8C /* EditorFlowReducer.swift */; };
+		2AF884352C4D62F700EF8A8C /* EditorFlowEffectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF884342C4D62F700EF8A8C /* EditorFlowEffectHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +125,14 @@
 		2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowReducerTests.swift; sourceTree = "<group>"; };
 		2AF8841F2C4D594800EF8A8C /* EditorFlowEffectHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffectHandlerTests.swift; sourceTree = "<group>"; };
 		2AF884212C4D5A0A00EF8A8C /* Spy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spy.swift; sourceTree = "<group>"; };
+		2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowStateWrapperView.swift; sourceTree = "<group>"; };
+		2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowComposerView.swift; sourceTree = "<group>"; };
+		2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowModel.swift; sourceTree = "<group>"; };
+		2AF8842A2C4D624300EF8A8C /* EditorFlowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowState.swift; sourceTree = "<group>"; };
+		2AF8842C2C4D626B00EF8A8C /* EditorFlowEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEvent.swift; sourceTree = "<group>"; };
+		2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffect.swift; sourceTree = "<group>"; };
+		2AF884322C4D62C700EF8A8C /* EditorFlowReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowReducer.swift; sourceTree = "<group>"; };
+		2AF884342C4D62F700EF8A8C /* EditorFlowEffectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowEffectHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +299,7 @@
 			children = (
 				2AA784452C4B7B30007A127D /* Info.plist */,
 				2AA27D042C48198B0032FA1F /* NoteNestApp.swift */,
+				2AF884232C4D614200EF8A8C /* EditorFlow */,
 				2AA27D032C48198B0032FA1F /* ContentView.swift */,
 				2AA27CE62C48198B0032FA1F /* CompositionRoot */,
 				2AA27CE82C48198B0032FA1F /* Domain */,
@@ -359,6 +376,45 @@
 			children = (
 				2AA27CF32C48198B0032FA1F /* ListFlowEffectHandler.swift */,
 				2AA27CF72C48198B0032FA1F /* ListFlowReducer.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		2AF884232C4D614200EF8A8C /* EditorFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2AF884262C4D616E00EF8A8C /* EditorFlowComposerView.swift */,
+				2AF884302C4D62A900EF8A8C /* Domain */,
+				2AF884362C4D630C00EF8A8C /* Logic */,
+				2AF884312C4D62B600EF8A8C /* UI */,
+			);
+			path = EditorFlow;
+			sourceTree = "<group>";
+		};
+		2AF884302C4D62A900EF8A8C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8842A2C4D624300EF8A8C /* EditorFlowState.swift */,
+				2AF8842C2C4D626B00EF8A8C /* EditorFlowEvent.swift */,
+				2AF8842E2C4D628B00EF8A8C /* EditorFlowEffect.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2AF884312C4D62B600EF8A8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2AF884282C4D61E200EF8A8C /* EditorFlowModel.swift */,
+				2AF884242C4D616400EF8A8C /* EditorFlowStateWrapperView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2AF884362C4D630C00EF8A8C /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				2AF884322C4D62C700EF8A8C /* EditorFlowReducer.swift */,
+				2AF884342C4D62F700EF8A8C /* EditorFlowEffectHandler.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -484,18 +540,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF884352C4D62F700EF8A8C /* EditorFlowEffectHandler.swift in Sources */,
 				2AA27D092C48198B0032FA1F /* Entry.swift in Sources */,
 				2AA27D062C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */,
 				2AA27D0B2C48198B0032FA1F /* EntryDetailView.swift in Sources */,
+				2AF884252C4D616400EF8A8C /* EditorFlowStateWrapperView.swift in Sources */,
+				2AF8842B2C4D624300EF8A8C /* EditorFlowState.swift in Sources */,
+				2AF884292C4D61E200EF8A8C /* EditorFlowModel.swift in Sources */,
 				2AA27D1A2C48198B0032FA1F /* ListFlowFactory+preview.swift in Sources */,
 				2AA27D0E2C48198B0032FA1F /* EntryRowLabel.swift in Sources */,
 				2A6E08702C4CE8F600E72AA3 /* EntryPayload.swift in Sources */,
+				2AF8842D2C4D626B00EF8A8C /* EditorFlowEvent.swift in Sources */,
 				2AA27D0F2C48198B0032FA1F /* ListFlowEffect.swift in Sources */,
 				2AA27D192C48198B0032FA1F /* EntryListModel+preview.swift in Sources */,
 				2A6E086E2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift in Sources */,
+				2AF884332C4D62C700EF8A8C /* EditorFlowReducer.swift in Sources */,
 				2AA27D112C48198B0032FA1F /* ListFlowEvent.swift in Sources */,
 				2AA27D072C48198B0032FA1F /* EntryListModelComposer.swift in Sources */,
 				2AA27D0C2C48198B0032FA1F /* EntryEditorWrapperView.swift in Sources */,
+				2AF884272C4D616E00EF8A8C /* EditorFlowComposerView.swift in Sources */,
 				2AA27D152C48198B0032FA1F /* ListFlowState.swift in Sources */,
 				2AA27D1B2C48198B0032FA1F /* ListFlowModel+preview.swift in Sources */,
 				2AA27D1E2C48198B0032FA1F /* ContentView.swift in Sources */,
@@ -508,6 +571,7 @@
 				2AA27D172C48198B0032FA1F /* [Entry]+preview.swift in Sources */,
 				2AA27D102C48198B0032FA1F /* ListFlowEffectHandler.swift in Sources */,
 				2AA27D162C48198B0032FA1F /* ListFlowView.swift in Sources */,
+				2AF8842F2C4D628B00EF8A8C /* EditorFlowEffect.swift in Sources */,
 				2AA27D1F2C48198B0032FA1F /* NoteNestApp.swift in Sources */,
 				2AA27D0A2C48198B0032FA1F /* DispatchQueue+delay.swift in Sources */,
 			);
