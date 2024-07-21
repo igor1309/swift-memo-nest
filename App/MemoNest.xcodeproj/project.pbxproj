@@ -52,6 +52,7 @@
 		2AA86A262C4AB575009BC197 /* anyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A252C4AB575009BC197 /* anyError.swift */; };
 		2AA86A292C4AB63F009BC197 /* XCTAssertNoDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */; };
 		2AA86A2C2C4AB652009BC197 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 2AA86A2B2C4AB652009BC197 /* CustomDump */; };
+		2AF8841E2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		2AA86A252C4AB575009BC197 /* anyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyError.swift; sourceTree = "<group>"; };
 		2AA86A282C4AB63F009BC197 /* XCTAssertNoDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTAssertNoDiff.swift; sourceTree = "<group>"; };
 		2ABB5CD62C46BAAB00D6822C /* MemoNest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MemoNest.xctestplan; path = TestPlans/MemoNest.xctestplan; sourceTree = "<group>"; };
+		2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorFlowReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 				2AA86A272C4AB62B009BC197 /* ThirdPartyDependencies */,
 				2AA86A232C4A7299009BC197 /* IntegrationTests */,
 				2AA86A162C4A712C009BC197 /* Helpers */,
+				2AF8841D2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift */,
 			);
 			path = MemoNestTests;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 			files = (
 				2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */,
 				2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */,
+				2AF8841E2C4D4F7000EF8A8C /* EditorFlowReducerTests.swift in Sources */,
 				2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */,
 				2AA86A1A2C4A7199009BC197 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				2AA86A262C4AB575009BC197 /* anyError.swift in Sources */,
