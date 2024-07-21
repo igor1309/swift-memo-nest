@@ -12,12 +12,20 @@ struct EntryPayload<Entry: Identifiable>: Filtering, Sorting {
     
     let lastID: Entry.ID?
     
+    /// Generates a predicate to filter entries.
+    /// - Parameter entry: The entry to be filtered.
+    /// - Returns: A boolean indicating if the entry satisfies the predicate.
     func predicate(_ entry: Entry) -> Bool {
         
 #warning("use Predicate/Filter from module")
         return true
     }
     
+    /// Determines the sort order between two entries.
+    /// - Parameters:
+    ///   - lhs: The left-hand side entry.
+    ///   - rhs: The right-hand side entry.
+    /// - Returns: A boolean indicating if lhs should be ordered before rhs.
     func areInIncreasingOrder(_ lhs: Entry, _ rhs: Entry) -> Bool {
         
 #warning("use Sort from module")
@@ -33,6 +41,8 @@ final class CacheCoordinatorsComposer {
     
     private let storeURL: URL
     
+    /// Initialises the composer with a store URL.
+    /// - Parameter storeURL: The URL of the store.
     init(storeURL: URL) {
         
         self.storeURL = storeURL
@@ -41,6 +51,8 @@ final class CacheCoordinatorsComposer {
 
 extension CacheCoordinatorsComposer {
     
+    /// Composes the read and write coordinators.
+    /// - Returns: A tuple containing the read and write coordinators.
     func compose() -> Coordinators {
         
         let cache = InMemoryCache<Entry>()
@@ -234,12 +246,12 @@ final class CacheCoordinatorsComposerAcceptanceTests: XCTestCase {
         let (_, write) = makeSUT()
         
         try await write.add(entry)
-
+        
         let (read1, write1) = makeSUT()
         let retrieved1 = try await read1.load(anyPayload())
         
         XCTAssertNoDiff(retrieved1, [entry])
-
+        
         let edited = makeEntry(id: entry.id)
         try await write1.edit(edited)
         
