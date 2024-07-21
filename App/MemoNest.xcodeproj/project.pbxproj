@@ -20,6 +20,8 @@
 		2A6E08662C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */; };
 		2A6E08682C4CD12500E72AA3 /* assertThrowsAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E08672C4CD12500E72AA3 /* assertThrowsAsyncError.swift */; };
 		2A6E086C2C4CD91800E72AA3 /* anyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E086B2C4CD91800E72AA3 /* anyMessage.swift */; };
+		2A6E086E2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E086D2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift */; };
+		2A6E08702C4CE8F600E72AA3 /* EntryPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6E086F2C4CE8F600E72AA3 /* EntryPayload.swift */; };
 		2AA27D062C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */; };
 		2AA27D072C48198B0032FA1F /* EntryListModelComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */; };
 		2AA27D082C48198B0032FA1F /* ListFlowViewComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA27CE52C48198B0032FA1F /* ListFlowViewComposer.swift */; };
@@ -72,6 +74,8 @@
 		2A6E08652C4CCBA500E72AA3 /* CacheCoordinatorsComposerAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCoordinatorsComposerAcceptanceTests.swift; sourceTree = "<group>"; };
 		2A6E08672C4CD12500E72AA3 /* assertThrowsAsyncError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assertThrowsAsyncError.swift; sourceTree = "<group>"; };
 		2A6E086B2C4CD91800E72AA3 /* anyMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anyMessage.swift; sourceTree = "<group>"; };
+		2A6E086D2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCoordinatorsComposer.swift; sourceTree = "<group>"; };
+		2A6E086F2C4CE8F600E72AA3 /* EntryPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPayload.swift; sourceTree = "<group>"; };
 		2A87153D2C4955B5003B8FF6 /* EntryFilterFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EntryFilterFeature.xctestplan; path = TestPlans/EntryFilterFeature.xctestplan; sourceTree = "<group>"; };
 		2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListEffectHandlerMicroServicesComposer.swift; sourceTree = "<group>"; };
 		2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListModelComposer.swift; sourceTree = "<group>"; };
@@ -181,12 +185,22 @@
 			name = TestPlans;
 			sourceTree = "<group>";
 		};
+		2A6E08712C4CE91500E72AA3 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				2A6E086D2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift */,
+				2A6E086F2C4CE8F600E72AA3 /* EntryPayload.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		2AA27CE62C48198B0032FA1F /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
 				2AA27CE32C48198B0032FA1F /* EntryListEffectHandlerMicroServicesComposer.swift */,
 				2AA27CE42C48198B0032FA1F /* EntryListModelComposer.swift */,
 				2AA27CE52C48198B0032FA1F /* ListFlowViewComposer.swift */,
+				2A6E08712C4CE91500E72AA3 /* Cache */,
 			);
 			path = CompositionRoot;
 			sourceTree = "<group>";
@@ -466,8 +480,10 @@
 				2AA27D0B2C48198B0032FA1F /* EntryDetailView.swift in Sources */,
 				2AA27D1A2C48198B0032FA1F /* ListFlowFactory+preview.swift in Sources */,
 				2AA27D0E2C48198B0032FA1F /* EntryRowLabel.swift in Sources */,
+				2A6E08702C4CE8F600E72AA3 /* EntryPayload.swift in Sources */,
 				2AA27D0F2C48198B0032FA1F /* ListFlowEffect.swift in Sources */,
 				2AA27D192C48198B0032FA1F /* EntryListModel+preview.swift in Sources */,
+				2A6E086E2C4CE88500E72AA3 /* CacheCoordinatorsComposer.swift in Sources */,
 				2AA27D112C48198B0032FA1F /* ListFlowEvent.swift in Sources */,
 				2AA27D072C48198B0032FA1F /* EntryListModelComposer.swift in Sources */,
 				2AA27D0C2C48198B0032FA1F /* EntryEditorWrapperView.swift in Sources */,
